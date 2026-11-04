@@ -311,6 +311,7 @@
     var panel = document.createElement("div");
     panel.className = "zoni-pay-panel"; panel.id = "zoniPayPanel";
     var note = document.querySelector(".pay-note");
+    if (note) note.textContent = "Cash on Delivery, bank transfer, or place your order on WhatsApp — our team confirms every order personally.";
     var anchor = note || sel.closest(".field") || sel;
     anchor.parentNode.insertBefore(panel, anchor.nextSibling);
     var shotData = "";
