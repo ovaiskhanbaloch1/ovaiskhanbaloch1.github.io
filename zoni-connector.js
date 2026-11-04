@@ -102,13 +102,6 @@
       var waTxt = document.querySelector('footer a[href^="https://wa.me/"]');
       if (waTxt) waTxt.textContent = SETTINGS.phoneDisplay;
     }
-    var fb = document.querySelector(".foot-bottom");
-    if (fb && !fb.querySelector(".zoni-admin-link")) {
-      var al = document.createElement("a");
-      al.href = "admin.html"; al.className = "zoni-admin-link"; al.textContent = "Admin Panel";
-      fb.appendChild(al);
-    }
-
     if (page === "product") enhanceProduct();
     if (page === "checkout") hookCheckout();
     if (page === "track") hookTrack();

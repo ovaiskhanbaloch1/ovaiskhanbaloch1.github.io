@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Collection's by Zoni — Design 1: Playful Classic (Demo)</title>
+<link rel="icon" type="image/jpeg" href="https://collections-by-zoni.surge.sh/products/logo.jpg">
+<link rel="apple-touch-icon" href="https://collections-by-zoni.surge.sh/products/logo.jpg">
 <meta name="description" content="Collection's by Zoni demo store — Playful Classic design. Little style, big smile. Kids clothing in Rahim Yar Khan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -440,6 +442,18 @@ a.drop-item{box-sizing:border-box}
 
 /* Colour picker removed — Sunshine Yellow is the permanent theme (see :root). */
 
+
+/* ---- Mobile fit + friendliness (2026-11-04) ---- */
+html,body{overflow-x:clip}
+@supports not (overflow:clip){html{overflow-x:hidden}}
+body{-webkit-text-size-adjust:100%}
+img,svg,video{max-width:100%}
+@media(max-width:560px){
+.grid{grid-template-columns:repeat(2,1fr);gap:12px}
+.size-pill{padding:10px 15px;font-size:14.5px}
+.track-box,.done-box{padding:20px 15px}
+.zoni-chart-table{font-size:13px}
+}
 </style>
 </head>
 <body data-page="home">
@@ -529,7 +543,7 @@ a.drop-item{box-sizing:border-box}
 <div id="newsMsg"></div>
 <p style="margin-top:14px">Main Bazaar Road, Rahim Yar Khan, Punjab, Pakistan</p></div>
 </div>
-<div class="foot-bottom"><span>© 2026 Collection's by Zoni. All rights reserved.</span><span>Demo store — products and photos from our Facebook page; prices are samples.</span></div>
+<div class="foot-bottom"><span>© 2026 Collection's by Zoni. All rights reserved.</span></div>
 </div></footer>
 
 <a class="wa-float" href="https://wa.me/923416008008" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="29" height="29" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a>
@@ -1306,6 +1320,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 </script>
-<script src="zoni-connector.js"></script>
+<script src="zoni-connector.js?v=3"></script>
 </body>
 </html>
