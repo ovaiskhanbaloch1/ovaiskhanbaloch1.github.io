@@ -22,3 +22,4 @@ the browser (localStorage key `zoni_admin_v1`, see `zoni-connector.js`):
   number, which the customer then sees on the Track Order page.
 - Data & Backup in the panel exports/imports the whole store as one JSON file,
   which is how the data moves between devices.
+
