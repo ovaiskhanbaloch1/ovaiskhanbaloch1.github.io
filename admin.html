@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — Collection's by Zoni</title>
+<style>
+:root{--acc:#F5B301;--acc-strong:#BE8B00;--acc-2:#FE6907;--deep:#2F2B26;--deep2:#464038;--soft:#FFF3C4;--tint:#FDECC0;--ink:#262019;--line:#EFE3BC;--bg:#FFFBEB;--card:#fff;--ok:#1F7A3D;--bad:#C0392B;--mut:#7A7261}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--acc-strong)}
+button{font:inherit;cursor:pointer}
+input,select,textarea{font:inherit;font-size:14.5px;padding:9px 11px;border:1.5px solid var(--line);border-radius:10px;background:#fff;width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);border-color:var(--acc)}
+label{font-size:13px;font-weight:600;color:var(--deep2);display:block;margin:10px 0 5px}
+.btn{background:var(--acc);color:var(--ink);border:0;padding:9px 18px;border-radius:999px;font-weight:700}
+.btn:hover{background:#FFC61A}
+.btn.ghost{background:#fff;border:1.5px solid var(--line);color:var(--deep)}
+.btn.dark{background:var(--deep);color:#fff}
+.btn.danger{background:#FDECEA;color:var(--bad);border:1.5px solid #F3C1BB}
+.btn.small{padding:6px 13px;font-size:13px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+/* login */
+#gate{position:fixed;inset:0;background:var(--deep);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+#gate .box{background:#fff;border-radius:22px;padding:30px;max-width:380px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+#gate h1{font-size:22px;margin-bottom:4px}
+#gate h1 span{color:var(--acc-strong)}
+#gate p{color:var(--mut);font-size:14px;margin-bottom:14px}
+#gateErr{color:var(--bad);font-size:13.5px;min-height:18px;margin-top:8px}
+.hint{background:var(--soft);border-radius:10px;padding:9px 12px;font-size:13px;margin-top:14px}
+/* layout */
+#app{display:none;min-height:100vh}
+.side{position:fixed;top:0;left:0;bottom:0;width:228px;background:var(--deep);color:#EDEAE2;padding:20px 14px;overflow:auto}
+.side .brand{font-size:19px;font-weight:800;color:#fff;padding:2px 10px 4px}
+.side .brand span{color:var(--acc)}
+.side .sub{font-size:12px;color:#B9B2A2;padding:0 10px 16px}
+.nav button{display:flex;width:100%;gap:9px;align-items:center;background:transparent;border:0;color:#EDEAE2;padding:10px 12px;border-radius:10px;font-size:14.5px;text-align:left}
+.nav button:hover{background:var(--deep2)}
+.nav button.on{background:var(--acc);color:var(--ink);font-weight:700}
+.nav .sep{border-top:1px solid var(--deep2);margin:12px 4px}
+.side a.store{display:block;margin:6px 4px;padding:10px 12px;border:1.5px solid var(--deep2);border-radius:10px;color:#fff;text-decoration:none;font-size:14px;text-align:center}
+.main{margin-left:228px;padding:22px 26px 60px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.topbar h2{font-size:23px}
+.view{display:none}.view.on{display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:18px}
+.stat{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px}
+.stat .n{font-size:26px;font-weight:800}
+.stat .l{font-size:13px;color:var(--mut);margin-top:2px}
+.panel{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px}
+.panel h3{font-size:17px;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:9px 8px;border-bottom:1px solid #F3EAD0;text-align:left;vertical-align:top}
+th{font-size:12.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--mut)}
+tr.clickable{cursor:pointer}tr.clickable:hover{background:#FFFDF4}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700;background:var(--soft)}
+.pill.ok{background:#E3F4E8;color:var(--ok)}.pill.bad{background:#FDECEA;color:var(--bad)}.pill.warn{background:#FFF0D6;color:#9A6B00}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 18px}
+.thumb{width:52px;height:52px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.rowline{display:flex;gap:8px;align-items:center}
+.rowline>*{flex:1}
+.sizerow,.chartrow{display:grid;gap:8px;align-items:center;margin-bottom:8px}
+.sizerow{grid-template-columns:1.2fr 1fr .8fr .3fr}
+.chartrow{grid-template-columns:1fr 1fr 1fr .3fr}
+.checkline{display:flex;gap:8px;align-items:center;font-size:14px;margin:6px 0}
+.checkline input{width:auto}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px;font-size:13.5px;cursor:pointer}
+.chip.on{background:var(--acc);border-color:var(--acc);font-weight:700}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--deep);color:#fff;padding:11px 22px;border-radius:999px;font-size:14.5px;z-index:60;transition:transform .25s;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+.modal{position:fixed;inset:0;background:rgba(38,32,25,.5);display:none;align-items:flex-start;justify-content:center;z-index:40;padding:22px;overflow:auto}
+.modal.on{display:flex}
+.modal .box{background:#fff;border-radius:20px;max-width:760px;width:100%;padding:24px}
+.stars{color:var(--acc-strong);letter-spacing:1px}
+.mut{color:var(--mut);font-size:13px}
+.searchbar{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.searchbar input{max-width:340px}
+@media(max-width:860px){.side{position:static;width:auto}.side .nav{display:flex;flex-wrap:wrap}.main{margin-left:0;padding:16px}.grid2,.grid3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="box">
+    <h1>Collection's <span>by Zoni</span></h1>
+    <p>Admin Panel — sign in to manage your store.</p>
+    <label>Admin password</label>
+    <input type="password" id="gatePass" placeholder="Enter password" autocomplete="current-password">
+    <div style="height:12px"></div>
+    <button class="btn" id="gateBtn" style="width:100%">Sign In</button>
+    <div id="gateErr"></div>
+    <div class="hint" id="gateHint" style="display:none">First time? Default password is <strong>zoniadmin</strong> — please change it from Settings after signing in.</div>
+  </div>
+</div>
+
+<div id="app">
+  <aside class="side">
+    <div class="brand">Collection's <span>by Zoni</span></div>
+    <div class="sub">Store Admin Panel</div>
+    <nav class="nav" id="mainNav">
+      <button data-view="dashboard" class="on">Dashboard</button>
+      <button data-view="products">Products</button>
+      <button data-view="categories">Categories</button>
+      <button data-view="orders">Orders <span class="pill warn" id="ordBadge" style="margin-left:auto;display:none"></span></button>
+      <button data-view="reviews">Reviews <span class="pill warn" id="revBadge" style="margin-left:auto;display:none"></span></button>
+      <button data-view="settings">Settings</button>
+      <button data-view="data">Data &amp; Backup</button>
+      <div class="sep"></div>
+    </nav>
+    <a class="store" href="design-1.html" target="_blank" rel="noopener">View Storefront</a>
+    <div style="height:8px"></div>
+    <a class="store" href="#" id="logoutBtn">Sign Out</a>
+  </aside>
+
+  <main class="main">
+    <div class="topbar"><h2 id="viewTitle">Dashboard</h2><span class="mut" id="saveState"></span></div>
+
+    <section class="view on" id="view-dashboard"></section>
+    <section class="view" id="view-products"></section>
+    <section class="view" id="view-editor"></section>
+    <section class="view" id="view-categories"></section>
+    <section class="view" id="view-orders"></section>
+    <section class="view" id="view-reviews"></section>
+    <section class="view" id="view-settings"></section>
+    <section class="view" id="view-data"></section>
+  </main>
+</div>
+
+<div class="modal" id="orderModal"><div class="box" id="orderModalBox"></div></div>
+<div id="toast"></div>
+
+<script>
+const SEED = {
+ "SETTINGS": {
+  "siteName": "Collection's by Zoni",
+  "tagline": "Little style, big smile",
+  "phoneDisplay": "0341 600 8008",
+  "whatsapp": "https://wa.me/923416008008",
+  "address": "Main Bazaar Road, Rahim Yar Khan, Punjab, Pakistan",
+  "city": "Rahim Yar Khan, Punjab, Pakistan",
+  "email": "contact@collectionsbyzoni.com",
+  "freeShippingThreshold": 3000,
+  "flatShippingFee": 200,
+  "currency": "Rs. "
+ },
+ "CATEGORIES": [
+  "All",
+  "Track Suits",
+  "Denim Sets",
+  "Shirts & Sets",
+  "Sweatshirt Sets",
+  "Winter Sets"
+ ],
+ "CATBAND": {
+  "Track Suits": "#38BDF8",
+  "Denim Sets": "#818CF8",
+  "Shirts & Sets": "#34D399",
+  "Sweatshirt Sets": "#F472B6",
+  "Winter Sets": "#FBBF24"
+ },
+ "AGES": [
+  "1-2",
+  "2-4",
+  "4-6",
+  "6-8",
+  "8-10",
+  "10-14"
+ ],
+ "PRODUCTS": [
+  {
+   "id": 1,
+   "title": "BOLD Sweatshirt & White Cargo Set",
+   "slug": "bold-sweatshirt-white-cargo-set",
+   "regularPrice": 2199,
+   "salePrice": 2199,
+   "rating": 4.8,
+   "reviewCount": 19,
+   "category": "Sweatshirt Sets",
+   "ages": [
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "2-4Y",
+    "4-6Y",
+    "6-8Y",
+    "8-10Y",
+    "10-12Y",
+    "12-14Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p01.jpg",
+   "fbNote": true,
+   "shortDesc": "Sweatshirt and bottom set from our Facebook collection — cosy, bright and playground-ready.",
+   "fullDesc": [
+    "BOLD Sweatshirt & White Cargo Set is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Fatima S.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.",
+     "date": "2 days ago"
+    },
+    {
+     "name": "Ayesha K.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Soft material and neat stitching. My little one wears it all day.",
+     "date": "1 week ago"
+    },
+    {
+     "name": "Hira M.",
+     "city": "Bahawalpur",
+     "rating": 4,
+     "text": "Colours are bright and delivery was quick. Happy with the purchase.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "title": "Black Fur-Collar Jacket Set",
+   "slug": "black-fur-collar-jacket-set",
+   "regularPrice": 2999,
+   "salePrice": 2999,
+   "rating": 4.7,
+   "reviewCount": 26,
+   "category": "Winter Sets",
+   "ages": [
+    "2-4"
+   ],
+   "sizes": [
+    "2-3Y",
+    "3-4Y",
+    "4-5Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p02.jpg",
+   "fbNote": true,
+   "shortDesc": "Warm winter set from our Facebook collection — snug layers made for cold days.",
+   "fullDesc": [
+    "Black Fur-Collar Jacket Set is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Maryam T.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Bought it after seeing it on their Facebook page — even better in person.",
+     "date": "3 days ago"
+    },
+    {
+     "name": "Sana R.",
+     "city": "Lahore",
+     "rating": 4,
+     "text": "Good fabric and finishing. Size chart was accurate.",
+     "date": "1 week ago"
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "title": "Denim Jacket & Wide-Leg Jeans Set",
+   "slug": "denim-jacket-wide-leg-jeans-set",
+   "regularPrice": 2799,
+   "salePrice": 2799,
+   "rating": 4.9,
+   "reviewCount": 33,
+   "category": "Denim Sets",
+   "ages": [
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10"
+   ],
+   "sizes": [
+    "2-4Y",
+    "4-6Y",
+    "6-8Y",
+    "8-10Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p03.jpg",
+   "fbNote": true,
+   "shortDesc": "Denim jacket and jeans set from our Facebook collection — smart, sturdy and easy to style.",
+   "fullDesc": [
+    "Denim Jacket & Wide-Leg Jeans Set is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Zainab A.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Washed many times, still soft and bright. Ordered the next size too.",
+     "date": "1 day ago"
+    },
+    {
+     "name": "Mahnoor F.",
+     "city": "Karachi",
+     "rating": 4,
+     "text": "Looks exactly like the photo on their page. True to size.",
+     "date": "5 days ago"
+    },
+    {
+     "name": "Amna J.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Neat stitching, no loose threads. Recommended.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "title": "Dark Denim Jacket & Jeans Set",
+   "slug": "dark-denim-jacket-jeans-set",
+   "regularPrice": 2799,
+   "salePrice": 2799,
+   "rating": 4.8,
+   "reviewCount": 17,
+   "category": "Denim Sets",
+   "ages": [
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "2-4Y",
+    "4-6Y",
+    "6-8Y",
+    "8-10Y",
+    "10-12Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p04.jpg",
+   "fbNote": true,
+   "shortDesc": "Denim jacket and jeans set from our Facebook collection — smart, sturdy and easy to style.",
+   "fullDesc": [
+    "Dark Denim Jacket & Jeans Set is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Fatima S.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.",
+     "date": "2 days ago"
+    },
+    {
+     "name": "Ayesha K.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Soft material and neat stitching. My little one wears it all day.",
+     "date": "1 week ago"
+    },
+    {
+     "name": "Hira M.",
+     "city": "Bahawalpur",
+     "rating": 4,
+     "text": "Colours are bright and delivery was quick. Happy with the purchase.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "title": "Black Fur-Collar Party Set",
+   "slug": "black-fur-collar-party-set",
+   "regularPrice": 2999,
+   "salePrice": 2999,
+   "rating": 4.7,
+   "reviewCount": 24,
+   "category": "Winter Sets",
+   "ages": [
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "2-4Y",
+    "4-6Y",
+    "6-8Y",
+    "8-10Y",
+    "10-12Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p05.jpg",
+   "fbNote": true,
+   "shortDesc": "Warm winter set from our Facebook collection — snug layers made for cold days.",
+   "fullDesc": [
+    "Black Fur-Collar Party Set is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Maryam T.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Bought it after seeing it on their Facebook page — even better in person.",
+     "date": "3 days ago"
+    },
+    {
+     "name": "Sana R.",
+     "city": "Lahore",
+     "rating": 4,
+     "text": "Good fabric and finishing. Size chart was accurate.",
+     "date": "1 week ago"
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "title": "Red Slogan Sweatshirt & Jeans Set",
+   "slug": "red-slogan-sweatshirt-jeans-set",
+   "regularPrice": 2199,
+   "salePrice": 2199,
+   "rating": 4.6,
+   "reviewCount": 31,
+   "category": "Sweatshirt Sets",
+   "ages": [
+    "1-2",
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "1-3Y",
+    "3-5Y",
+    "5-7Y",
+    "7-9Y",
+    "9-11Y",
+    "11-12Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p06.jpg",
+   "fbNote": true,
+   "shortDesc": "Sweatshirt and bottom set from our Facebook collection — cosy, bright and playground-ready.",
+   "fullDesc": [
+    "Red Slogan Sweatshirt & Jeans Set is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Zainab A.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Washed many times, still soft and bright. Ordered the next size too.",
+     "date": "1 day ago"
+    },
+    {
+     "name": "Mahnoor F.",
+     "city": "Karachi",
+     "rating": 4,
+     "text": "Looks exactly like the photo on their page. True to size.",
+     "date": "5 days ago"
+    },
+    {
+     "name": "Amna J.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Neat stitching, no loose threads. Recommended.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "title": "Mustard Corduroy Shirt & Pants Set",
+   "slug": "mustard-corduroy-shirt-pants-set",
+   "regularPrice": 1899,
+   "salePrice": 1899,
+   "rating": 4.8,
+   "reviewCount": 15,
+   "category": "Shirts & Sets",
+   "ages": [
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10"
+   ],
+   "sizes": [
+    "2-4Y",
+    "4-6Y",
+    "6-8Y",
+    "8-10Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p07.jpg",
+   "fbNote": false,
+   "shortDesc": "Shirt and bottom set from our Facebook collection — neat, breathable and gentle on skin.",
+   "fullDesc": [
+    "Mustard Corduroy Shirt & Pants Set is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Fatima S.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.",
+     "date": "2 days ago"
+    },
+    {
+     "name": "Ayesha K.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Soft material and neat stitching. My little one wears it all day.",
+     "date": "1 week ago"
+    },
+    {
+     "name": "Hira M.",
+     "city": "Bahawalpur",
+     "rating": 4,
+     "text": "Colours are bright and delivery was quick. Happy with the purchase.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "title": "Beige Zip Track Suit",
+   "slug": "beige-zip-track-suit",
+   "regularPrice": 2499,
+   "salePrice": 2499,
+   "rating": 4.7,
+   "reviewCount": 22,
+   "category": "Track Suits",
+   "ages": [
+    "1-2",
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "1-3Y",
+    "3-5Y",
+    "5-7Y",
+    "7-9Y",
+    "9-11Y",
+    "11-13Y",
+    "13-14Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p08.jpg",
+   "fbNote": true,
+   "shortDesc": "Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",
+   "fullDesc": [
+    "Beige Zip Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Maryam T.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Bought it after seeing it on their Facebook page — even better in person.",
+     "date": "3 days ago"
+    },
+    {
+     "name": "Sana R.",
+     "city": "Lahore",
+     "rating": 4,
+     "text": "Good fabric and finishing. Size chart was accurate.",
+     "date": "1 week ago"
+    }
+   ]
+  },
+  {
+   "id": 9,
+   "title": "Kotrai Velvet Shirt & Jeans Set",
+   "slug": "kotrai-velvet-shirt-jeans-set",
+   "regularPrice": 1899,
+   "salePrice": 1899,
+   "rating": 4.9,
+   "reviewCount": 29,
+   "category": "Shirts & Sets",
+   "ages": [
+    "1-2",
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "1-3Y",
+    "3-5Y",
+    "5-7Y",
+    "7-9Y",
+    "9-11Y",
+    "11-12Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p09.jpg",
+   "fbNote": true,
+   "shortDesc": "Shirt and bottom set from our Facebook collection — neat, breathable and gentle on skin.",
+   "fullDesc": [
+    "Kotrai Velvet Shirt & Jeans Set is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Zainab A.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Washed many times, still soft and bright. Ordered the next size too.",
+     "date": "1 day ago"
+    },
+    {
+     "name": "Mahnoor F.",
+     "city": "Karachi",
+     "rating": 4,
+     "text": "Looks exactly like the photo on their page. True to size.",
+     "date": "5 days ago"
+    },
+    {
+     "name": "Amna J.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Neat stitching, no loose threads. Recommended.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 10,
+   "title": "Black & White Zip Track Suit",
+   "slug": "black-white-zip-track-suit",
+   "regularPrice": 2499,
+   "salePrice": 2499,
+   "rating": 4.8,
+   "reviewCount": 13,
+   "category": "Track Suits",
+   "ages": [
+    "1-2",
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "1-3Y",
+    "3-5Y",
+    "5-7Y",
+    "7-9Y",
+    "9-11Y",
+    "11-12Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p10.jpg",
+   "fbNote": true,
+   "shortDesc": "Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",
+   "fullDesc": [
+    "Black & White Zip Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Fatima S.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.",
+     "date": "2 days ago"
+    },
+    {
+     "name": "Ayesha K.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Soft material and neat stitching. My little one wears it all day.",
+     "date": "1 week ago"
+    },
+    {
+     "name": "Hira M.",
+     "city": "Bahawalpur",
+     "rating": 4,
+     "text": "Colours are bright and delivery was quick. Happy with the purchase.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 11,
+   "title": "Striped Shirt, Tee & Jeans Set",
+   "slug": "striped-shirt-tee-jeans-set",
+   "regularPrice": 1899,
+   "salePrice": 1899,
+   "rating": 4.7,
+   "reviewCount": 20,
+   "category": "Shirts & Sets",
+   "ages": [
+    "1-2",
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "1-3Y",
+    "3-5Y",
+    "5-7Y",
+    "7-9Y",
+    "9-11Y",
+    "11-13Y",
+    "13-14Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p11.jpg",
+   "fbNote": true,
+   "shortDesc": "Shirt and bottom set from our Facebook collection — neat, breathable and gentle on skin.",
+   "fullDesc": [
+    "Striped Shirt, Tee & Jeans Set is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Maryam T.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Bought it after seeing it on their Facebook page — even better in person.",
+     "date": "3 days ago"
+    },
+    {
+     "name": "Sana R.",
+     "city": "Lahore",
+     "rating": 4,
+     "text": "Good fabric and finishing. Size chart was accurate.",
+     "date": "1 week ago"
+    }
+   ]
+  },
+  {
+   "id": 12,
+   "title": "88 West Side Hoodie Track Suit",
+   "slug": "88-west-side-hoodie-track-suit",
+   "regularPrice": 2499,
+   "salePrice": 2499,
+   "rating": 4.6,
+   "reviewCount": 27,
+   "category": "Track Suits",
+   "ages": [
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10"
+   ],
+   "sizes": [
+    "2-4Y",
+    "4-6Y",
+    "6-8Y",
+    "8-10Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p12.jpg",
+   "fbNote": false,
+   "shortDesc": "Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",
+   "fullDesc": [
+    "88 West Side Hoodie Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Zainab A.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Washed many times, still soft and bright. Ordered the next size too.",
+     "date": "1 day ago"
+    },
+    {
+     "name": "Mahnoor F.",
+     "city": "Karachi",
+     "rating": 4,
+     "text": "Looks exactly like the photo on their page. True to size.",
+     "date": "5 days ago"
+    },
+    {
+     "name": "Amna J.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Neat stitching, no loose threads. Recommended.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 13,
+   "title": "Red & Grey Track Suit",
+   "slug": "red-grey-track-suit",
+   "regularPrice": 2499,
+   "salePrice": 2499,
+   "rating": 4.8,
+   "reviewCount": 34,
+   "category": "Track Suits",
+   "ages": [
+    "1-2",
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "1-3Y",
+    "3-5Y",
+    "5-7Y",
+    "7-9Y",
+    "9-11Y",
+    "11-13Y",
+    "13-14Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p13.jpg",
+   "fbNote": true,
+   "shortDesc": "Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",
+   "fullDesc": [
+    "Red & Grey Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Fatima S.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.",
+     "date": "2 days ago"
+    },
+    {
+     "name": "Ayesha K.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Soft material and neat stitching. My little one wears it all day.",
+     "date": "1 week ago"
+    },
+    {
+     "name": "Hira M.",
+     "city": "Bahawalpur",
+     "rating": 4,
+     "text": "Colours are bright and delivery was quick. Happy with the purchase.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 14,
+   "title": "Mint Green Track Suit",
+   "slug": "mint-green-track-suit",
+   "regularPrice": 2499,
+   "salePrice": 2499,
+   "rating": 4.7,
+   "reviewCount": 18,
+   "category": "Track Suits",
+   "ages": [
+    "1-2",
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "1-3Y",
+    "3-5Y",
+    "5-7Y",
+    "7-9Y",
+    "9-11Y",
+    "11-13Y",
+    "13-14Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p14.jpg",
+   "fbNote": true,
+   "shortDesc": "Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",
+   "fullDesc": [
+    "Mint Green Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Maryam T.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Bought it after seeing it on their Facebook page — even better in person.",
+     "date": "3 days ago"
+    },
+    {
+     "name": "Sana R.",
+     "city": "Lahore",
+     "rating": 4,
+     "text": "Good fabric and finishing. Size chart was accurate.",
+     "date": "1 week ago"
+    }
+   ]
+  },
+  {
+   "id": 15,
+   "title": "Light Grey Track Suit",
+   "slug": "light-grey-track-suit",
+   "regularPrice": 2499,
+   "salePrice": 2499,
+   "rating": 4.9,
+   "reviewCount": 25,
+   "category": "Track Suits",
+   "ages": [
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "2-4Y",
+    "4-6Y",
+    "6-8Y",
+    "8-10Y",
+    "10-12Y",
+    "12-14Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p15.jpg",
+   "fbNote": true,
+   "shortDesc": "Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",
+   "fullDesc": [
+    "Light Grey Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Zainab A.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Washed many times, still soft and bright. Ordered the next size too.",
+     "date": "1 day ago"
+    },
+    {
+     "name": "Mahnoor F.",
+     "city": "Karachi",
+     "rating": 4,
+     "text": "Looks exactly like the photo on their page. True to size.",
+     "date": "5 days ago"
+    },
+    {
+     "name": "Amna J.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Neat stitching, no loose threads. Recommended.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 16,
+   "title": "Light Denim Jacket & Jeans Set",
+   "slug": "light-denim-jacket-jeans-set",
+   "regularPrice": 2799,
+   "salePrice": 2799,
+   "rating": 4.8,
+   "reviewCount": 32,
+   "category": "Denim Sets",
+   "ages": [
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10"
+   ],
+   "sizes": [
+    "2-4Y",
+    "4-6Y",
+    "6-8Y",
+    "8-10Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p16.jpg",
+   "fbNote": false,
+   "shortDesc": "Denim jacket and jeans set from our Facebook collection — smart, sturdy and easy to style.",
+   "fullDesc": [
+    "Light Denim Jacket & Jeans Set is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Fatima S.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.",
+     "date": "2 days ago"
+    },
+    {
+     "name": "Ayesha K.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Soft material and neat stitching. My little one wears it all day.",
+     "date": "1 week ago"
+    },
+    {
+     "name": "Hira M.",
+     "city": "Bahawalpur",
+     "rating": 4,
+     "text": "Colours are bright and delivery was quick. Happy with the purchase.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 17,
+   "title": "Mars Kids Vest Set",
+   "slug": "mars-kids-vest-set",
+   "regularPrice": 2999,
+   "salePrice": 2999,
+   "rating": 4.7,
+   "reviewCount": 16,
+   "category": "Winter Sets",
+   "ages": [
+    "1-2",
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "1-3Y",
+    "3-5Y",
+    "5-7Y",
+    "7-9Y",
+    "9-11Y",
+    "11-12Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p17.jpg",
+   "fbNote": true,
+   "shortDesc": "Warm winter set from our Facebook collection — snug layers made for cold days.",
+   "fullDesc": [
+    "Mars Kids Vest Set is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Maryam T.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Bought it after seeing it on their Facebook page — even better in person.",
+     "date": "3 days ago"
+    },
+    {
+     "name": "Sana R.",
+     "city": "Lahore",
+     "rating": 4,
+     "text": "Good fabric and finishing. Size chart was accurate.",
+     "date": "1 week ago"
+    }
+   ]
+  },
+  {
+   "id": 18,
+   "title": "Black & Red Track Suit",
+   "slug": "black-red-track-suit",
+   "regularPrice": 2499,
+   "salePrice": 2499,
+   "rating": 4.6,
+   "reviewCount": 23,
+   "category": "Track Suits",
+   "ages": [
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10"
+   ],
+   "sizes": [
+    "2-4Y",
+    "4-6Y",
+    "6-8Y",
+    "8-10Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p18.jpg",
+   "fbNote": false,
+   "shortDesc": "Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",
+   "fullDesc": [
+    "Black & Red Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Zainab A.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Washed many times, still soft and bright. Ordered the next size too.",
+     "date": "1 day ago"
+    },
+    {
+     "name": "Mahnoor F.",
+     "city": "Karachi",
+     "rating": 4,
+     "text": "Looks exactly like the photo on their page. True to size.",
+     "date": "5 days ago"
+    },
+    {
+     "name": "Amna J.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Neat stitching, no loose threads. Recommended.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 19,
+   "title": "Orange & Black Hoodie Track Suit",
+   "slug": "orange-black-hoodie-track-suit",
+   "regularPrice": 2499,
+   "salePrice": 2499,
+   "rating": 4.8,
+   "reviewCount": 30,
+   "category": "Track Suits",
+   "ages": [
+    "1-2",
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "1-3Y",
+    "3-5Y",
+    "5-7Y",
+    "7-9Y",
+    "9-11Y",
+    "11-12Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p19.jpg",
+   "fbNote": true,
+   "shortDesc": "Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",
+   "fullDesc": [
+    "Orange & Black Hoodie Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Fatima S.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.",
+     "date": "2 days ago"
+    },
+    {
+     "name": "Ayesha K.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Soft material and neat stitching. My little one wears it all day.",
+     "date": "1 week ago"
+    },
+    {
+     "name": "Hira M.",
+     "city": "Bahawalpur",
+     "rating": 4,
+     "text": "Colours are bright and delivery was quick. Happy with the purchase.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 20,
+   "title": "Olive Green Track Suit",
+   "slug": "olive-green-track-suit",
+   "regularPrice": 2499,
+   "salePrice": 2499,
+   "rating": 4.7,
+   "reviewCount": 14,
+   "category": "Track Suits",
+   "ages": [
+    "1-2",
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "1-3Y",
+    "3-5Y",
+    "5-7Y",
+    "7-9Y",
+    "9-11Y",
+    "11-12Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p20.jpg",
+   "fbNote": true,
+   "shortDesc": "Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",
+   "fullDesc": [
+    "Olive Green Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Maryam T.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Bought it after seeing it on their Facebook page — even better in person.",
+     "date": "3 days ago"
+    },
+    {
+     "name": "Sana R.",
+     "city": "Lahore",
+     "rating": 4,
+     "text": "Good fabric and finishing. Size chart was accurate.",
+     "date": "1 week ago"
+    }
+   ]
+  },
+  {
+   "id": 21,
+   "title": "Navy & Orange Track Suit",
+   "slug": "navy-orange-track-suit",
+   "regularPrice": 2499,
+   "salePrice": 2499,
+   "rating": 4.9,
+   "reviewCount": 21,
+   "category": "Track Suits",
+   "ages": [
+    "1-2",
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10",
+    "10-14"
+   ],
+   "sizes": [
+    "1-3Y",
+    "3-5Y",
+    "5-7Y",
+    "7-9Y",
+    "9-11Y",
+    "11-12Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p21.jpg",
+   "fbNote": true,
+   "shortDesc": "Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",
+   "fullDesc": [
+    "Navy & Orange Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Zainab A.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Washed many times, still soft and bright. Ordered the next size too.",
+     "date": "1 day ago"
+    },
+    {
+     "name": "Mahnoor F.",
+     "city": "Karachi",
+     "rating": 4,
+     "text": "Looks exactly like the photo on their page. True to size.",
+     "date": "5 days ago"
+    },
+    {
+     "name": "Amna J.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Neat stitching, no loose threads. Recommended.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 22,
+   "title": "Maroon & Black EA7 Track Suit",
+   "slug": "maroon-black-ea7-track-suit",
+   "regularPrice": 2499,
+   "salePrice": 2499,
+   "rating": 4.8,
+   "reviewCount": 28,
+   "category": "Track Suits",
+   "ages": [
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10"
+   ],
+   "sizes": [
+    "2-4Y",
+    "4-6Y",
+    "6-8Y",
+    "8-10Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p22.jpg",
+   "fbNote": false,
+   "shortDesc": "Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",
+   "fullDesc": [
+    "Maroon & Black EA7 Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Fatima S.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.",
+     "date": "2 days ago"
+    },
+    {
+     "name": "Ayesha K.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Soft material and neat stitching. My little one wears it all day.",
+     "date": "1 week ago"
+    },
+    {
+     "name": "Hira M.",
+     "city": "Bahawalpur",
+     "rating": 4,
+     "text": "Colours are bright and delivery was quick. Happy with the purchase.",
+     "date": "2 weeks ago"
+    }
+   ]
+  },
+  {
+   "id": 23,
+   "title": "Orange Spider Print Sweatshirt Set",
+   "slug": "orange-spider-print-sweatshirt-set",
+   "regularPrice": 2199,
+   "salePrice": 2199,
+   "rating": 4.7,
+   "reviewCount": 12,
+   "category": "Sweatshirt Sets",
+   "ages": [
+    "1-2",
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10"
+   ],
+   "sizes": [
+    "1-3Y",
+    "3-5Y",
+    "5-7Y",
+    "7-9Y",
+    "9-10Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p23.jpg",
+   "fbNote": true,
+   "shortDesc": "Sweatshirt and bottom set from our Facebook collection — cosy, bright and playground-ready.",
+   "fullDesc": [
+    "Orange Spider Print Sweatshirt Set is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Maryam T.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Bought it after seeing it on their Facebook page — even better in person.",
+     "date": "3 days ago"
+    },
+    {
+     "name": "Sana R.",
+     "city": "Lahore",
+     "rating": 4,
+     "text": "Good fabric and finishing. Size chart was accurate.",
+     "date": "1 week ago"
+    }
+   ]
+  },
+  {
+   "id": 24,
+   "title": "Blue Polo Hoodie & Joggers Set",
+   "slug": "blue-polo-hoodie-joggers-set",
+   "regularPrice": 2499,
+   "salePrice": 2499,
+   "rating": 4.6,
+   "reviewCount": 19,
+   "category": "Track Suits",
+   "ages": [
+    "1-2",
+    "2-4",
+    "4-6",
+    "6-8",
+    "8-10"
+   ],
+   "sizes": [
+    "1-3Y",
+    "3-5Y",
+    "5-7Y",
+    "7-9Y",
+    "9-10Y"
+   ],
+   "featuredImage": "https://collections-by-zoni.surge.sh/products/p24.jpg",
+   "fbNote": true,
+   "shortDesc": "Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",
+   "fullDesc": [
+    "Blue Polo Hoodie & Joggers Set is part of the range we post on our Facebook page, where new designs arrive every week.",
+    "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.",
+    "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."
+   ],
+   "reviews": [
+    {
+     "name": "Zainab A.",
+     "city": "Rahim Yar Khan",
+     "rating": 5,
+     "text": "Washed many times, still soft and bright. Ordered the next size too.",
+     "date": "1 day ago"
+    },
+    {
+     "name": "Mahnoor F.",
+     "city": "Karachi",
+     "rating": 4,
+     "text": "Looks exactly like the photo on their page. True to size.",
+     "date": "5 days ago"
+    },
+    {
+     "name": "Amna J.",
+     "city": "Multan",
+     "rating": 5,
+     "text": "Neat stitching, no loose threads. Recommended.",
+     "date": "2 weeks ago"
+    }
+   ]
+  }
+ ]
+};
+</script>
+<script>
+"use strict";
+var KEY = "zoni_admin_v1";
+var AGES_ALL = (SEED && SEED.AGES) || ["1-2","2-4","4-6","6-8","8-10","10-14"];
+var STATUSES = ["Pending","Confirmed","Packed","Shipped","Delivered","Cancelled"];
+var state = null, curView = "dashboard", editId = null, orderFilter = "All", orderQuery = "";
+
+function hashPw(s){ var h=5381; for (var i=0;i<s.length;i++) h=((h<<5)+h+s.charCodeAt(i))|0; return "h"+(h>>>0).toString(16); }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function money(n){ var c=(state&&state.settings&&state.settings.currency)||"Rs. "; return c + Number(n||0).toLocaleString("en-US"); }
+function $(s,r){ return (r||document).querySelector(s); }
+function $all(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); }
+function toast(msg){ var t=$("#toast"); t.textContent=msg; t.classList.add("show"); setTimeout(function(){t.classList.remove("show");},2200); }
+function slugify(t){ return String(t||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,""); }
+function waLink(num){ var d=String(num||"").replace(/\D/g,""); if(d && d[0]==="0") d="92"+d.slice(1); return d?("https://wa.me/"+d):"#"; }
+
+function seedState(){
+  var s = {
+    version:1, seededAt:new Date().toISOString(),
+    settings: JSON.parse(JSON.stringify(SEED.SETTINGS)),
+    announcements:["Free delivery on orders above Rs 3,000","Cash on Delivery available across Pakistan","7-day easy exchange"],
+    categories: SEED.CATEGORIES.filter(function(c){return c!=="All";}).map(function(n){ return {name:n, color:(SEED.CATBAND&&SEED.CATBAND[n])||"#F5B301"}; }),
+    products: JSON.parse(JSON.stringify(SEED.PRODUCTS)).map(function(p){
+      p.active=true; p.featured=false;
+      p.sizesAdv=(p.sizes||[]).map(function(l){ return {label:l, price:null, soldOut:false}; });
+      p.sizeChart=p.sizeChart||[];
+      (p.reviews||[]).forEach(function(r){ if(!r.status) r.status="approved"; });
+      return p;
+    }),
+    orders: [], adminPass: null
+  };
+  s.settings.tcsTrackUrl = "https://www.tcsexpress.com/tracking";
+  return s;
+}
+function load(){
+  try{ var v=localStorage.getItem(KEY); if(v){ state=JSON.parse(v); return; } }catch(e){}
+  state = seedState(); persist();
+}
+function persist(){
+  try{ localStorage.setItem(KEY, JSON.stringify(state)); $("#saveState").textContent="All changes saved — storefront is connected"; }
+  catch(e){ toast("Storage full — export a backup from Data & Backup"); }
+}
+function byId(id){ return state.products.find(function(p){ return p.id===id; }); }
+function pendingReviews(){ var n=0; state.products.forEach(function(p){ (p.reviews||[]).forEach(function(r){ if(r.status==="pending") n++; }); }); return n; }
+function pendingOrders(){ return state.orders.filter(function(o){ return o.status==="Pending"; }).length; }
+
+/* ---------------- navigation ---------------- */
+function go(view){
+  curView=view;
+  $all("#mainNav button").forEach(function(b){ b.classList.toggle("on", b.dataset.view===view); });
+  $all(".view").forEach(function(v){ v.classList.remove("on"); });
+  $("#view-"+view).classList.add("on");
+  $("#viewTitle").textContent = {dashboard:"Dashboard",products:"Products",editor:(editId?"Edit Product":"Add Product"),categories:"Categories",orders:"Orders",reviews:"Reviews",settings:"Store Settings",data:"Data & Backup"}[view]||view;
+  ({dashboard:renderDashboard,products:renderProducts,categories:renderCategories,orders:renderOrders,reviews:renderReviews,settings:renderSettings,data:renderData,editor:function(){}})[view]();
+  refreshBadges();
+}
+function refreshBadges(){
+  var po=pendingOrders(), pr=pendingReviews();
+  var ob=$("#ordBadge"); ob.style.display=po?"inline-block":"none"; ob.textContent=po+" new";
+  var rb=$("#revBadge"); rb.style.display=pr?"inline-block":"none"; rb.textContent=pr+" new";
+}
+
+/* ---------------- dashboard ---------------- */
+function renderDashboard(){
+  var rev = state.orders.filter(function(o){return o.status!=="Cancelled";}).reduce(function(a,o){return a+Number(o.total||0);},0);
+  var allSoldOut = state.products.filter(function(p){ return p.sizesAdv && p.sizesAdv.length && p.sizesAdv.every(function(s){return s.soldOut;}); }).length;
+  var recent = state.orders.slice(0,5);
+  $("#view-dashboard").innerHTML =
+    '<div class="cards">'+
+    stat(money(rev),"Total revenue (orders)")+
+    stat(state.orders.length,"Total orders")+
+    stat(pendingOrders(),"Orders pending")+
+    stat(state.products.filter(function(p){return p.active!==false;}).length,"Active products")+
+    stat(state.categories.length,"Categories")+
+    stat(pendingReviews(),"Reviews to approve")+
+    '</div>'+
+    (allSoldOut? '<div class="panel" style="border-color:#F3C1BB"><h3>Stock alert</h3><p>'+allSoldOut+' product(s) have every size marked Sold Out. Check them in Products.</p></div>':"")+
+    '<div class="panel"><h3>Recent orders</h3>'+ (recent.length? '<table><tr><th>Order</th><th>Customer</th><th>City</th><th>Total</th><th>Status</th></tr>'+
+      recent.map(function(o){ return '<tr><td><strong>'+esc(o.orderNumber)+'</strong></td><td>'+esc(o.name)+'</td><td>'+esc(o.city)+'</td><td>'+money(o.total)+'</td><td><span class="pill '+(o.status==="Delivered"?"ok":o.status==="Cancelled"?"bad":"warn")+'">'+esc(o.status)+'</span></td></tr>'; }).join("")+'</table>'
+      : '<p class="mut">No orders yet. Orders placed on the storefront (on this device/browser) will appear here automatically.</p>')+
+    '</div>'+
+    '<div class="panel"><h3>How the connection works</h3><p class="mut" style="font-size:14px;line-height:1.65">This admin panel and the storefront share one data store in this browser. Products, categories, prices, sizes and settings you change here appear on the storefront on its next load, and new storefront orders arrive here. Use <strong>Data &amp; Backup</strong> to export everything as a file and import it on another device. For a multi-device live database (owner phone + staff + customers on their own phones), the store can later be connected to a cloud database without changing this panel\'s design.</p></div>';
+  function stat(n,l){ return '<div class="stat"><div class="n">'+n+'</div><div class="l">'+l+'</div></div>'; }
+}
+
+/* ---------------- products ---------------- */
+function renderProducts(){
+  var q = ($("#prodSearch") && $("#prodSearch").value || "").toLowerCase();
+  var rows = state.products.filter(function(p){ return !q || p.title.toLowerCase().indexOf(q)>-1 || (p.category||"").toLowerCase().indexOf(q)>-1; });
+  $("#view-products").innerHTML =
+    '<div class="searchbar"><input id="prodSearch" placeholder="Search products..." value="'+esc(q)+'"><button class="btn" id="addProdBtn">+ Add Product</button></div>'+
+    '<div class="panel"><table><tr><th></th><th>Product</th><th>Category</th><th>Price</th><th>Sizes</th><th>Featured</th><th>Status</th><th></th></tr>'+
+    rows.map(function(p){
+      var sold = (p.sizesAdv||[]).filter(function(s){return s.soldOut;}).length;
+      return '<tr><td><img class="thumb" src="'+esc(p.featuredImage)+'" alt=""></td>'+
+      '<td><strong>'+esc(p.title)+'</strong><div class="mut">ID '+p.id+' · '+(p.reviews||[]).length+' reviews</div></td>'+
+      '<td>'+esc(p.category)+'</td><td>'+money(p.salePrice)+(p.regularPrice>p.salePrice?' <span class="mut" style="text-decoration:line-through">'+money(p.regularPrice)+'</span>':"")+'</td>'+
+      '<td>'+(p.sizes||[]).length+(sold?' <span class="pill bad">'+sold+' sold out</span>':"")+'</td>'+
+      '<td>'+(p.featured?'<span class="pill warn">Featured</span>':"")+'</td>'+
+      '<td>'+(p.active!==false?'<span class="pill ok">Active</span>':'<span class="pill bad">Hidden</span>')+'</td>'+
+      '<td><div class="rowline"><button class="btn small ghost" data-edit="'+p.id+'">Edit</button><button class="btn small ghost" data-dup="'+p.id+'">Copy</button><button class="btn small danger" data-del="'+p.id+'">Delete</button></div></td></tr>';
+    }).join("")+'</table>'+(rows.length?"":'<p class="mut">No products match.</p>')+'</div>';
+  $("#prodSearch").addEventListener("input", renderProductsKeepFocus);
+  $("#addProdBtn").addEventListener("click", function(){ openEditor(null); });
+  $all("[data-edit]").forEach(function(b){ b.addEventListener("click", function(){ openEditor(Number(b.dataset.edit)); }); });
+  $all("[data-dup]").forEach(function(b){ b.addEventListener("click", function(){
+    var src=byId(Number(b.dataset.dup)); if(!src) return;
+    var c=JSON.parse(JSON.stringify(src)); c.id=nextProdId(); c.title=src.title+" (Copy)"; c.slug=slugify(c.title);
+    state.products.push(c); persist(); renderProducts(); toast("Product copied");
+  }); });
+  $all("[data-del]").forEach(function(b){ b.addEventListener("click", function(){
+    var p=byId(Number(b.dataset.del)); if(!p) return;
+    if(!confirm("Delete product \""+p.title+"\" permanently?")) return;
+    state.products=state.products.filter(function(x){return x.id!==p.id;}); persist(); renderProducts(); toast("Product deleted");
+  }); });
+}
+function renderProductsKeepFocus(){ var v=$("#prodSearch").value, pos=$("#prodSearch").selectionStart; renderProducts(); var el=$("#prodSearch"); el.focus(); el.setSelectionRange(pos,pos); }
+function nextProdId(){ return state.products.reduce(function(a,p){ return Math.max(a,p.id||0); },0)+1; }
+
+function openEditor(id){
+  editId=id;
+  var p = id? JSON.parse(JSON.stringify(byId(id))) : { id:nextProdId(), title:"", slug:"", regularPrice:2000, salePrice:2000, rating:5, reviewCount:0, category:(state.categories[0]||{}).name||"", ages:[], sizes:[], sizesAdv:[], sizeChart:[], featuredImage:"", shortDesc:"", fullDesc:[], reviews:[], active:true, featured:false };
+  if(!p.sizesAdv) p.sizesAdv=(p.sizes||[]).map(function(l){ return {label:l,price:null,soldOut:false}; });
+  if(!p.sizeChart) p.sizeChart=[];
+  if(!p.reviews) p.reviews=[];
+  window._editDraft=p;
+  var catOpts = state.categories.map(function(c){ return '<option '+(c.name===p.category?"selected":"")+'>'+esc(c.name)+'</option>'; }).join("");
+  var ageBoxes = AGES_ALL.map(function(a){ return '<label class="checkline" style="margin:0"><input type="checkbox" class="ageBox" value="'+a+'" '+(p.ages.indexOf(a)>-1?"checked":"")+'> '+a+' years</label>'; }).join("");
+  $("#view-editor").innerHTML =
+  '<div class="panel"><h3>'+(id?"Edit":"New")+' product</h3>'+
+  '<div class="grid2"><div><label>Product title</label><input id="f_title" value="'+esc(p.title)+'"></div>'+
+  '<div><label>Category</label><select id="f_category">'+catOpts+'</select></div></div>'+
+  '<div class="grid3"><div><label>Regular price (Rs)</label><input id="f_regular" type="number" min="0" value="'+p.regularPrice+'"></div>'+
+  '<div><label>Sale price (Rs)</label><input id="f_sale" type="number" min="0" value="'+p.salePrice+'"></div>'+
+  '<div><label>Rating (0–5)</label><input id="f_rating" type="number" min="0" max="5" step="0.1" value="'+(p.rating||5)+'"></div></div>'+
+  '<label>Image URL</label><div class="rowline"><input id="f_image" value="'+esc(p.featuredImage)+'" placeholder="https://..."><img class="thumb" id="f_imgPrev" src="'+esc(p.featuredImage)+'" alt=""></div>'+
+  '<label>Age groups</label><div class="chips">'+ageBoxes+'</div>'+
+  '<label>Short description</label><textarea id="f_short" rows="2">'+esc(p.shortDesc)+'</textarea>'+
+  '<label>Full description (one paragraph per line)</label><textarea id="f_full" rows="4">'+esc((p.fullDesc||[]).join("\n"))+'</textarea>'+
+  '<div class="rowline" style="max-width:420px"><label class="checkline"><input type="checkbox" id="f_active" '+(p.active!==false?"checked":"")+'> Active on storefront</label>'+
+  '<label class="checkline"><input type="checkbox" id="f_featured" '+(p.featured?"checked":"")+'> Featured on homepage</label></div>'+
+  '</div>'+
+  '<div class="panel"><h3>Sizes — price per size &amp; stock</h3><p class="mut">Leave a size price empty to use the sale price. Mark a size Sold Out and it shows struck-through on the product page and cannot be selected.</p><div id="sizeRows" style="margin-top:10px"></div>'+
+  '<button class="btn small ghost" id="addSizeBtn">+ Add size</button> <button class="btn small ghost" id="genSizeBtn">Generate sizes from age groups</button></div>'+
+  '<div class="panel"><h3>Size chart (shown on the product page)</h3><div id="chartRows"></div><button class="btn small ghost" id="addChartBtn">+ Add row</button></div>'+
+  '<div class="panel"><h3>Reviews for this product</h3><div id="revList"></div>'+
+  '<div class="grid3"><div><label>Name</label><input id="r_name"></div><div><label>City</label><input id="r_city"></div><div><label>Rating</label><select id="r_rating"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select></div></div>'+
+  '<label>Review text</label><textarea id="r_text" rows="2"></textarea><div style="height:8px"></div><button class="btn small ghost" id="addRevBtn">+ Add review</button></div>'+
+  '<div style="display:flex;gap:10px"><button class="btn" id="saveProdBtn">Save Product</button><button class="btn ghost" id="cancelProdBtn">Back to Products</button></div>';
+  go("editor");
+  drawSizeRows(); drawChartRows(); drawEditorReviews();
+  $("#f_image").addEventListener("input", function(){ $("#f_imgPrev").src=this.value; });
+  $("#addSizeBtn").addEventListener("click", function(){ window._editDraft.sizesAdv.push({label:"",price:null,soldOut:false}); drawSizeRows(); });
+  $("#genSizeBtn").addEventListener("click", function(){
+    var ages=$all(".ageBox").filter(function(b){return b.checked;}).map(function(b){return b.value;});
+    if(!ages.length){ toast("Select age groups first"); return; }
+    window._editDraft.sizesAdv = ages.map(function(a){ return {label:a+"Y", price:null, soldOut:false}; });
+    drawSizeRows();
+  });
+  $("#addChartBtn").addEventListener("click", function(){ window._editDraft.sizeChart.push({size:"",length:"",chest:""}); drawChartRows(); });
+  $("#addRevBtn").addEventListener("click", function(){
+    var t=$("#r_text").value.trim(); if(!t){ toast("Write the review text first"); return; }
+    window._editDraft.reviews.push({name:$("#r_name").value.trim()||"Customer", city:$("#r_city").value.trim(), rating:Number($("#r_rating").value)||5, text:t, date:"Just now", status:"approved"});
+    drawEditorReviews();
+  });
+  $("#cancelProdBtn").addEventListener("click", function(){ go("products"); });
+  $("#saveProdBtn").addEventListener("click", saveEditor);
+}
+function drawSizeRows(){
+  var p=window._editDraft;
+  $("#sizeRows").innerHTML = p.sizesAdv.map(function(s,i){
+    return '<div class="sizerow"><input placeholder="Size label e.g. 4-6Y" data-sr="'+i+'" data-f="label" value="'+esc(s.label)+'">'+
+    '<input type="number" min="0" placeholder="Price (optional)" data-sr="'+i+'" data-f="price" value="'+(s.price==null?"":s.price)+'">'+
+    '<label class="checkline" style="margin:0"><input type="checkbox" data-sr="'+i+'" data-f="soldOut" '+(s.soldOut?"checked":"")+'> Sold out</label>'+
+    '<button class="btn small danger" data-sdel="'+i+'">X</button></div>';
+  }).join("") || '<p class="mut">No sizes yet.</p>';
+  $all("[data-sr]").forEach(function(el){ el.addEventListener("change", function(){
+    var s=window._editDraft.sizesAdv[Number(el.dataset.sr)];
+    if(el.dataset.f==="label") s.label=el.value;
+    if(el.dataset.f==="price") s.price=el.value===""?null:Number(el.value);
+    if(el.dataset.f==="soldOut") s.soldOut=el.checked;
+  }); });
+  $all("[data-sdel]").forEach(function(b){ b.addEventListener("click", function(){ syncSizeRows(); window._editDraft.sizesAdv.splice(Number(b.dataset.sdel),1); drawSizeRows(); }); });
+}
+function syncSizeRows(){ $all("[data-sr]").forEach(function(el){ var s=window._editDraft.sizesAdv[Number(el.dataset.sr)]; if(!s) return; if(el.dataset.f==="label") s.label=el.value; if(el.dataset.f==="price") s.price=el.value===""?null:Number(el.value); if(el.dataset.f==="soldOut") s.soldOut=el.checked; }); }
+function drawChartRows(){
+  var p=window._editDraft;
+  $("#chartRows").innerHTML = p.sizeChart.map(function(r,i){
+    return '<div class="chartrow"><input placeholder="Size" data-cr="'+i+'" data-f="size" value="'+esc(r.size)+'"><input placeholder="Length" data-cr="'+i+'" data-f="length" value="'+esc(r.length)+'"><input placeholder="Chest" data-cr="'+i+'" data-f="chest" value="'+esc(r.chest)+'"><button class="btn small danger" data-cdel="'+i+'">X</button></div>';
+  }).join("") || '<p class="mut">No size chart rows.</p>';
+  $all("[data-cr]").forEach(function(el){ el.addEventListener("change", function(){ var r=window._editDraft.sizeChart[Number(el.dataset.cr)]; r[el.dataset.f]=el.value; }); });
+  $all("[data-cdel]").forEach(function(b){ b.addEventListener("click", function(){ window._editDraft.sizeChart.splice(Number(b.dataset.cdel),1); drawChartRows(); }); });
+}
+function drawEditorReviews(){
+  var p=window._editDraft;
+  $("#revList").innerHTML = (p.reviews||[]).map(function(r,i){
+    return '<div style="border-bottom:1px solid #F3EAD0;padding:8px 0"><strong>'+esc(r.name)+'</strong> <span class="stars">'+"★".repeat(r.rating||5)+'</span> <span class="pill '+(r.status==="pending"?"warn":"ok")+'">'+esc(r.status||"approved")+'</span><div>'+esc(r.text)+'</div>'+
+    '<div style="margin-top:5px;display:flex;gap:8px"><button class="btn small ghost" data-rtoggle="'+i+'">'+(r.status==="pending"?"Approve":"Set pending")+'</button><button class="btn small danger" data-rdel="'+i+'">Delete</button></div></div>';
+  }).join("") || '<p class="mut">No reviews yet.</p>';
+  $all("[data-rtoggle]").forEach(function(b){ b.addEventListener("click", function(){ var r=window._editDraft.reviews[Number(b.dataset.rtoggle)]; r.status = r.status==="pending"?"approved":"pending"; drawEditorReviews(); }); });
+  $all("[data-rdel]").forEach(function(b){ b.addEventListener("click", function(){ window._editDraft.reviews.splice(Number(b.dataset.rdel),1); drawEditorReviews(); }); });
+}
+function saveEditor(){
+  syncSizeRows();
+  var d=window._editDraft;
+  d.title=$("#f_title").value.trim(); if(!d.title){ toast("Title is required"); return; }
+  d.slug=slugify(d.title);
+  d.category=$("#f_category").value;
+  d.regularPrice=Number($("#f_regular").value)||0;
+  d.salePrice=Number($("#f_sale").value)||0;
+  d.rating=Math.min(5,Math.max(0,Number($("#f_rating").value)||5));
+  d.featuredImage=$("#f_image").value.trim();
+  d.shortDesc=$("#f_short").value;
+  d.fullDesc=$("#f_full").value.split("\n").map(function(x){return x.trim();}).filter(Boolean);
+  d.ages=$all(".ageBox").filter(function(b){return b.checked;}).map(function(b){return b.value;});
+  d.active=$("#f_active").checked; d.featured=$("#f_featured").checked;
+  d.sizesAdv=d.sizesAdv.filter(function(s){ return s.label.trim(); });
+  d.sizes=d.sizesAdv.map(function(s){ return s.label; });
+  d.sizeChart=d.sizeChart.filter(function(r){ return r.size.trim(); });
+  d.reviewCount=(d.reviews||[]).filter(function(r){return r.status!=="pending";}).length;
+  var idx=state.products.findIndex(function(p){return p.id===d.id;});
+  if(idx>-1) state.products[idx]=d; else state.products.push(d);
+  persist(); toast("Product saved — live on storefront"); go("products");
+}
+
+/* ---------------- categories ---------------- */
+function renderCategories(){
+  $("#view-categories").innerHTML =
+  '<div class="panel"><h3>All categories</h3><table><tr><th>Colour</th><th>Name</th><th>Products</th><th></th></tr>'+
+  state.categories.map(function(c,i){
+    var n=state.products.filter(function(p){return p.category===c.name;}).length;
+    return '<tr><td><input type="color" data-cat="'+i+'" value="'+esc(c.color||"#F5B301")+'" style="width:52px;padding:2px;height:36px"></td>'+
+    '<td><input data-catname="'+i+'" value="'+esc(c.name)+'"></td><td>'+n+'</td>'+
+    '<td><button class="btn small danger" data-catdel="'+i+'">Delete</button></td></tr>';
+  }).join("")+'</table>'+
+  '<div class="rowline" style="max-width:520px;margin-top:12px"><input id="newCatName" placeholder="New category name"><input type="color" id="newCatColor" value="#F5B301" style="width:52px;padding:2px;height:40px;flex:0 0 52px"><button class="btn" id="addCatBtn">Add</button></div>'+
+  '<p class="mut" style="margin-top:10px">Renaming a category also updates its products. Categories appear in the store header menu, homepage and footer automatically.</p></div>';
+  $all("[data-cat]").forEach(function(el){ el.addEventListener("change", function(){ state.categories[Number(el.dataset.cat)].color=el.value; persist(); toast("Category colour saved"); }); });
+  $all("[data-catname]").forEach(function(el){ el.addEventListener("change", function(){
+    var i=Number(el.dataset.catname), old=state.categories[i].name, nw=el.value.trim();
+    if(!nw || nw===old){ el.value=old; return; }
+    state.categories[i].name=nw;
+    state.products.forEach(function(p){ if(p.category===old) p.category=nw; });
+    persist(); toast("Category renamed"); renderCategories();
+  }); });
+  $all("[data-catdel]").forEach(function(b){ b.addEventListener("click", function(){
+    var i=Number(b.dataset.catdel), c=state.categories[i];
+    var used=state.products.filter(function(p){return p.category===c.name;});
+    if(used.length){ if(!confirm(used.length+" product(s) use \""+c.name+"\". Delete it and move those products to the first remaining category?")) return;
+      var target=state.categories.find(function(x){return x.name!==c.name;});
+      if(!target){ toast("Cannot delete the only category"); return; }
+      used.forEach(function(p){ p.category=target.name; });
+    }
+    state.categories.splice(i,1); persist(); renderCategories(); toast("Category deleted");
+  }); });
+  $("#addCatBtn").addEventListener("click", function(){
+    var n=$("#newCatName").value.trim(); if(!n){ toast("Type a category name"); return; }
+    if(state.categories.some(function(c){return c.name.toLowerCase()===n.toLowerCase();})){ toast("Category already exists"); return; }
+    state.categories.push({name:n, color:$("#newCatColor").value}); persist(); renderCategories(); toast("Category added");
+  });
+}
+
+/* ---------------- orders ---------------- */
+function renderOrders(){
+  var list=state.orders.filter(function(o){
+    var okF = orderFilter==="All" || o.status===orderFilter;
+    var okQ = !orderQuery || (o.orderNumber+" "+o.name+" "+o.phone).toLowerCase().indexOf(orderQuery)>-1;
+    return okF && okQ;
+  });
+  $("#view-orders").innerHTML =
+  '<div class="chips" style="margin-bottom:14px">'+["All"].concat(STATUSES).map(function(s){ return '<button class="chip '+(orderFilter===s?"on":"")+'" data-of="'+s+'">'+s+'</button>'; }).join("")+'</div>'+
+  '<div class="searchbar"><input id="ordSearch" placeholder="Search order no, name or phone..." value="'+esc(orderQuery)+'"></div>'+
+  '<div class="panel"><table><tr><th>Order</th><th>Date</th><th>Customer</th><th>City</th><th>Items</th><th>Payment</th><th>Total</th><th>Status</th><th>TCS</th></tr>'+
+  (list.map(function(o){
+    return '<tr class="clickable" data-order="'+esc(o.orderNumber)+'"><td><strong>'+esc(o.orderNumber)+'</strong></td><td>'+esc(o.date)+'</td><td>'+esc(o.name)+'<div class="mut">'+esc(o.phone)+'</div></td><td>'+esc(o.city)+'</td><td>'+(o.itemsCount||(o.items?o.items.length:0))+'</td><td>'+esc(o.payment)+'</td><td>'+money(o.total)+'</td><td><span class="pill '+(o.status==="Delivered"?"ok":o.status==="Cancelled"?"bad":"warn")+'">'+esc(o.status)+'</span></td><td>'+(o.tcs?esc(o.tcs):'<span class="mut">—</span>')+'</td></tr>';
+  }).join("") || '<tr><td colspan="9" class="mut">No orders found. New storefront orders appear here automatically.</td></tr>')+'</table></div>';
+  $all("[data-of]").forEach(function(b){ b.addEventListener("click", function(){ orderFilter=b.dataset.of; renderOrders(); }); });
+  $("#ordSearch").addEventListener("input", function(){ orderQuery=this.value.toLowerCase(); var pos=this.selectionStart; renderOrders(); var el=$("#ordSearch"); el.focus(); el.setSelectionRange(pos,pos); });
+  $all("[data-order]").forEach(function(r){ r.addEventListener("click", function(){ openOrder(r.dataset.order); }); });
+}
+function openOrder(num){
+  var o=state.orders.find(function(x){ return x.orderNumber===num; }); if(!o) return;
+  var items=(o.items||[]).map(function(l){ return '<tr><td>'+esc(l.title)+'</td><td>'+esc(l.size)+'</td><td>'+l.qty+'</td><td>'+money(l.price)+'</td><td>'+money(l.price*l.qty)+'</td></tr>'; }).join("");
+  $("#orderModalBox").innerHTML =
+  '<div style="display:flex;justify-content:space-between;align-items:center"><h3>Order '+esc(o.orderNumber)+'</h3><button class="btn small ghost" id="omClose">Close</button></div>'+
+  '<p class="mut">'+esc(o.date)+' · '+esc(o.payment)+'</p>'+
+  '<div class="grid2"><div><label>Customer</label><p><strong>'+esc(o.name)+'</strong><br>Phone: '+esc(o.phone)+'<br>WhatsApp: '+esc(o.whatsapp||o.phone)+'<br>'+(o.email?("Email: "+esc(o.email)+"<br>"):"")+'City: '+esc(o.city)+'<br>Address: '+esc(o.address||"")+'</p></div>'+
+  '<div><label>Order status</label><select id="om_status">'+STATUSES.map(function(s){ return '<option '+(o.status===s?"selected":"")+'>'+s+'</option>'; }).join("")+'</select>'+
+  '<label>TCS consignment number</label><input id="om_tcs" value="'+esc(o.tcs||"")+'" placeholder="e.g. 602123456789">'+
+  '<label>Internal note</label><textarea id="om_note" rows="2">'+esc(o.note||"")+'</textarea></div></div>'+
+  '<h3 style="margin:14px 0 8px">Items</h3><table><tr><th>Product</th><th>Size</th><th>Qty</th><th>Price</th><th>Amount</th></tr>'+(items||'<tr><td colspan="5" class="mut">Item detail not stored for this order.</td></tr>')+
+  '<tr><td colspan="4">Subtotal</td><td>'+money(o.subtotal)+'</td></tr><tr><td colspan="4">Delivery</td><td>'+(o.shipping?money(o.shipping):"FREE")+'</td></tr><tr><td colspan="4"><strong>Total</strong></td><td><strong>'+money(o.total)+'</strong></td></tr></table>'+
+  '<div style="display:flex;gap:9px;margin-top:16px;flex-wrap:wrap"><button class="btn" id="omSave">Save Changes</button>'+
+  '<a class="btn ghost" target="_blank" rel="noopener" href="'+waLink(o.whatsapp||o.phone)+'">WhatsApp Customer</a>'+
+  '<button class="btn ghost" id="omPrint">Print Invoice</button>'+
+  '<button class="btn danger" id="omDelete">Delete Order</button></div>';
+  $("#orderModal").classList.add("on");
+  $("#omClose").addEventListener("click", function(){ $("#orderModal").classList.remove("on"); });
+  $("#omSave").addEventListener("click", function(){
+    o.status=$("#om_status").value; o.tcs=$("#om_tcs").value.trim(); o.note=$("#om_note").value;
+    persist(); $("#orderModal").classList.remove("on"); renderOrders(); refreshBadges(); toast("Order updated — customer track page updated too");
+  });
+  $("#omDelete").addEventListener("click", function(){
+    if(!confirm("Delete order "+o.orderNumber+"?")) return;
+    state.orders=state.orders.filter(function(x){return x.orderNumber!==o.orderNumber;});
+    persist(); $("#orderModal").classList.remove("on"); renderOrders(); toast("Order deleted");
+  });
+  $("#omPrint").addEventListener("click", function(){
+    var w=window.open("","_blank");
+    w.document.write('<html><head><title>Invoice '+esc(o.orderNumber)+'</title><style>body{font-family:Arial;padding:28px}table{width:100%;border-collapse:collapse}td,th{border-bottom:1px solid #ddd;padding:7px;text-align:left}</style></head><body>'+
+    '<h2>Collection\'s by Zoni — Invoice</h2><p>Order <strong>'+esc(o.orderNumber)+'</strong> · '+esc(o.date)+'<br>'+esc(o.name)+' · '+esc(o.phone)+'<br>'+esc(o.address||"")+', '+esc(o.city)+'</p>'+
+    '<table><tr><th>Product</th><th>Size</th><th>Qty</th><th>Amount</th></tr>'+(o.items||[]).map(function(l){return '<tr><td>'+esc(l.title)+'</td><td>'+esc(l.size)+'</td><td>'+l.qty+'</td><td>'+money(l.price*l.qty)+'</td></tr>';}).join("")+
+    '<tr><td colspan="3">Delivery</td><td>'+(o.shipping?money(o.shipping):"FREE")+'</td></tr><tr><td colspan="3"><strong>Total ('+esc(o.payment)+')</strong></td><td><strong>'+money(o.total)+'</strong></td></tr></table>'+
+    (o.tcs?'<p>TCS consignment: <strong>'+esc(o.tcs)+'</strong></p>':"")+'</body></html>');
+    w.document.close(); w.focus(); w.print();
+  });
+}
+
+/* ---------------- reviews ---------------- */
+function renderReviews(){
+  var all=[];
+  state.products.forEach(function(p){ (p.reviews||[]).forEach(function(r,i){ all.push({p:p, r:r, i:i}); }); });
+  all.sort(function(a,b){ return (a.r.status==="pending"?0:1)-(b.r.status==="pending"?0:1); });
+  $("#view-reviews").innerHTML = '<div class="panel"><h3>All reviews ('+all.length+')</h3>'+
+  (all.map(function(x){
+    return '<div style="border-bottom:1px solid #F3EAD0;padding:10px 0"><strong>'+esc(x.r.name)+'</strong> <span class="stars">'+"★".repeat(x.r.rating||5)+'</span> <span class="pill '+(x.r.status==="pending"?"warn":"ok")+'">'+esc(x.r.status||"approved")+'</span> <span class="mut">on '+esc(x.p.title)+' · '+esc(x.r.city||"")+' · '+esc(x.r.date||"")+'</span><div style="margin-top:3px">'+esc(x.r.text)+'</div>'+
+    '<div style="margin-top:6px;display:flex;gap:8px"><button class="btn small ghost" data-rvt="'+x.p.id+':'+x.i+'">'+(x.r.status==="pending"?"Approve":"Set pending")+'</button><button class="btn small danger" data-rvd="'+x.p.id+':'+x.i+'">Delete</button></div></div>';
+  }).join("") || '<p class="mut">No reviews yet.</p>')+'</div>';
+  $all("[data-rvt]").forEach(function(b){ b.addEventListener("click", function(){ var parts=b.dataset.rvt.split(":"); var p=byId(Number(parts[0])); var r=p.reviews[Number(parts[1])]; r.status=r.status==="pending"?"approved":"pending"; persist(); renderReviews(); refreshBadges(); }); });
+  $all("[data-rvd]").forEach(function(b){ b.addEventListener("click", function(){ var parts=b.dataset.rvd.split(":"); var p=byId(Number(parts[0])); p.reviews.splice(Number(parts[1]),1); p.reviewCount=p.reviews.filter(function(r){return r.status!=="pending";}).length; persist(); renderReviews(); toast("Review deleted"); }); });
+}
+
+/* ---------------- settings ---------------- */
+function renderSettings(){
+  var s=state.settings;
+  $("#view-settings").innerHTML =
+  '<div class="panel"><h3>Store information</h3><div class="grid2">'+
+  fld("Store name","s_siteName",s.siteName)+ fld("Tagline","s_tagline",s.tagline)+
+  fld("Phone (display)","s_phoneDisplay",s.phoneDisplay)+ fld("WhatsApp link","s_whatsapp",s.whatsapp)+
+  fld("Email","s_email",s.email)+ fld("City","s_city",s.city)+
+  '</div><label>Shop address</label><input id="s_address" value="'+esc(s.address)+'">'+
+  '<label>Announcement bar message</label><input id="s_announce" value="'+esc((state.announcements||[])[0]||"")+'">'+
+  '</div>'+
+  '<div class="panel"><h3>Delivery &amp; currency</h3><div class="grid3">'+
+  fldN("Free delivery above (Rs)","s_threshold",s.freeShippingThreshold)+ fldN("Flat delivery fee (Rs)","s_fee",s.flatShippingFee)+ fld("Currency symbol","s_currency",s.currency)+
+  '</div><label>TCS tracking page URL (use {no} where the consignment number goes)</label><input id="s_tcs" value="'+esc(s.tcsTrackUrl||"")+'" placeholder="https://www.tcsexpress.com/tracking"></div>'+
+  '<div class="panel"><h3>Admin password</h3><div class="rowline" style="max-width:480px"><input type="password" id="s_newpass" placeholder="New password"><button class="btn ghost" id="chPassBtn">Change</button></div></div>'+
+  '<button class="btn" id="saveSettingsBtn">Save Settings</button>';
+  function fld(l,id,v){ return '<div><label>'+l+'</label><input id="'+id+'" value="'+esc(v||"")+'"></div>'; }
+  function fldN(l,id,v){ return '<div><label>'+l+'</label><input type="number" min="0" id="'+id+'" value="'+(v==null?"":v)+'"></div>'; }
+  $("#saveSettingsBtn").addEventListener("click", function(){
+    s.siteName=$("#s_siteName").value; s.tagline=$("#s_tagline").value; s.phoneDisplay=$("#s_phoneDisplay").value;
+    s.whatsapp=$("#s_whatsapp").value; s.email=$("#s_email").value; s.city=$("#s_city").value; s.address=$("#s_address").value;
+    s.freeShippingThreshold=Number($("#s_threshold").value)||0; s.flatShippingFee=Number($("#s_fee").value)||0; s.currency=$("#s_currency").value||"Rs. ";
+    s.tcsTrackUrl=$("#s_tcs").value.trim();
+    var ann=$("#s_announce").value.trim(); if(ann) state.announcements=[ann].concat((state.announcements||[]).slice(1));
+    persist(); toast("Settings saved — storefront updated");
+  });
+  $("#chPassBtn").addEventListener("click", function(){
+    var np=$("#s_newpass").value; if(np.length<6){ toast("Password must be at least 6 characters"); return; }
+    state.adminPass=hashPw(np); persist(); toast("Admin password changed");
+  });
+}
+
+/* ---------------- data ---------------- */
+function renderData(){
+  var bytes=(localStorage.getItem(KEY)||"").length;
+  $("#view-data").innerHTML =
+  '<div class="panel"><h3>Backup &amp; restore</h3><p class="mut" style="font-size:14px;line-height:1.6">Everything — products, categories, orders, reviews and settings — is stored in this browser ('+Math.round(bytes/1024)+' KB used). Export a backup file regularly, and import it on any other device to move the whole store.</p>'+
+  '<div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap"><button class="btn" id="expBtn">Export Backup (JSON)</button>'+
+  '<label class="btn ghost" style="margin:0;cursor:pointer">Import Backup<input type="file" id="impFile" accept=".json" style="display:none"></label>'+
+  '<button class="btn danger" id="resetBtn">Reset to Original Catalog</button></div></div>'+
+  '<div class="panel"><h3>Store data summary</h3><table>'+
+  '<tr><td>Products</td><td>'+state.products.length+'</td></tr><tr><td>Categories</td><td>'+state.categories.length+'</td></tr>'+
+  '<tr><td>Orders</td><td>'+state.orders.length+'</td></tr><tr><td>Reviews</td><td>'+state.products.reduce(function(a,p){return a+(p.reviews||[]).length;},0)+'</td></tr></table></div>';
+  $("#expBtn").addEventListener("click", function(){
+    var blob=new Blob([JSON.stringify(state,null,1)],{type:"application/json"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="zoni-store-backup.json"; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); },2000);
+    toast("Backup downloaded");
+  });
+  $("#impFile").addEventListener("change", function(){
+    var f=this.files[0]; if(!f) return;
+    var rd=new FileReader();
+    rd.onload=function(){ try{ var d=JSON.parse(rd.result); if(!d.products||!d.settings) throw new Error("bad file"); state=d; persist(); go("dashboard"); toast("Backup imported successfully"); }catch(e){ toast("That file is not a valid Zoni backup"); } };
+    rd.readAsText(f);
+  });
+  $("#resetBtn").addEventListener("click", function(){
+    if(!confirm("Reset products, categories and settings to the original catalog? Orders will be kept.")) return;
+    var keepOrders=state.orders, keepPass=state.adminPass;
+    state=seedState(); state.orders=keepOrders; state.adminPass=keepPass; persist(); go("dashboard"); toast("Store reset to original catalog");
+  });
+}
+
+/* ---------------- gate ---------------- */
+function tryLogin(){
+  var v=$("#gatePass").value;
+  var ok = state.adminPass ? (hashPw(v)===state.adminPass) : (v==="zoniadmin");
+  if(ok){ sessionStorage.setItem("zoni_admin_ok","1"); showApp(); }
+  else { $("#gateErr").textContent="Wrong password — try again."; }
+}
+function showApp(){
+  $("#gate").style.display="none"; $("#app").style.display="block"; go("dashboard");
+  if(!state.adminPass) $("#gateHint").style.display="block";
+}
+load();
+if(!state.adminPass) $("#gateHint").style.display="block";
+$("#gateBtn").addEventListener("click", tryLogin);
+$("#gatePass").addEventListener("keydown", function(e){ if(e.key==="Enter") tryLogin(); });
+$("#logoutBtn").addEventListener("click", function(e){ e.preventDefault(); sessionStorage.removeItem("zoni_admin_ok"); location.reload(); });
+$("#mainNav").addEventListener("click", function(e){ var b=e.target.closest("button[data-view]"); if(b) go(b.dataset.view); });
+if(sessionStorage.getItem("zoni_admin_ok")==="1") showApp();
+</script>
+</body>
+</html>
