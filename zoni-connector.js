@@ -68,10 +68,19 @@
   var css = document.createElement("style");
   css.textContent =
     ".size-pill.zoni-soldout{opacity:.45;text-decoration:line-through;cursor:not-allowed}" +
-    ".zoni-chart{margin-top:14px;border:1.5px solid var(--acc-sep,#FCE7AE);border-radius:14px;padding:10px 14px;background:#FFFDF4}" +
-    ".zoni-chart summary{font-weight:700;cursor:pointer;color:var(--acc-strong,#BE8B00)}" +
-    ".zoni-chart table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14px}" +
-    ".zoni-chart th,.zoni-chart td{border:1px solid #F0E2B6;padding:6px 8px;text-align:left}" +
+    ".zoni-chart-btn{display:inline-flex;align-items:center;gap:7px;margin-top:12px;background:none;border:0;font:inherit;font-size:15px;font-weight:600;color:var(--acc-ink,#262019);cursor:pointer;padding:4px 2px}" +
+    ".zoni-chart-btn:hover{color:var(--acc-strong,#BE8B00)}" +
+    ".zoni-chart-btn svg{flex:0 0 auto}" +
+    ".zoni-modal{position:fixed;inset:0;background:rgba(30,25,15,.55);display:none;align-items:flex-end;justify-content:center;z-index:200;padding:0}" +
+    ".zoni-modal.open{display:flex}" +
+    ".zoni-modal-box{background:#fff;width:100%;max-width:560px;max-height:88vh;overflow:auto;border-radius:22px 22px 0 0;padding:26px 22px 30px;position:relative}" +
+    "@media(min-width:640px){.zoni-modal{align-items:center;padding:20px}.zoni-modal-box{border-radius:22px}}" +
+    ".zoni-modal-box h3{font-size:24px;line-height:1.25;margin:0 40px 8px 0}" +
+    ".zoni-modal-box .zoni-note{color:#3C4057;font-size:15px;margin-bottom:16px}" +
+    ".zoni-modal-close{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:1.5px solid #E7D9A8;background:#fff;font-size:17px;cursor:pointer;line-height:1}" +
+    ".zoni-chart-table{width:100%;border-collapse:collapse;font-size:14.5px}" +
+    ".zoni-chart-table th,.zoni-chart-table td{border:1px solid #E3E3E3;padding:9px 8px;text-align:center}" +
+    ".zoni-chart-table th{background:#FBF6E3;font-weight:700}" +
     ".zoni-revform{margin-top:18px;border:1.5px solid var(--acc-sep,#FCE7AE);border-radius:16px;padding:16px;background:#FFFDF4}" +
     ".zoni-revform h4{margin:0 0 10px;font-size:16px}" +
     ".zoni-revform input,.zoni-revform select,.zoni-revform textarea{width:100%;padding:9px 11px;border:1.5px solid #E7D9A8;border-radius:10px;margin-bottom:9px;font:inherit;font-size:14.5px}" +
@@ -137,16 +146,43 @@
       }
     });
 
-    /* size chart */
-    if (p.sizeChart && p.sizeChart.length) {
-      var sizesBox = document.getElementById("pdSizes");
-      if (sizesBox && sizesBox.parentNode && !document.querySelector(".zoni-chart")) {
-        var rows = p.sizeChart.map(function (r) { return "<tr><td>" + esc(r.size) + "</td><td>" + esc(r.length) + "</td><td>" + esc(r.chest) + "</td></tr>"; }).join("");
-        var det = document.createElement("details");
-        det.className = "zoni-chart";
-        det.innerHTML = "<summary>Size Chart</summary><table><tr><th>Size</th><th>Length</th><th>Chest</th></tr>" + rows + "</table>";
-        sizesBox.parentNode.insertBefore(det, sizesBox.nextSibling);
-      }
+    /* size chart — "Size Chart" link under the sizes opens a popup with the
+       garment measurements, like the client's reference. Uses the product's
+       own chart from the admin panel when set, otherwise the client's
+       standard chart below. */
+    var DEFAULT_CHART = [
+      { size: "1-2 Years", chest: "13", length: "16", sleeve: "12.25" },
+      { size: "2-3 Years", chest: "13.5", length: "17", sleeve: "13" },
+      { size: "3-4 Years", chest: "14", length: "18", sleeve: "13.75" },
+      { size: "4-5 Years", chest: "14.5", length: "19", sleeve: "14.5" },
+      { size: "5-6 Years", chest: "15", length: "20", sleeve: "15.25" },
+      { size: "6-7 Years", chest: "15.5", length: "21", sleeve: "16" },
+      { size: "7-8 Years", chest: "16", length: "22", sleeve: "16.75" },
+      { size: "8-9 Years", chest: "17", length: "23", sleeve: "17" }
+    ];
+    var sizesBox2 = document.getElementById("pdSizes");
+    if (sizesBox2 && sizesBox2.parentNode && !document.querySelector(".zoni-chart-btn")) {
+      var chartRows = (p.sizeChart && p.sizeChart.length) ? p.sizeChart : DEFAULT_CHART;
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "zoni-chart-btn";
+      btn.innerHTML = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 17 17 3l4 4L7 21H3v-4z"/><path d="M8 16l1.5 1.5M11 13l1.5 1.5M14 10l1.5 1.5"/></svg> Size Chart';
+      sizesBox2.parentNode.insertBefore(btn, sizesBox2.nextSibling);
+      var modal = document.createElement("div");
+      modal.className = "zoni-modal";
+      modal.setAttribute("role", "dialog");
+      modal.setAttribute("aria-label", "Size chart");
+      var rowsHtml = chartRows.map(function (r) {
+        return "<tr><td>" + esc(r.size) + "</td><td>" + esc(r.chest || "—") + "</td><td>" + esc(r.length || "—") + "</td><td>" + esc(r.sleeve || "—") + "</td></tr>";
+      }).join("");
+      modal.innerHTML = '<div class="zoni-modal-box"><button type="button" class="zoni-modal-close" aria-label="Close">✕</button>' +
+        "<h3>Garment Measurements</h3>" +
+        '<p class="zoni-note">Please note below chart is based on garment measurements.</p>' +
+        '<table class="zoni-chart-table"><tr><th>Years</th><th>Chest (Inches)</th><th>Length (Inches)</th><th>Sleeve Length (Inches)</th></tr>' + rowsHtml + "</table></div>";
+      document.body.appendChild(modal);
+      btn.addEventListener("click", function () { modal.classList.add("open"); });
+      modal.addEventListener("click", function (e) { if (e.target === modal) modal.classList.remove("open"); });
+      modal.querySelector(".zoni-modal-close").addEventListener("click", function () { modal.classList.remove("open"); });
     }
 
     /* write-a-review form -> goes to admin for approval */

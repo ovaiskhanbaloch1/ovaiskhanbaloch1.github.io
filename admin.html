@@ -62,7 +62,7 @@ tr.clickable{cursor:pointer}tr.clickable:hover{background:#FFFDF4}
 .rowline>*{flex:1}
 .sizerow,.chartrow{display:grid;gap:8px;align-items:center;margin-bottom:8px}
 .sizerow{grid-template-columns:1.2fr 1fr .8fr .3fr}
-.chartrow{grid-template-columns:1fr 1fr 1fr .3fr}
+.chartrow{grid-template-columns:1fr 1fr 1fr 1fr .3fr}
 .checkline{display:flex;gap:8px;align-items:center;font-size:14px;margin:6px 0}
 .checkline input{width:auto}
 .chips{display:flex;flex-wrap:wrap;gap:7px}
@@ -1590,7 +1590,7 @@ function openEditor(id){
   '</div>'+
   '<div class="panel"><h3>Sizes — price per size &amp; stock</h3><p class="mut">Leave a size price empty to use the sale price. Mark a size Sold Out and it shows struck-through on the product page and cannot be selected.</p><div id="sizeRows" style="margin-top:10px"></div>'+
   '<button class="btn small ghost" id="addSizeBtn">+ Add size</button> <button class="btn small ghost" id="genSizeBtn">Generate sizes from age groups</button></div>'+
-  '<div class="panel"><h3>Size chart (shown on the product page)</h3><div id="chartRows"></div><button class="btn small ghost" id="addChartBtn">+ Add row</button></div>'+
+  '<div class="panel"><h3>Size chart — Garment Measurements popup</h3><p class="mut">Customers see this chart in a popup when they tap "Size Chart" on the product page. Leave it empty to use the client\'s standard chart (Years / Chest / Length / Sleeve Length).</p><div id="chartRows" style="margin-top:10px"></div><button class="btn small ghost" id="addChartBtn">+ Add row</button> <button class="btn small ghost" id="stdChartBtn">Load client standard chart</button></div>'+
   '<div class="panel"><h3>Reviews for this product</h3><div id="revList"></div>'+
   '<div class="grid3"><div><label>Name</label><input id="r_name"></div><div><label>City</label><input id="r_city"></div><div><label>Rating</label><select id="r_rating"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select></div></div>'+
   '<label>Review text</label><textarea id="r_text" rows="2"></textarea><div style="height:8px"></div><button class="btn small ghost" id="addRevBtn">+ Add review</button></div>'+
@@ -1605,7 +1605,16 @@ function openEditor(id){
     window._editDraft.sizesAdv = ages.map(function(a){ return {label:a+"Y", price:null, soldOut:false}; });
     drawSizeRows();
   });
-  $("#addChartBtn").addEventListener("click", function(){ window._editDraft.sizeChart.push({size:"",length:"",chest:""}); drawChartRows(); });
+  $("#addChartBtn").addEventListener("click", function(){ window._editDraft.sizeChart.push({size:"",chest:"",length:"",sleeve:""}); drawChartRows(); });
+  $("#stdChartBtn").addEventListener("click", function(){
+    window._editDraft.sizeChart = [
+      {size:"1-2 Years",chest:"13",length:"16",sleeve:"12.25"},{size:"2-3 Years",chest:"13.5",length:"17",sleeve:"13"},
+      {size:"3-4 Years",chest:"14",length:"18",sleeve:"13.75"},{size:"4-5 Years",chest:"14.5",length:"19",sleeve:"14.5"},
+      {size:"5-6 Years",chest:"15",length:"20",sleeve:"15.25"},{size:"6-7 Years",chest:"15.5",length:"21",sleeve:"16"},
+      {size:"7-8 Years",chest:"16",length:"22",sleeve:"16.75"},{size:"8-9 Years",chest:"17",length:"23",sleeve:"17"}
+    ];
+    drawChartRows(); toast("Standard chart loaded — Save Product to apply");
+  });
   $("#addRevBtn").addEventListener("click", function(){
     var t=$("#r_text").value.trim(); if(!t){ toast("Write the review text first"); return; }
     window._editDraft.reviews.push({name:$("#r_name").value.trim()||"Customer", city:$("#r_city").value.trim(), rating:Number($("#r_rating").value)||5, text:t, date:"Just now", status:"approved"});
@@ -1634,8 +1643,8 @@ function syncSizeRows(){ $all("[data-sr]").forEach(function(el){ var s=window._e
 function drawChartRows(){
   var p=window._editDraft;
   $("#chartRows").innerHTML = p.sizeChart.map(function(r,i){
-    return '<div class="chartrow"><input placeholder="Size" data-cr="'+i+'" data-f="size" value="'+esc(r.size)+'"><input placeholder="Length" data-cr="'+i+'" data-f="length" value="'+esc(r.length)+'"><input placeholder="Chest" data-cr="'+i+'" data-f="chest" value="'+esc(r.chest)+'"><button class="btn small danger" data-cdel="'+i+'">X</button></div>';
-  }).join("") || '<p class="mut">No size chart rows.</p>';
+    return '<div class="chartrow"><input placeholder="Years e.g. 1-2 Years" data-cr="'+i+'" data-f="size" value="'+esc(r.size)+'"><input placeholder="Chest (in)" data-cr="'+i+'" data-f="chest" value="'+esc(r.chest||"")+'"><input placeholder="Length (in)" data-cr="'+i+'" data-f="length" value="'+esc(r.length||"")+'"><input placeholder="Sleeve (in)" data-cr="'+i+'" data-f="sleeve" value="'+esc(r.sleeve||"")+'"><button class="btn small danger" data-cdel="'+i+'">X</button></div>';
+  }).join("") || '<p class="mut">No custom rows — the client\'s standard chart will be used.</p>';
   $all("[data-cr]").forEach(function(el){ el.addEventListener("change", function(){ var r=window._editDraft.sizeChart[Number(el.dataset.cr)]; r[el.dataset.f]=el.value; }); });
   $all("[data-cdel]").forEach(function(b){ b.addEventListener("click", function(){ window._editDraft.sizeChart.splice(Number(b.dataset.cdel),1); drawChartRows(); }); });
 }
