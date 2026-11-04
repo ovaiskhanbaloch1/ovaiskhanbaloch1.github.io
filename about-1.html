@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Collection's by Zoni — Design 1: Playful Classic (Demo)</title>
+<link rel="icon" type="image/jpeg" href="https://collections-by-zoni.surge.sh/products/logo.jpg">
+<link rel="apple-touch-icon" href="https://collections-by-zoni.surge.sh/products/logo.jpg">
+<meta name="description" content="Collection's by Zoni demo store — Playful Classic design. Little style, big smile. Kids clothing in Rahim Yar Khan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Design 1 — Playful Classic: Quicksand, Sunshine Yellow #F5B301, rounded soft cards.
+   Final client-approved theme: the picker's Sunshine Yellow colourway is
+   baked into :root below and the colour picker has been removed. */
+:root{
+--acc:#F5B301;--acc-strong:#BE8B00;--acc-2:#FE6907;--acc-deep:#2F2B26;--acc-deep2:#464038;--acc-soft:#FFF3C4;--acc-tint:#FDECC0;--acc-hero:#FDF3D6;--acc-sep:#FCE7AE;--acc-ink:#262019;
+}
+body{margin:0;font-family:'Quicksand',sans-serif;color:var(--acc-deep);background:#FFF9F5}
+h1,h2,h3,p,ul,ol,figure{margin:0;padding:0}
+ul,ol{list-style:none}
+a{color:var(--acc-strong);text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+img{display:block;max-width:100%}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+.topbar{background:var(--acc);color:var(--acc-ink);font-size:13px;font-weight:600}
+.topbar .wrap{display:flex;justify-content:space-between;gap:10px;padding-top:7px;padding-bottom:7px;flex-wrap:wrap}
+.topbar a{color:#fff;text-decoration:underline}
+.site-head{position:sticky;top:0;z-index:40;background:#fff;box-shadow:0 2px 14px color-mix(in srgb, var(--acc) 15%, transparent)}
+.head-in{display:flex;align-items:center;gap:16px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.wordmark{font-size:26px;font-weight:700;color:var(--acc-deep);line-height:1.05}
+.wordmark span{color:var(--acc)}
+.wordmark small{display:block;font-size:12px;font-weight:600;color:var(--acc-2);letter-spacing:.4px}
+.search-box{flex:1;min-width:180px;display:flex;align-items:center;gap:8px;background:var(--acc-soft);border:2px solid var(--acc-tint);border-radius:999px;padding:8px 14px}
+.search-box svg{fill:var(--acc);flex:none}
+.search-box input{border:0;background:transparent;outline:0;font-family:inherit;font-size:15px;width:100%;color:var(--acc-deep)}
+.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav-btn{background:transparent;border:0;font-weight:700;font-size:15px;color:var(--acc-deep);padding:9px 13px;border-radius:999px}
+.nav-btn:hover{background:var(--acc-soft);color:var(--acc-strong)}
+.cart-btn{position:relative;background:var(--acc);border:0;color:var(--acc-ink);font-weight:700;border-radius:999px;padding:10px 18px;display:flex;align-items:center;gap:8px;font-size:15px}
+.cart-btn svg{fill:#fff}
+.badge{background:var(--acc-deep);color:#fff;border-radius:999px;min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;padding:0 5px}
+.hero{background:var(--acc-hero)}
+.hero-in{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center;padding-top:44px;padding-bottom:44px}
+.hero-eyebrow{display:inline-block;background:#fff;color:var(--acc-strong);font-weight:700;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;border-radius:999px;padding:7px 14px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+.hero h1{font-size:46px;line-height:1.12;font-weight:700;margin:18px 0 14px}
+.hero h1 .accent{color:var(--acc);background:#fff;border-radius:14px;padding:0 12px;box-shadow:0 3px 10px rgba(0,0,0,.06);display:inline-block;transform:rotate(-1.5deg)}
+.hero-sub{font-size:17px;color:#5A5E73;max-width:480px;line-height:1.55}
+.hero-ctas{display:flex;gap:12px;margin:24px 0 26px;flex-wrap:wrap}
+.btn{border:0;border-radius:999px;font-weight:700;font-size:15px;padding:12px 22px;background:var(--acc);color:var(--acc-ink);transition:transform .18s ease,box-shadow .18s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px color-mix(in srgb, var(--acc) 35%, transparent)}
+.btn.ghost{background:#fff;color:var(--acc-strong);box-shadow:inset 0 0 0 2px var(--acc)}
+.btn.primary{background:var(--acc)}
+.btn.big{padding:14px 28px;font-size:16px}
+.btn:disabled{background:#D9D9DE;color:#8A8FA3;box-shadow:none;transform:none;cursor:not-allowed}
+.stats{display:flex;gap:10px;flex-wrap:wrap}
+.stat{background:#fff;border-radius:16px;padding:10px 14px;font-weight:700;font-size:13.5px;color:var(--acc-deep);box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.stat b{color:var(--acc)}
+.hero-photo img{border-radius:28px;width:100%;height:440px;object-fit:cover;box-shadow:0 18px 40px color-mix(in srgb, var(--acc-strong) 22%, transparent)}
+.section{padding:44px 0 8px}
+.sec-head{text-align:center;margin-bottom:22px}
+.sec-head h2{font-size:30px;font-weight:700}
+.sec-head p{color:#5A5E73;margin-top:6px}
+.age-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.age-tile{width:104px;height:104px;border-radius:50%;border:3px solid var(--acc-tint);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;transition:transform .18s ease,border-color .18s ease}
+.age-tile:hover{transform:translateY(-4px)}
+.age-tile .age-num{font-size:21px;font-weight:700;color:var(--acc-strong);line-height:1}
+.age-tile .age-lab{font-size:12px;font-weight:700;color:#5A5E73;letter-spacing:1px;text-transform:uppercase}
+.age-tile.active{background:var(--acc);border-color:var(--acc)}
+.age-tile.active .age-num,.age-tile.active .age-lab{color:var(--acc-ink)}
+.chips{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-bottom:8px}
+.chip{border:2px solid var(--acc-tint);background:#fff;color:var(--acc-deep);font-weight:700;font-size:14px;border-radius:999px;padding:9px 17px}
+.chip.active{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.res-count{text-align:center;color:#5A5E73;font-size:14px;margin:12px 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:20px;padding-bottom:16px}
+.card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 6px 20px color-mix(in srgb, var(--acc-deep) 8%, transparent);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-5px);box-shadow:0 14px 30px color-mix(in srgb, var(--acc-deep) 14%, transparent)}
+.card-img{position:relative}
+.card-img img{width:100%;height:250px;object-fit:cover}
+.sale-badge{background:var(--acc-deep);color:#fff;font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px}
+.card-img .sale-badge{position:absolute;top:12px;left:12px;background:var(--acc);color:var(--acc-ink)}
+.card-body{padding:15px 16px 17px;display:flex;flex-direction:column;gap:7px;flex:1}
+.card-cat{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--acc-2)}
+.card-title{font-size:17px;font-weight:700;line-height:1.3}
+.card-rating{display:flex;align-items:center;gap:6px}
+.stars{display:inline-flex;gap:1px}
+.star{fill:#E3E3E8}
+.star.on{fill:#FFB800}
+.rc{font-size:13px;color:#5A5E73;font-weight:600}
+.card-foot{display:flex;align-items:center;gap:9px;margin-top:2px}
+.price-pill{background:var(--acc-soft);color:var(--acc-strong);font-weight:700;border-radius:999px;padding:5px 13px;font-size:16px}
+.was{color:#9AA0B4;text-decoration:line-through;font-size:14px;font-weight:600}
+.add-btn{margin-top:auto;width:100%}
+.empty{grid-column:1/-1;text-align:center;color:#5A5E73;padding:34px 10px;font-weight:600}
+.testi{background:var(--acc-soft);border-radius:28px;padding:34px 26px;margin:36px auto 8px}
+.testi h2{text-align:center;font-size:28px;margin-bottom:20px}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.tcard{background:#fff;border-radius:18px;padding:20px;box-shadow:0 4px 14px color-mix(in srgb, var(--acc-deep) 6%, transparent)}
+.tcard p{margin:10px 0;color:#3C4057;line-height:1.55;font-size:15px}
+.tname{font-weight:700}
+.tcity{font-size:13px;color:#9AA0B4;font-weight:600}
+.view{display:none}
+.view.active{display:block}
+.pd{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:36px 0 8px}
+.pd-img img{border-radius:24px;width:100%;height:520px;object-fit:cover;box-shadow:0 14px 34px color-mix(in srgb, var(--acc-deep) 12%, transparent)}
+.pd-title{font-size:32px;font-weight:700;margin:6px 0 10px}
+.pd-price{font-size:27px;font-weight:700;color:var(--acc-strong);margin:12px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pd-price .sale-badge{background:var(--acc);color:var(--acc-ink)}
+.pd-desc{color:#3C4057;line-height:1.6;font-size:16px}
+.pd-desc2{color:#5A5E73;line-height:1.6;margin-top:8px;font-size:15px}
+.pd-label{font-weight:700;margin:20px 0 9px;font-size:15px}
+.sizes{display:flex;gap:9px;flex-wrap:wrap}
+.size-pill{border:2px solid var(--acc-tint);background:#fff;border-radius:999px;padding:9px 16px;font-weight:700;font-size:14.5px;color:var(--acc-deep)}
+.size-pill.active{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.admin-note{font-size:13px;color:#9AA0B4;margin-top:9px;font-weight:600}
+.qty-row{display:inline-flex;align-items:center;gap:14px;background:var(--acc-soft);border-radius:999px;padding:5px 10px}
+.qty-row span{font-weight:700;min-width:20px;text-align:center}
+.qty-btn{width:32px;height:32px;border-radius:50%;border:0;background:#fff;color:var(--acc-strong);font-size:19px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.qty-row.sm{padding:3px 7px}
+.qty-row.sm .qty-btn{width:26px;height:26px;font-size:16px}
+.pd-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.pd-meta{margin-top:16px;font-size:13.5px;color:#5A5E73;font-weight:600}
+.back-btn{background:#fff;border:2px solid var(--acc-tint);color:var(--acc-strong);border-radius:999px;font-weight:700;padding:9px 17px;margin-top:22px}
+.reviews{padding:26px 0 10px;max-width:860px}
+.reviews h3{font-size:23px;margin-bottom:14px}
+.review{background:#fff;border-radius:16px;padding:16px 18px;box-shadow:0 4px 14px color-mix(in srgb, var(--acc-deep) 6%, transparent);margin-bottom:12px}
+.rev-head{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.review p{color:#3C4057;line-height:1.55;font-size:15px}
+.rev-form{background:var(--acc-soft);border-radius:18px;padding:20px;margin-top:18px}
+.rev-form h4{font-size:18px;margin-bottom:12px}
+.field{margin-bottom:13px}
+.field label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;box-sizing:border-box;border:2px solid var(--acc-tint);border-radius:13px;padding:11px 13px;font-family:inherit;font-size:15px;background:#fff;color:var(--acc-deep);outline:0}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--acc)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.page-head{padding:34px 0 6px;text-align:center}
+.page-head h2{font-size:31px}
+.page-head p{color:#5A5E73;margin-top:7px}
+.ck-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;padding:22px 0 10px;align-items:start}
+.ck-card{background:#fff;border-radius:20px;box-shadow:0 6px 20px color-mix(in srgb, var(--acc-deep) 8%, transparent);padding:24px}
+.ck-card h3{font-size:20px;margin-bottom:15px}
+.sum-line{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed #F0DAD4;font-size:15px}
+.sum-line.total{border-bottom:0;font-weight:700;font-size:18px;color:var(--acc-strong)}
+.pay-note{background:#FFF7E8;border:2px solid #FFE1A8;color:#7A5A12;border-radius:14px;padding:13px 15px;font-size:14.5px;font-weight:600;line-height:1.5;margin:14px 0}
+.ck-error{display:none;background:#FFE3E0;color:#A92B20;border-radius:12px;padding:11px 14px;font-weight:600;font-size:14.5px;margin-bottom:13px}
+.place-btn{width:100%;font-size:18px;padding:16px}
+.track-box{max-width:640px;margin:20px auto 6px;background:#fff;border-radius:20px;box-shadow:0 6px 20px color-mix(in srgb, var(--acc-deep) 8%, transparent);padding:24px}
+.track-form{display:flex;gap:10px;flex-wrap:wrap}
+.track-form input{flex:1;min-width:200px;border:2px solid var(--acc-tint);border-radius:999px;padding:12px 17px;font-family:inherit;font-size:15.5px;outline:0}
+.track-form input:focus{border-color:var(--acc)}
+.demo-note{background:#FFF7E8;border-radius:12px;padding:11px 14px;font-weight:600;font-size:14px;color:#7A5A12;margin-bottom:15px}
+.track-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:16px;margin-bottom:14px}
+.track-head span{color:#5A5E73;font-weight:600;font-size:14px}
+.timeline{margin:8px 0 4px}
+.timeline li{display:flex;gap:14px;position:relative;padding-bottom:20px}
+.timeline li .dot{width:17px;height:17px;border-radius:50%;background:#E3E3E8;flex:none;margin-top:3px;z-index:1}
+.timeline li:not(:last-child):before{content:"";position:absolute;left:8px;top:22px;bottom:0;width:2px;background:#F0DAD4}
+.timeline li.done .dot{background:var(--acc)}
+.timeline li.current .dot{background:#fff;border:4px solid var(--acc);width:11px;height:11px}
+.timeline li p{color:#5A5E73;font-size:14px;margin-top:2px}
+.track-courier{font-size:14.5px;color:#5A5E73;margin-top:6px}
+.done-box{max-width:640px;margin:36px auto 10px;background:#fff;border-radius:24px;box-shadow:0 8px 26px color-mix(in srgb, var(--acc-deep) 10%, transparent);padding:34px 28px;text-align:center}
+.done-check{width:74px;height:74px;border-radius:50%;background:#E7F8EE;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.done-check svg{fill:#22A565}
+.done-box h2{font-size:27px;margin-bottom:9px}
+.done-box p{color:#3C4057;line-height:1.6;margin-bottom:8px}
+.done-id{font-size:19px}
+.done-id strong{color:var(--acc-strong)}
+.cart-drawer{position:fixed;top:0;right:0;height:100dvh;width:min(400px,94vw);background:#fff;z-index:80;box-shadow:-12px 0 34px rgba(0,0,0,.16);transform:translateX(106%);transition:transform .32s ease;display:flex;flex-direction:column}
+.cart-drawer.open{transform:translateX(0)}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:2px solid var(--acc-soft)}
+.drawer-head h3{font-size:20px}
+.close-x{background:var(--acc-soft);border:0;width:36px;height:36px;border-radius:50%;font-size:19px;color:var(--acc-strong);font-weight:700}
+.drawer-lines{flex:1;overflow-y:auto;padding:16px 20px}
+.cline{display:flex;gap:12px;background:#FFF9F5;border-radius:15px;padding:11px;margin-bottom:12px;position:relative}
+.cline img{width:66px;height:66px;object-fit:cover;border-radius:11px}
+.cline-title{font-weight:700;font-size:14.5px;line-height:1.3;padding-right:22px}
+.cline-size{font-size:13px;color:#5A5E73;font-weight:600;margin:2px 0}
+.cline-price{font-weight:700;color:var(--acc-strong);font-size:14.5px;margin-bottom:6px}
+.line-remove{position:absolute;top:7px;right:9px;background:transparent;border:0;font-size:19px;color:#9AA0B4}
+.drawer-foot{border-top:2px solid var(--acc-soft);padding:17px 20px}
+.drawer-foot .sum-line{border-bottom:0;padding:4px 0}
+#overlay{position:fixed;inset:0;background:color-mix(in srgb, var(--acc-deep) 45%, transparent);z-index:70;display:none}
+#overlay.show{display:block}
+footer{background:var(--acc-deep);color:#D8DAE4;margin-top:52px}
+.foot-grid{display:grid;grid-template-columns:1.3fr .8fr .8fr 1.2fr;gap:28px;padding:42px 0 26px}
+footer h4{color:#fff;font-size:16.5px;margin-bottom:13px}
+footer li{margin-bottom:8px;font-size:14.5px}
+footer a{color:#D8DAE4}
+footer a:hover{color:var(--acc-2)}
+.foot-word{font-size:23px;font-weight:700;color:#fff}
+.foot-word span{color:var(--acc)}
+.foot-tag{color:var(--acc-2);font-weight:600;font-size:13.5px;margin:4px 0 11px}
+footer p{font-size:14.5px;line-height:1.6}
+.news-form{display:flex;gap:8px;margin-top:6px}
+.news-form input{flex:1;border:0;border-radius:999px;padding:11px 15px;font-family:inherit;font-size:14.5px;min-width:0}
+.news-form button{background:var(--acc);color:var(--acc-ink);border:0;border-radius:999px;padding:11px 17px;font-weight:700}
+#newsMsg{font-size:14px;margin-top:9px}
+#newsMsg .ok{color:#7CE3A8;font-weight:700}
+.foot-bottom{border-top:1px solid var(--acc-deep2);padding:16px 0 20px;font-size:13.5px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.wa-float{position:fixed;right:18px;bottom:18px;z-index:60;background:#25D366;width:57px;height:57px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(37,211,102,.4)}
+.wa-float svg{fill:#fff}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,80px);background:var(--acc-deep);color:#fff;font-weight:700;font-size:14.5px;border-radius:999px;padding:12px 22px;z-index:90;transition:transform .3s ease;max-width:92vw;text-align:center}
+#toast.show{transform:translate(-50%,0)}
+.sticky-bar{display:none}
+@media(max-width:900px){.hero-in{grid-template-columns:1fr}.hero-photo img{height:300px}.pd{grid-template-columns:1fr}.pd-img img{height:360px}.ck-grid{grid-template-columns:1fr}.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.hero h1{font-size:33px}.head-in{gap:10px}.search-box{order:3;flex-basis:100%}.wordmark{font-size:22px}.age-tile{width:84px;height:84px}.age-tile .age-num{font-size:17px}.form-grid{grid-template-columns:1fr}.foot-grid{grid-template-columns:1fr 1fr}.foot-grid>div:first-child{grid-column:1/-1}.foot-grid>div:last-child{grid-column:1/-1}.section{padding-top:34px}}
+
+/* ===== Velzo-style header (client feedback) ===== */
+.head-in{flex-wrap:nowrap;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex:none;color:inherit}
+.head-logo{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none}
+.head-actions{display:flex;align-items:center;gap:8px;margin-left:auto;flex:none}
+.icon-btn{background:transparent;border:0;display:inline-flex;align-items:center;justify-content:center;padding:9px;cursor:pointer}
+.nav-drop{position:relative;display:inline-block}
+.drop-menu{display:none;position:absolute;top:calc(100% + 8px);left:0;min-width:215px;background:#fff;z-index:70;padding:6px}
+.drop-menu.open{display:block}
+.drop-item{display:block;width:100%;text-align:left;background:transparent;border:0;font-family:inherit;cursor:pointer}
+.mobile-menu{display:none;background:#fff;padding:10px 16px 16px}
+.m-link{display:block;width:100%;text-align:left;background:transparent;border:0;font-family:inherit;cursor:pointer}
+.m-label{font-size:11.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;opacity:.55;margin:10px 0 2px}
+.m-cta{width:100%;margin-top:12px}
+.burger{display:none;background:transparent;border:0;cursor:pointer;padding:9px 6px;flex-direction:column;gap:5px}
+.burger span{display:block;width:23px;height:2.6px}
+.shop-search{flex:none;width:100%;max-width:520px;margin:0 0 16px}
+.fb-note{font-size:13px;font-style:italic;opacity:.72;margin-top:8px}
+@media(max-width:900px){
+.main-nav{display:none}
+.cta-btn{display:none}
+.burger{display:inline-flex}
+.mobile-menu.open{display:block}
+}
+@media(max-width:560px){
+.wordmark small{display:none}
+.head-logo{width:38px;height:38px}
+.cart-btn{padding:9px 12px}
+}
+
+.site-head{z-index:50}
+.head-logo{box-shadow:0 1px 6px color-mix(in srgb, var(--acc) 35%, transparent)}
+.icon-btn{border-radius:999px}
+.icon-btn svg{fill:var(--acc)}
+.icon-btn:hover{background:var(--acc-soft)}
+.drop-menu{border-radius:16px;box-shadow:0 14px 34px color-mix(in srgb, var(--acc) 22%, transparent)}
+.drop-item{font-weight:700;font-size:14.5px;color:var(--acc-deep);padding:9px 13px;border-radius:999px}
+.drop-item:hover{background:var(--acc-soft);color:var(--acc-strong)}
+.burger span{background:var(--acc);border-radius:2px}
+.mobile-menu{border-top:2px solid var(--acc-tint);box-shadow:0 18px 24px color-mix(in srgb, var(--acc) 12%, transparent)}
+.m-link{font-weight:700;font-size:15.5px;color:var(--acc-deep);padding:10px 6px;border-radius:10px}
+.m-link:hover{background:var(--acc-soft)}
+
+/* Mobile header fit fix: keep logo + cart + burger inside 390px */
+@media(max-width:560px){
+.icon-btn{display:none}
+.head-actions{gap:5px}
+.brand{gap:8px;min-width:0}
+.wordmark{white-space:nowrap}
+.icon-btn{display:none}
+}
+@media(max-width:560px){.wordmark{font-size:19px}}
+
+.shop-search{box-sizing:border-box}
+
+/* ===== Multi-page + Noor Threads animation package ===== */
+main{animation:pageIn .35s ease backwards}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.rv{opacity:0;transform:translateY(36px)}
+.rv.in{opacity:1;transform:translateY(0);transition:opacity .55s ease var(--d,0ms),transform .8s cubic-bezier(.34,1.56,.64,1) var(--d,0ms)}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08)}}
+.kb{animation:kenburns 8s ease-in-out infinite alternate}
+a.btn{display:inline-block;text-align:center;text-decoration:none}
+@media(max-width:900px){a.cta-btn{display:none}}
+a.place-btn{display:block}
+.back-btn{display:inline-block;text-decoration:none}
+.card-imglink{display:block;text-decoration:none}
+.card-img{display:block}
+.card-titlelink{color:inherit;text-decoration:none;display:block}
+.main-nav a,.d-link,.drop-item{text-decoration:none}
+.badge.pop{animation:badgePop .45s ease}
+@keyframes badgePop{35%{transform:scale(1.34)}}
+.fly-clone{position:fixed;z-index:200;object-fit:cover;pointer-events:none;border-radius:18px;box-shadow:0 10px 26px rgba(0,0,0,.25)}
+.drop-menu{display:block;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .25s ease,transform .25s ease,visibility .25s;pointer-events:none}
+.drop-menu.open{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+a.drop-item{box-sizing:border-box}
+.drop-menu .drop-item{opacity:0;transform:translateY(6px);transition:opacity .25s ease,transform .25s ease}
+.drop-menu.open .drop-item{opacity:1;transform:none}
+.drop-menu.open .drop-item:nth-child(1){transition-delay:.03s}
+.drop-menu.open .drop-item:nth-child(2){transition-delay:.06s}
+.drop-menu.open .drop-item:nth-child(3){transition-delay:.09s}
+.drop-menu.open .drop-item:nth-child(4){transition-delay:.12s}
+.drop-menu.open .drop-item:nth-child(5){transition-delay:.15s}
+.drop-menu.open .drop-item:nth-child(6){transition-delay:.18s}
+#drawerBackdrop{position:fixed;inset:0;background:rgba(18,18,28,.45);opacity:0;visibility:hidden;transition:opacity .38s ease,visibility .38s;z-index:75}
+#drawerBackdrop.show{opacity:1;visibility:visible}
+#drawer{position:fixed;top:0;left:0;height:100dvh;width:min(320px,86vw);background:#fff;z-index:85;transform:translateX(-106%);transition:transform .38s cubic-bezier(.32,.72,.28,1);display:flex;flex-direction:column;box-shadow:16px 0 38px color-mix(in srgb, var(--acc-deep) 18%, transparent)}
+#drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:2px solid var(--acc-tint)}
+.drawer-brand{display:flex;align-items:center;gap:10px}
+.drawer-brand .head-logo{width:38px;height:38px}
+.drawer-brand b{font-size:16.5px;color:var(--acc-deep)}
+.drawer-nav{padding:12px 14px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
+#drawer .d-link{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;box-sizing:border-box;background:transparent;border:0;font-family:inherit;font-weight:800;font-size:15.5px;color:var(--acc-deep);padding:11px 10px;border-radius:12px;text-align:left;cursor:pointer;opacity:0;transform:translateX(-16px);transition:opacity .3s ease,transform .38s cubic-bezier(.32,.72,.28,1)}
+#drawer.open .d-link{opacity:1;transform:none;transition-delay:var(--dl,0ms)}
+#drawer .d-link:hover{background:var(--acc-soft)}
+#drawer .d-cat{font-weight:700;font-size:14.5px;padding-left:20px}
+.acc-btn .chev{fill:var(--acc-deep);transition:transform .3s ease;flex:none}
+.acc-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.32,.72,.28,1)}
+.acc-panel.open{grid-template-rows:1fr}
+.acc-in{overflow:hidden;min-height:0;display:flex;flex-direction:column}
+#drawer .d-cta{margin-top:12px;text-align:center}
+.drawer-note{margin-top:auto;padding:14px 16px;border-top:2px solid var(--acc-tint);font-size:13.5px;font-weight:700;color:var(--acc-deep);opacity:.85;line-height:1.55}
+.cart-wrap{max-width:880px;margin:6px auto 0}
+.cline-main{flex:1;min-width:0}
+.cline.leaving{transition:height .35s ease,opacity .3s ease,margin .35s ease,padding .35s ease;overflow:hidden;pointer-events:none}
+.cart-totals{background:#fff;border-radius:20px;box-shadow:0 10px 30px color-mix(in srgb, var(--acc-strong) 12%, transparent);padding:22px;margin-top:18px}
+.cart-totals .place-btn{margin-top:14px}
+.cart-totals .back-btn{margin-top:12px}
+@keyframes totalPulse{30%{transform:scale(1.12)}}
+.pulse{animation:totalPulse .35s ease;display:inline-block}
+.done-box[hidden]{display:none}
+.done-box.show{display:block;animation:donePop .45s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes donePop{from{opacity:0;transform:scale(.92) translateY(14px)}to{opacity:1;transform:none}}
+.ckmark{width:84px;height:84px;fill:none;stroke:#22A565;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;display:block;margin:0 auto 16px}
+.ckmark .ckm-circle{stroke-dasharray:151;stroke-dashoffset:151}
+.ckmark .ckm-tick{stroke-dasharray:40;stroke-dashoffset:40}
+.done-box.show .ckmark .ckm-circle{animation:drawStroke .6s ease forwards}
+.done-box.show .ckmark .ckm-tick{animation:drawStroke .38s ease .5s forwards}
+@keyframes drawStroke{to{stroke-dashoffset:0}}
+.place-btn{position:relative}
+.place-btn.loading{opacity:.85;pointer-events:none}
+.place-btn.loading::after{content:"";width:20px;height:20px;border-radius:50%;border:3px solid rgba(255,255,255,.35);border-top-color:#fff;position:absolute;right:18px;top:50%;margin-top:-10px;animation:spinAnim .7s linear infinite}
+@keyframes spinAnim{to{transform:rotate(360deg)}}
+.timeline{position:relative}
+.tl-progress{position:absolute;left:8px;width:2px;height:0;background:var(--acc);z-index:0;transition:height 1s cubic-bezier(.4,0,.2,1) .15s;border-radius:2px}
+.timeline.anim li .dot{transform:scale(0)}
+.timeline.anim li.tl-in .dot{animation:dotPop .38s cubic-bezier(.34,1.56,.64,1) both;animation-delay:calc(var(--i,0)*200ms + 100ms)}
+.timeline.anim li>div{opacity:0;transform:translateY(10px)}
+.timeline.anim li.tl-in>div{animation:fadeUp .4s ease both;animation-delay:calc(var(--i,0)*200ms + 200ms)}
+@keyframes dotPop{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.wa-float{overflow:visible}
+.wa-float::after{content:"";position:absolute;inset:-2px;border-radius:50%;box-shadow:0 0 0 0 rgba(37,211,102,.45);animation:waPulse 2.2s ease-out infinite;pointer-events:none}
+@keyframes waPulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}70%{box-shadow:0 0 0 15px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+.kbwrap{animation:kenburns 9s ease-in-out infinite alternate}
+
+/* ===== Round 4: hero slider + restructured home (featured / categories / perks) ===== */
+/* Slider: slides stack naturally with JS off (first slide fully visible);
+   hiding happens ONLY under .slider-on, a class the script itself adds. */
+.slider{position:relative;overflow:hidden}
+.slides{position:relative}
+.slider .slide{position:relative}
+.sl-arrow,.sl-dots{display:none}
+.slider-on .slide{position:absolute;top:0;left:0;width:100%;opacity:0;visibility:hidden;transform:translateX(16px);transition:opacity .6s ease,transform .6s ease,visibility 0s linear .6s;pointer-events:none}
+.slider-on .slide.active{position:relative;opacity:1;visibility:visible;transform:none;transition:opacity .6s ease,transform .6s ease;pointer-events:auto;z-index:1}
+.slider-on .sl-arrow{display:flex;align-items:center;justify-content:center;position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:44px;height:44px;border-radius:50%;border:0;background:#fff;box-shadow:0 8px 20px color-mix(in srgb, var(--acc-strong) 25%, transparent);cursor:pointer}
+.slider-on .sl-arrow svg{fill:var(--acc-strong)}
+.slider-on .sl-arrow.prev{left:14px}
+.slider-on .sl-arrow.next{right:14px}
+.slider-on .sl-dots{display:flex;gap:8px;position:absolute;left:50%;transform:translateX(-50%);bottom:14px;z-index:6}
+.sl-dot{width:10px;height:10px;border-radius:999px;border:2px solid var(--acc);background:#fff;padding:0;cursor:pointer;transition:width .3s ease,background .3s ease}
+.sl-dot.active{background:var(--acc);width:26px}
+.slider .hero-photo{border-radius:28px;overflow:hidden;box-shadow:0 18px 40px color-mix(in srgb, var(--acc-strong) 22%, transparent)}
+.slider .hero-photo img{box-shadow:none}
+/* Perks strip */
+.perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;padding-bottom:16px}
+.perk{display:flex;gap:13px;background:#fff;border-radius:18px;box-shadow:0 6px 20px color-mix(in srgb, var(--acc-deep) 8%, transparent);padding:18px}
+.perk-ic{width:46px;height:46px;border-radius:50%;background:var(--acc-soft);display:flex;align-items:center;justify-content:center;flex:none}
+.perk-ic svg{fill:var(--acc-strong)}
+.perk b{font-size:16px;color:var(--acc-deep)}
+.perk p{color:#5A5E73;font-size:14px;margin-top:3px;line-height:1.5;font-weight:600}
+/* Featured + view all */
+.view-all-row{text-align:center;margin:24px 0 12px}
+/* Category showcase: photo cards row */
+.cat-show{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px;padding-bottom:16px}
+.cat-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 6px 20px color-mix(in srgb, var(--acc-deep) 8%, transparent);text-decoration:none;color:inherit;display:block;transition:transform .18s ease,box-shadow .18s ease}
+.cat-card:hover{transform:translateY(-5px);box-shadow:0 14px 30px color-mix(in srgb, var(--acc-deep) 14%, transparent)}
+.cat-img{display:block}
+.cat-img img{width:100%;height:150px;object-fit:cover}
+.cat-meta{display:flex;flex-direction:column;padding:13px 15px 2px}
+.cat-name{font-weight:700;font-size:16.5px;color:var(--acc-deep)}
+.cat-count{color:var(--acc-2);font-weight:700;font-size:13.5px;margin-top:2px}
+.cat-arrow{display:flex;justify-content:flex-end;padding:0 12px 12px}
+.cat-arrow svg{fill:var(--acc-strong)}
+@media(max-width:560px){.slider-on .sl-arrow{width:36px;height:36px}.slider-on .sl-arrow.prev{left:8px}.slider-on .sl-arrow.next{right:8px}}
+
+/* ===== Round 5: announcement bar / marquee / shop-by-price / product badges ===== */
+/* Announcement bar: sits ABOVE the sticky header and scrolls away with the page */
+.abar{height:38px;background:var(--acc-deep);color:#fff;display:flex;align-items:center;justify-content:center;padding:0 12px;box-sizing:border-box}
+.abar-msg{font-size:13.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;transition:opacity .26s ease}
+.abar-msg.swap{opacity:0}
+/* Marquee strip. Deliberately NO hover-pause rule (a stuck :hover on touch
+   would freeze the band) and NO reduced-motion gate — it always runs. */
+.marquee{background:var(--acc);color:var(--acc-ink);overflow:hidden;padding:11px 0}
+.mq-track{display:flex;width:max-content;animation:mqScroll 26s linear infinite}
+.mq-group{display:flex;align-items:center;gap:30px;padding-right:30px;flex:none}
+.mq-item{font-weight:800;font-size:15px;white-space:nowrap}
+.mq-sep{fill:var(--acc-sep);flex:none}
+@keyframes mqScroll{to{transform:translateX(-50%)}}
+/* Shop by Price tiles */
+.price-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;padding-bottom:16px}
+.price-tile{background:#fff;border-radius:20px;box-shadow:0 6px 20px color-mix(in srgb, var(--acc-deep) 8%, transparent);padding:22px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:3px;transition:transform .18s ease,box-shadow .18s ease}
+.price-tile:hover{transform:translateY(-5px);box-shadow:0 14px 30px color-mix(in srgb, var(--acc-deep) 14%, transparent)}
+.pt-label{font-weight:700;font-size:19px;color:var(--acc-deep)}
+.pt-count{color:var(--acc-2);font-weight:700;font-size:14px}
+/* Shop page: active price filter chip */
+.active-filters{margin:2px 0 14px}
+.price-chip{display:inline-flex;align-items:center;gap:9px;background:var(--acc-soft);border:2px solid var(--acc-tint);color:var(--acc-deep);font-weight:700;font-size:14px;border-radius:999px;padding:6px 8px 6px 14px}
+.price-chip-x{width:24px;height:24px;border-radius:50%;border:0;background:var(--acc);color:var(--acc-ink);font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+/* Product badges (merchandising flags, one per product) */
+.pbadge{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.3px;padding:5px 11px;border-radius:999px;text-transform:uppercase}
+.card-img .pbadge{position:absolute;top:12px;left:12px;z-index:2}
+.pd-img{position:relative}
+.pd-img .pbadge{position:absolute;top:16px;left:16px;z-index:2}
+.pbadge.b-new{background:#22A565;color:#fff}
+.pbadge.b-best{background:var(--acc);color:var(--acc-ink)}
+.pbadge.b-trend{background:#7C5CD6;color:#fff}
+.pbadge.b-flash{background:var(--acc-deep);color:#FFD166}
+
+/* ===== Round 6: Featured Products — endless auto-stepping slider =====
+   The track steps one card at a time with a bump easing (the "pyara
+   jhatka": a tasteful overshoot + settle). The engine wraps the position
+   by one set width without animation, so it never ends and never gaps.
+   Cards are sized here: 4 visible on desktop, 3 on tablet, ~1.3 (peek)
+   on mobile. Featured section padding is trimmed ~35% vs other sections.
+   There is NO hover-pause CSS here (the engine pauses via JS only on
+   hover-capable fine pointers) and NO reduced-motion gate. */
+.feat-sec{padding-top:28px;padding-bottom:2px}
+.fslider{position:relative}
+.fview{overflow:hidden;touch-action:pan-y;cursor:grab}
+.fview:active{cursor:grabbing}
+.ftrack{display:flex;gap:20px;transition:transform .65s cubic-bezier(.3,1.35,.4,1);will-change:transform}
+.ftrack.noanim{transition:none!important}
+.ftrack .card{flex:0 0 calc((100% - 60px)/4);width:calc((100% - 60px)/4)}
+.fs-btn{position:absolute;top:118px;z-index:6;width:44px;height:44px;border-radius:50%;border:0;background:#fff;box-shadow:0 8px 20px color-mix(in srgb, var(--acc-strong) 25%, transparent);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.fs-btn svg{fill:var(--acc-strong)}
+.fs-btn.prev{left:-8px}
+.fs-btn.next{right:-8px}
+@media(max-width:900px){.ftrack .card{flex-basis:calc((100% - 40px)/3);width:calc((100% - 40px)/3)}}
+@media(max-width:560px){.feat-sec{padding-top:22px}.ftrack .card{flex-basis:calc((100% - 6px)/1.3);width:calc((100% - 6px)/1.3)}.fs-btn{display:none}}
+
+/* Colour picker removed — Sunshine Yellow is the permanent theme (see :root). */
+
+
+/* ---- Mobile fit + friendliness (2026-11-04) ---- */
+html,body{overflow-x:clip}
+@supports not (overflow:clip){html{overflow-x:hidden}}
+body{-webkit-text-size-adjust:100%}
+img,svg,video{max-width:100%}
+@media(max-width:560px){
+.grid{grid-template-columns:repeat(2,1fr);gap:12px}
+.size-pill{padding:10px 15px;font-size:14.5px}
+.track-box,.done-box{padding:20px 15px}
+.zoni-chart-table{font-size:13px}
+}
+</style>
+<style>
+.contact-brand{background:var(--acc-hero,#FDF3D6);border:1.5px solid var(--acc-sep,#FCE7AE);border-radius:20px;padding:28px 24px;text-align:center;margin-bottom:22px}
+.cb-name{font-size:30px;font-weight:800;color:var(--acc-ink,#262019)}
+.cb-tag{font-size:17px;font-weight:700;color:var(--acc-strong,#BE8B00);margin-top:2px}
+.cb-sub{color:#3C4057;margin:10px auto 0;max-width:560px}
+.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:22px}
+.contact-card{background:#fff;border:1.5px solid var(--acc-sep,#FCE7AE);border-radius:16px;padding:20px}
+.contact-card h3{margin:0 0 8px;font-size:18px;color:var(--acc-ink,#262019);border-bottom:3px solid var(--acc,#F5B301);display:inline-block;padding-bottom:4px}
+.contact-card p{margin:6px 0;color:#2A2E3F}
+.contact-card a{color:var(--acc-strong,#BE8B00);font-weight:700;text-decoration:none}
+.cc-note{color:#3C4057;font-size:14px}
+.contact-form-box{background:#FFFDF4;border:1.5px solid var(--acc-sep,#FCE7AE);border-radius:16px;padding:22px;margin-bottom:22px}
+.contact-form-box h3{margin:0 0 6px;font-size:20px;color:var(--acc-ink,#262019)}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+#zoniContactForm .field{margin-bottom:14px}
+#zoniContactForm label{display:block;font-weight:600;margin-bottom:6px;font-size:14.5px}
+#zoniContactForm input,#zoniContactForm textarea{width:100%;padding:11px 13px;border:1.5px solid #E7D9A8;border-radius:10px;font:inherit;font-size:15px;background:#fff;box-sizing:border-box}
+.about-block{background:#fff;border:1.5px solid var(--acc-sep,#FCE7AE);border-radius:16px;padding:22px;margin-bottom:22px}
+.about-block h3{margin:0 0 8px;font-size:20px;color:var(--acc-ink,#262019);border-bottom:3px solid var(--acc,#F5B301);display:inline-block;padding-bottom:4px}
+.about-block p{line-height:1.65;color:#2A2E3F;margin:8px 0}
+.about-list{margin:8px 0;padding-left:20px;line-height:1.9;color:#2A2E3F}
+.about-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.stat-card{background:#fff;border:1.5px solid var(--acc-sep,#FCE7AE);border-radius:16px;padding:16px 10px;text-align:center}
+.stat-num{font-size:24px;font-weight:800;color:var(--acc-strong,#BE8B00)}
+.stat-lbl{font-size:13.5px;color:#3C4057;margin-top:2px}
+.about-steps{margin:8px 0;padding-left:22px;line-height:1.9;color:#2A2E3F}
+@media(max-width:640px){.about-stats{grid-template-columns:repeat(2,1fr)}}
+.about-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:4px 0 10px}
+@media(max-width:640px){.contact-grid{grid-template-columns:1fr}.cf-row{grid-template-columns:1fr}.cb-name{font-size:25px}}
+</style>
+</head>
+<body data-page="about">
+<div class="abar"><span class="abar-msg" id="abarMsg">Free delivery on orders above Rs 3,000</span></div>
+<header class="site-head"><div class="wrap head-in">
+<a class="brand" href="design-1.html" aria-label="Collection's by Zoni — home"><img class="head-logo" src="https://collections-by-zoni.surge.sh/products/logo.jpg" alt="Collection's by Zoni logo" width="44" height="44"><span class="wordmark">Collection's <span>by Zoni</span><small>Little style, big smile</small></span></a>
+<nav class="main-nav" aria-label="Main navigation">
+<a class="nav-btn" href="design-1.html">Home</a>
+<span class="nav-drop"><button class="nav-btn" id="shopToggle" data-action="shop-menu" aria-haspopup="true" aria-expanded="false">Shop <span class="caret" aria-hidden="true">&#9662;</span></button><span class="drop-menu" id="shopMenu"><a class="drop-item" href="shop-1.html?cat=Track%20Suits">Track Suits</a><a class="drop-item" href="shop-1.html?cat=Denim%20Sets">Denim Sets</a><a class="drop-item" href="shop-1.html?cat=Shirts%20%26%20Sets">Shirts & Sets</a><a class="drop-item" href="shop-1.html?cat=Sweatshirt%20Sets">Sweatshirt Sets</a><a class="drop-item" href="shop-1.html?cat=Winter%20Sets">Winter Sets</a><a class="drop-item" href="shop-1.html">All Products</a></span></span>
+<a class="nav-btn" href="about-1.html">About</a><a class="nav-btn" href="track-1.html">Track Order</a>
+<a class="nav-btn" href="contact-1.html">Contact</a>
+</nav>
+<div class="head-actions">
+<a class="icon-btn" href="shop-1.html#searchInput" aria-label="Search products"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></a>
+<a class="cart-btn" href="cart-1.html" aria-label="View cart"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.13.12-.27.12-.42 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg><span class="badge" id="cartCount">0</span></a>
+<a class="btn primary cta-btn" href="shop-1.html">Shop Now</a>
+<button class="burger" data-action="drawer-open" aria-label="Open menu"><span></span><span></span><span></span></button>
+</div>
+</div>
+</header>
+<div id="drawerBackdrop" data-action="drawer-close"></div>
+<aside id="drawer" aria-label="Menu">
+<div class="drawer-top"><span class="drawer-brand"><img class="head-logo" src="https://collections-by-zoni.surge.sh/products/logo.jpg" alt="" width="38" height="38"><b>Collection's by Zoni</b></span><button class="close-x" data-action="drawer-close" aria-label="Close menu">&times;</button></div>
+<nav class="drawer-nav">
+<a class="d-link" style="--dl:40ms" href="design-1.html">Home</a>
+<button class="d-link acc-btn" style="--dl:80ms" data-action="acc-toggle" aria-expanded="false">Shop by Category <svg class="chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></button>
+<div class="acc-panel" id="accPanel"><div class="acc-in"><a class="d-link d-cat" style="--dl:150ms" href="shop-1.html?cat=Track%20Suits">Track Suits</a><a class="d-link d-cat" style="--dl:150ms" href="shop-1.html?cat=Denim%20Sets">Denim Sets</a><a class="d-link d-cat" style="--dl:150ms" href="shop-1.html?cat=Shirts%20%26%20Sets">Shirts & Sets</a><a class="d-link d-cat" style="--dl:150ms" href="shop-1.html?cat=Sweatshirt%20Sets">Sweatshirt Sets</a><a class="d-link d-cat" style="--dl:150ms" href="shop-1.html?cat=Winter%20Sets">Winter Sets</a><a class="d-link d-cat" style="--dl:190ms" href="shop-1.html">All Products</a></div></div>
+<a class="d-link" style="--dl:80ms" href="about-1.html">About</a><a class="d-link" style="--dl:120ms" href="track-1.html">Track Order</a>
+<a class="d-link" style="--dl:160ms" href="contact-1.html">Contact</a>
+<a class="btn primary d-cta" style="--dl:200ms" href="shop-1.html">Shop Now</a>
+</nav>
+<div class="drawer-note">WhatsApp: <a href="https://wa.me/923416008008" target="_blank" rel="noopener">0341 600 8008</a><br>Cash on Delivery all over Pakistan</div>
+</aside>
+<main>
+<div class="wrap">
+<div class="page-head"><h2>About Us</h2><p>The story behind <span data-bind="siteName">Collection's by Zoni</span> — kids clothing made with care in Rahim Yar Khan.</p></div>
+<div class="contact-brand">
+<div class="cb-name" data-bind="siteName">Collection's by Zoni</div>
+<div class="cb-tag" data-bind="tagline">Little style, big smile</div>
+<p class="cb-sub">Kids clothing for ages 1 to 14 — track suits, shirts, denim sets and winter wear, delivered all over Pakistan.</p>
+</div>
+<div class="about-stats">
+<div class="stat-card"><div class="stat-num"><span data-bind-products-count>24</span>+</div><div class="stat-lbl">Products in the collection</div></div>
+<div class="stat-card"><div class="stat-num" data-bind-cats-count>5</div><div class="stat-lbl">Categories to shop</div></div>
+<div class="stat-card"><div class="stat-num">18,000+</div><div class="stat-lbl">Facebook followers</div></div>
+<div class="stat-card"><div class="stat-num">1–14</div><div class="stat-lbl">Kids age range (years)</div></div>
+</div>
+<div class="about-block">
+<h3>Our Story</h3>
+<p>Collection's by Zoni started in Rahim Yar Khan with a simple idea: parents here should not have to travel to the big cities — or settle for poor quality — to dress their kids well. What began as a local shop and a Facebook page has grown into a store that families across Pakistan trust, with a Facebook community of more than 18,000 followers who see our newest designs every week.</p>
+<p>Every piece in our collection is chosen the way we would choose for our own children: soft, breathable fabrics, neat stitching, colours that stay bright wash after wash, and sizes that honestly match the size chart. If we would not put it on our own kids, we do not sell it.</p>
+</div>
+<div class="contact-grid">
+<div class="contact-card">
+<h3>What We Offer</h3>
+<ul class="about-list" data-bind-categories>
+<li>Track Suits</li>
+<li>Sweatshirt Sets</li>
+<li>Shirts &amp; Sets</li>
+<li>Denim Sets</li>
+<li>Winter Sets</li>
+</ul>
+<p class="cc-note">Sizes from 1–2 years up to 14–15 years, with a garment size chart on every product page.</p>
+</div>
+<div class="contact-card">
+<h3>Why Families Choose Us</h3>
+<ul class="about-list">
+<li>Soft, quality fabrics that are gentle on kids' skin</li>
+<li>True sizes — a size chart on every product</li>
+<li>Cash on Delivery all over Pakistan</li>
+<li>Free delivery on orders above <b data-bind="freeShippingThreshold" data-bind-format="rs">Rs. 3,000</b></li>
+<li>Fast nationwide shipping via TCS</li>
+<li>Friendly help on WhatsApp, before and after your order</li>
+</ul>
+</div>
+</div>
+<div class="about-block">
+<h3>How Ordering Works</h3>
+<ol class="about-steps">
+<li>Pick a product and the right size — every product page has a size chart to help you.</li>
+<li>Place your order with Cash on Delivery, Bank Transfer, or on WhatsApp.</li>
+<li>Our team confirms your order on WhatsApp.</li>
+<li>Your parcel is handed to TCS, and you can track it any time from our Track Order page.</li>
+</ol>
+<p>Visit us at <b data-bind="address">Main Bazaar Road, Rahim Yar Khan, Punjab, Pakistan</b>, message us any time on WhatsApp at <a data-bind="phoneDisplay" data-bind-href="whatsapp" href="https://wa.me/923416008008" target="_blank" rel="noopener" style="color:var(--acc-strong,#BE8B00);font-weight:700;text-decoration:none">0341 600 8008</a>, or email us at <a data-bind="email" data-bind-href="email" href="mailto:contact@collectionsbyzoni.com" style="color:var(--acc-strong,#BE8B00);font-weight:700;text-decoration:none">contact@collectionsbyzoni.com</a> — we are happy to help you choose the right size and style for your little one.</p>
+</div>
+<div class="about-cta">
+<a class="btn primary" href="shop-1.html">Shop the Collection</a>
+<a class="btn" style="background:#1F7A3D;border-color:#1F7A3D;color:#fff" data-bind-href="whatsapp" href="https://wa.me/923416008008" target="_blank" rel="noopener">Chat on WhatsApp</a>
+<a class="btn" href="contact-1.html">Contact Us</a>
+</div>
+</div>
+</main>
+<footer id="contact"><div class="wrap">
+<div class="foot-grid">
+<div><div class="foot-word">Collection's <span>by Zoni</span></div><div class="foot-tag">Little style, big smile</div>
+<p>Children's clothing for ages 1 to 14 — designed with love in Rahim Yar Khan and delivered all over Pakistan.</p>
+<p style="margin-top:10px">WhatsApp: <a href="https://wa.me/923416008008" target="_blank" rel="noopener">0341 600 8008</a></p>
+<p style="margin-top:6px">Email: <a href="mailto:contact@collectionsbyzoni.com">contact@collectionsbyzoni.com</a></p></div>
+<div><h4>Quick Links</h4><ul>
+<li><a href="design-1.html">Home</a></li>
+<li><a href="shop-1.html">Shop</a></li>
+<li><a href="track-1.html">Track Order</a></li><li><a href="about-1.html">About Us</a></li><li><a href="contact-1.html">Contact Us</a></li>
+<li><a href="cart-1.html">Your Cart</a></li>
+</ul></div>
+<div><h4>Categories</h4><ul id="footCats"></ul></div>
+<div><h4>Stay in the Loop</h4>
+<p>Join our newsletter for new arrivals and family offers.</p>
+<form id="newsletterForm" class="news-form"><input type="email" required placeholder="Your email address" aria-label="Email address"><button type="submit">Join</button></form>
+<div id="newsMsg"></div>
+<p style="margin-top:14px">Main Bazaar Road, Rahim Yar Khan, Punjab, Pakistan</p></div>
+</div>
+<div class="foot-bottom"><span>© 2026 Collection's by Zoni. All rights reserved.</span><span class="zoni-credit">Website Designed &amp; Developed by <a href="https://abizglobalservices.com" target="_blank" rel="noopener" style="display:inline-block;padding:4px 13px;margin-left:6px;border:1.5px solid rgba(245,179,1,.7);border-radius:999px;color:#F5B301;font-weight:700;text-decoration:none;white-space:nowrap">Abiz Global Services</a></span></div>
+</div></footer>
+
+<a class="wa-float" href="https://wa.me/923416008008" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="29" height="29" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a>
+<div id="toast" role="status"></div>
+<script>
+"use strict";
+/* Collection's by Zoni — demo store engine.
+   Structure mirrors the audited Giggles & Gadgets base: a SETTINGS object
+   (like /api/initial-state settings), a product catalog with the same field
+   shape (title, regularPrice, salePrice, rating, reviewCount, category,
+   ageGroup, featuredImage, shortDesc, fullDesc), a COD order flow producing
+   ZB-#### order numbers (base uses GG-####), and TCS order tracking. */
+const DESIGN = 1;
+const SETTINGS = {
+  siteName: "Collection's by Zoni",
+  tagline: "Little style, big smile",
+  phoneDisplay: "0341 600 8008",
+  whatsapp: "https://wa.me/923416008008",
+  address: "Main Bazaar Road, Rahim Yar Khan, Punjab, Pakistan",
+  city: "Rahim Yar Khan, Punjab, Pakistan",
+  email: "contact@collectionsbyzoni.com",
+  freeShippingThreshold: 3000,
+  flatShippingFee: 200,
+  currency: "Rs. "
+};
+const CATEGORIES = ["All", "Track Suits", "Denim Sets", "Shirts & Sets", "Sweatshirt Sets", "Winter Sets"];
+const CATBAND = {"Track Suits":"#38BDF8","Denim Sets":"#818CF8","Shirts & Sets":"#34D399","Sweatshirt Sets":"#F472B6","Winter Sets":"#FBBF24"};
+const AGES = ["1-2","2-4","4-6","6-8","8-10","10-14"];
+const PRODUCTS = [
+ {id:1,title:"BOLD Sweatshirt & White Cargo Set",slug:"bold-sweatshirt-white-cargo-set",regularPrice:2199,salePrice:2199,rating:4.8,reviewCount:19,category:"Sweatshirt Sets",ages:["2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["2-4Y", "4-6Y", "6-8Y", "8-10Y", "10-12Y", "12-14Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p01.jpg",fbNote:true,shortDesc:"Sweatshirt and bottom set from our Facebook collection — cosy, bright and playground-ready.",fullDesc:["BOLD Sweatshirt & White Cargo Set is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Fatima S.", "city": "Rahim Yar Khan", "rating": 5, "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.", "date": "2 days ago"}, {"name": "Ayesha K.", "city": "Multan", "rating": 5, "text": "Soft material and neat stitching. My little one wears it all day.", "date": "1 week ago"}, {"name": "Hira M.", "city": "Bahawalpur", "rating": 4, "text": "Colours are bright and delivery was quick. Happy with the purchase.", "date": "2 weeks ago"}]},
+ {id:2,title:"Black Fur-Collar Jacket Set",slug:"black-fur-collar-jacket-set",regularPrice:2999,salePrice:2999,rating:4.7,reviewCount:26,category:"Winter Sets",ages:["2-4"],sizes:["2-3Y", "3-4Y", "4-5Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p02.jpg",fbNote:true,shortDesc:"Warm winter set from our Facebook collection — snug layers made for cold days.",fullDesc:["Black Fur-Collar Jacket Set is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Maryam T.", "city": "Rahim Yar Khan", "rating": 5, "text": "Bought it after seeing it on their Facebook page — even better in person.", "date": "3 days ago"}, {"name": "Sana R.", "city": "Lahore", "rating": 4, "text": "Good fabric and finishing. Size chart was accurate.", "date": "1 week ago"}]},
+ {id:3,title:"Denim Jacket & Wide-Leg Jeans Set",slug:"denim-jacket-wide-leg-jeans-set",regularPrice:2799,salePrice:2799,rating:4.9,reviewCount:33,category:"Denim Sets",ages:["2-4", "4-6", "6-8", "8-10"],sizes:["2-4Y", "4-6Y", "6-8Y", "8-10Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p03.jpg",fbNote:true,shortDesc:"Denim jacket and jeans set from our Facebook collection — smart, sturdy and easy to style.",fullDesc:["Denim Jacket & Wide-Leg Jeans Set is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Zainab A.", "city": "Rahim Yar Khan", "rating": 5, "text": "Washed many times, still soft and bright. Ordered the next size too.", "date": "1 day ago"}, {"name": "Mahnoor F.", "city": "Karachi", "rating": 4, "text": "Looks exactly like the photo on their page. True to size.", "date": "5 days ago"}, {"name": "Amna J.", "city": "Multan", "rating": 5, "text": "Neat stitching, no loose threads. Recommended.", "date": "2 weeks ago"}]},
+ {id:4,title:"Dark Denim Jacket & Jeans Set",slug:"dark-denim-jacket-jeans-set",regularPrice:2799,salePrice:2799,rating:4.8,reviewCount:17,category:"Denim Sets",ages:["2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["2-4Y", "4-6Y", "6-8Y", "8-10Y", "10-12Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p04.jpg",fbNote:true,shortDesc:"Denim jacket and jeans set from our Facebook collection — smart, sturdy and easy to style.",fullDesc:["Dark Denim Jacket & Jeans Set is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Fatima S.", "city": "Rahim Yar Khan", "rating": 5, "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.", "date": "2 days ago"}, {"name": "Ayesha K.", "city": "Multan", "rating": 5, "text": "Soft material and neat stitching. My little one wears it all day.", "date": "1 week ago"}, {"name": "Hira M.", "city": "Bahawalpur", "rating": 4, "text": "Colours are bright and delivery was quick. Happy with the purchase.", "date": "2 weeks ago"}]},
+ {id:5,title:"Black Fur-Collar Party Set",slug:"black-fur-collar-party-set",regularPrice:2999,salePrice:2999,rating:4.7,reviewCount:24,category:"Winter Sets",ages:["2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["2-4Y", "4-6Y", "6-8Y", "8-10Y", "10-12Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p05.jpg",fbNote:true,shortDesc:"Warm winter set from our Facebook collection — snug layers made for cold days.",fullDesc:["Black Fur-Collar Party Set is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Maryam T.", "city": "Rahim Yar Khan", "rating": 5, "text": "Bought it after seeing it on their Facebook page — even better in person.", "date": "3 days ago"}, {"name": "Sana R.", "city": "Lahore", "rating": 4, "text": "Good fabric and finishing. Size chart was accurate.", "date": "1 week ago"}]},
+ {id:6,title:"Red Slogan Sweatshirt & Jeans Set",slug:"red-slogan-sweatshirt-jeans-set",regularPrice:2199,salePrice:2199,rating:4.6,reviewCount:31,category:"Sweatshirt Sets",ages:["1-2", "2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["1-3Y", "3-5Y", "5-7Y", "7-9Y", "9-11Y", "11-12Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p06.jpg",fbNote:true,shortDesc:"Sweatshirt and bottom set from our Facebook collection — cosy, bright and playground-ready.",fullDesc:["Red Slogan Sweatshirt & Jeans Set is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Zainab A.", "city": "Rahim Yar Khan", "rating": 5, "text": "Washed many times, still soft and bright. Ordered the next size too.", "date": "1 day ago"}, {"name": "Mahnoor F.", "city": "Karachi", "rating": 4, "text": "Looks exactly like the photo on their page. True to size.", "date": "5 days ago"}, {"name": "Amna J.", "city": "Multan", "rating": 5, "text": "Neat stitching, no loose threads. Recommended.", "date": "2 weeks ago"}]},
+ {id:7,title:"Mustard Corduroy Shirt & Pants Set",slug:"mustard-corduroy-shirt-pants-set",regularPrice:1899,salePrice:1899,rating:4.8,reviewCount:15,category:"Shirts & Sets",ages:["2-4", "4-6", "6-8", "8-10"],sizes:["2-4Y", "4-6Y", "6-8Y", "8-10Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p07.jpg",fbNote:false,shortDesc:"Shirt and bottom set from our Facebook collection — neat, breathable and gentle on skin.",fullDesc:["Mustard Corduroy Shirt & Pants Set is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Fatima S.", "city": "Rahim Yar Khan", "rating": 5, "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.", "date": "2 days ago"}, {"name": "Ayesha K.", "city": "Multan", "rating": 5, "text": "Soft material and neat stitching. My little one wears it all day.", "date": "1 week ago"}, {"name": "Hira M.", "city": "Bahawalpur", "rating": 4, "text": "Colours are bright and delivery was quick. Happy with the purchase.", "date": "2 weeks ago"}]},
+ {id:8,title:"Beige Zip Track Suit",slug:"beige-zip-track-suit",regularPrice:2499,salePrice:2499,rating:4.7,reviewCount:22,category:"Track Suits",ages:["1-2", "2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["1-3Y", "3-5Y", "5-7Y", "7-9Y", "9-11Y", "11-13Y", "13-14Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p08.jpg",fbNote:true,shortDesc:"Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",fullDesc:["Beige Zip Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Maryam T.", "city": "Rahim Yar Khan", "rating": 5, "text": "Bought it after seeing it on their Facebook page — even better in person.", "date": "3 days ago"}, {"name": "Sana R.", "city": "Lahore", "rating": 4, "text": "Good fabric and finishing. Size chart was accurate.", "date": "1 week ago"}]},
+ {id:9,title:"Kotrai Velvet Shirt & Jeans Set",slug:"kotrai-velvet-shirt-jeans-set",regularPrice:1899,salePrice:1899,rating:4.9,reviewCount:29,category:"Shirts & Sets",ages:["1-2", "2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["1-3Y", "3-5Y", "5-7Y", "7-9Y", "9-11Y", "11-12Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p09.jpg",fbNote:true,shortDesc:"Shirt and bottom set from our Facebook collection — neat, breathable and gentle on skin.",fullDesc:["Kotrai Velvet Shirt & Jeans Set is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Zainab A.", "city": "Rahim Yar Khan", "rating": 5, "text": "Washed many times, still soft and bright. Ordered the next size too.", "date": "1 day ago"}, {"name": "Mahnoor F.", "city": "Karachi", "rating": 4, "text": "Looks exactly like the photo on their page. True to size.", "date": "5 days ago"}, {"name": "Amna J.", "city": "Multan", "rating": 5, "text": "Neat stitching, no loose threads. Recommended.", "date": "2 weeks ago"}]},
+ {id:10,title:"Black & White Zip Track Suit",slug:"black-white-zip-track-suit",regularPrice:2499,salePrice:2499,rating:4.8,reviewCount:13,category:"Track Suits",ages:["1-2", "2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["1-3Y", "3-5Y", "5-7Y", "7-9Y", "9-11Y", "11-12Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p10.jpg",fbNote:true,shortDesc:"Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",fullDesc:["Black & White Zip Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Fatima S.", "city": "Rahim Yar Khan", "rating": 5, "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.", "date": "2 days ago"}, {"name": "Ayesha K.", "city": "Multan", "rating": 5, "text": "Soft material and neat stitching. My little one wears it all day.", "date": "1 week ago"}, {"name": "Hira M.", "city": "Bahawalpur", "rating": 4, "text": "Colours are bright and delivery was quick. Happy with the purchase.", "date": "2 weeks ago"}]},
+ {id:11,title:"Striped Shirt, Tee & Jeans Set",slug:"striped-shirt-tee-jeans-set",regularPrice:1899,salePrice:1899,rating:4.7,reviewCount:20,category:"Shirts & Sets",ages:["1-2", "2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["1-3Y", "3-5Y", "5-7Y", "7-9Y", "9-11Y", "11-13Y", "13-14Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p11.jpg",fbNote:true,shortDesc:"Shirt and bottom set from our Facebook collection — neat, breathable and gentle on skin.",fullDesc:["Striped Shirt, Tee & Jeans Set is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Maryam T.", "city": "Rahim Yar Khan", "rating": 5, "text": "Bought it after seeing it on their Facebook page — even better in person.", "date": "3 days ago"}, {"name": "Sana R.", "city": "Lahore", "rating": 4, "text": "Good fabric and finishing. Size chart was accurate.", "date": "1 week ago"}]},
+ {id:12,title:"88 West Side Hoodie Track Suit",slug:"88-west-side-hoodie-track-suit",regularPrice:2499,salePrice:2499,rating:4.6,reviewCount:27,category:"Track Suits",ages:["2-4", "4-6", "6-8", "8-10"],sizes:["2-4Y", "4-6Y", "6-8Y", "8-10Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p12.jpg",fbNote:false,shortDesc:"Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",fullDesc:["88 West Side Hoodie Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Zainab A.", "city": "Rahim Yar Khan", "rating": 5, "text": "Washed many times, still soft and bright. Ordered the next size too.", "date": "1 day ago"}, {"name": "Mahnoor F.", "city": "Karachi", "rating": 4, "text": "Looks exactly like the photo on their page. True to size.", "date": "5 days ago"}, {"name": "Amna J.", "city": "Multan", "rating": 5, "text": "Neat stitching, no loose threads. Recommended.", "date": "2 weeks ago"}]},
+ {id:13,title:"Red & Grey Track Suit",slug:"red-grey-track-suit",regularPrice:2499,salePrice:2499,rating:4.8,reviewCount:34,category:"Track Suits",ages:["1-2", "2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["1-3Y", "3-5Y", "5-7Y", "7-9Y", "9-11Y", "11-13Y", "13-14Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p13.jpg",fbNote:true,shortDesc:"Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",fullDesc:["Red & Grey Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Fatima S.", "city": "Rahim Yar Khan", "rating": 5, "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.", "date": "2 days ago"}, {"name": "Ayesha K.", "city": "Multan", "rating": 5, "text": "Soft material and neat stitching. My little one wears it all day.", "date": "1 week ago"}, {"name": "Hira M.", "city": "Bahawalpur", "rating": 4, "text": "Colours are bright and delivery was quick. Happy with the purchase.", "date": "2 weeks ago"}]},
+ {id:14,title:"Mint Green Track Suit",slug:"mint-green-track-suit",regularPrice:2499,salePrice:2499,rating:4.7,reviewCount:18,category:"Track Suits",ages:["1-2", "2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["1-3Y", "3-5Y", "5-7Y", "7-9Y", "9-11Y", "11-13Y", "13-14Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p14.jpg",fbNote:true,shortDesc:"Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",fullDesc:["Mint Green Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Maryam T.", "city": "Rahim Yar Khan", "rating": 5, "text": "Bought it after seeing it on their Facebook page — even better in person.", "date": "3 days ago"}, {"name": "Sana R.", "city": "Lahore", "rating": 4, "text": "Good fabric and finishing. Size chart was accurate.", "date": "1 week ago"}]},
+ {id:15,title:"Light Grey Track Suit",slug:"light-grey-track-suit",regularPrice:2499,salePrice:2499,rating:4.9,reviewCount:25,category:"Track Suits",ages:["2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["2-4Y", "4-6Y", "6-8Y", "8-10Y", "10-12Y", "12-14Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p15.jpg",fbNote:true,shortDesc:"Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",fullDesc:["Light Grey Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Zainab A.", "city": "Rahim Yar Khan", "rating": 5, "text": "Washed many times, still soft and bright. Ordered the next size too.", "date": "1 day ago"}, {"name": "Mahnoor F.", "city": "Karachi", "rating": 4, "text": "Looks exactly like the photo on their page. True to size.", "date": "5 days ago"}, {"name": "Amna J.", "city": "Multan", "rating": 5, "text": "Neat stitching, no loose threads. Recommended.", "date": "2 weeks ago"}]},
+ {id:16,title:"Light Denim Jacket & Jeans Set",slug:"light-denim-jacket-jeans-set",regularPrice:2799,salePrice:2799,rating:4.8,reviewCount:32,category:"Denim Sets",ages:["2-4", "4-6", "6-8", "8-10"],sizes:["2-4Y", "4-6Y", "6-8Y", "8-10Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p16.jpg",fbNote:false,shortDesc:"Denim jacket and jeans set from our Facebook collection — smart, sturdy and easy to style.",fullDesc:["Light Denim Jacket & Jeans Set is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Fatima S.", "city": "Rahim Yar Khan", "rating": 5, "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.", "date": "2 days ago"}, {"name": "Ayesha K.", "city": "Multan", "rating": 5, "text": "Soft material and neat stitching. My little one wears it all day.", "date": "1 week ago"}, {"name": "Hira M.", "city": "Bahawalpur", "rating": 4, "text": "Colours are bright and delivery was quick. Happy with the purchase.", "date": "2 weeks ago"}]},
+ {id:17,title:"Mars Kids Vest Set",slug:"mars-kids-vest-set",regularPrice:2999,salePrice:2999,rating:4.7,reviewCount:16,category:"Winter Sets",ages:["1-2", "2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["1-3Y", "3-5Y", "5-7Y", "7-9Y", "9-11Y", "11-12Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p17.jpg",fbNote:true,shortDesc:"Warm winter set from our Facebook collection — snug layers made for cold days.",fullDesc:["Mars Kids Vest Set is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Maryam T.", "city": "Rahim Yar Khan", "rating": 5, "text": "Bought it after seeing it on their Facebook page — even better in person.", "date": "3 days ago"}, {"name": "Sana R.", "city": "Lahore", "rating": 4, "text": "Good fabric and finishing. Size chart was accurate.", "date": "1 week ago"}]},
+ {id:18,title:"Black & Red Track Suit",slug:"black-red-track-suit",regularPrice:2499,salePrice:2499,rating:4.6,reviewCount:23,category:"Track Suits",ages:["2-4", "4-6", "6-8", "8-10"],sizes:["2-4Y", "4-6Y", "6-8Y", "8-10Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p18.jpg",fbNote:false,shortDesc:"Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",fullDesc:["Black & Red Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Zainab A.", "city": "Rahim Yar Khan", "rating": 5, "text": "Washed many times, still soft and bright. Ordered the next size too.", "date": "1 day ago"}, {"name": "Mahnoor F.", "city": "Karachi", "rating": 4, "text": "Looks exactly like the photo on their page. True to size.", "date": "5 days ago"}, {"name": "Amna J.", "city": "Multan", "rating": 5, "text": "Neat stitching, no loose threads. Recommended.", "date": "2 weeks ago"}]},
+ {id:19,title:"Orange & Black Hoodie Track Suit",slug:"orange-black-hoodie-track-suit",regularPrice:2499,salePrice:2499,rating:4.8,reviewCount:30,category:"Track Suits",ages:["1-2", "2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["1-3Y", "3-5Y", "5-7Y", "7-9Y", "9-11Y", "11-12Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p19.jpg",fbNote:true,shortDesc:"Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",fullDesc:["Orange & Black Hoodie Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Fatima S.", "city": "Rahim Yar Khan", "rating": 5, "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.", "date": "2 days ago"}, {"name": "Ayesha K.", "city": "Multan", "rating": 5, "text": "Soft material and neat stitching. My little one wears it all day.", "date": "1 week ago"}, {"name": "Hira M.", "city": "Bahawalpur", "rating": 4, "text": "Colours are bright and delivery was quick. Happy with the purchase.", "date": "2 weeks ago"}]},
+ {id:20,title:"Olive Green Track Suit",slug:"olive-green-track-suit",regularPrice:2499,salePrice:2499,rating:4.7,reviewCount:14,category:"Track Suits",ages:["1-2", "2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["1-3Y", "3-5Y", "5-7Y", "7-9Y", "9-11Y", "11-12Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p20.jpg",fbNote:true,shortDesc:"Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",fullDesc:["Olive Green Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Maryam T.", "city": "Rahim Yar Khan", "rating": 5, "text": "Bought it after seeing it on their Facebook page — even better in person.", "date": "3 days ago"}, {"name": "Sana R.", "city": "Lahore", "rating": 4, "text": "Good fabric and finishing. Size chart was accurate.", "date": "1 week ago"}]},
+ {id:21,title:"Navy & Orange Track Suit",slug:"navy-orange-track-suit",regularPrice:2499,salePrice:2499,rating:4.9,reviewCount:21,category:"Track Suits",ages:["1-2", "2-4", "4-6", "6-8", "8-10", "10-14"],sizes:["1-3Y", "3-5Y", "5-7Y", "7-9Y", "9-11Y", "11-12Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p21.jpg",fbNote:true,shortDesc:"Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",fullDesc:["Navy & Orange Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Zainab A.", "city": "Rahim Yar Khan", "rating": 5, "text": "Washed many times, still soft and bright. Ordered the next size too.", "date": "1 day ago"}, {"name": "Mahnoor F.", "city": "Karachi", "rating": 4, "text": "Looks exactly like the photo on their page. True to size.", "date": "5 days ago"}, {"name": "Amna J.", "city": "Multan", "rating": 5, "text": "Neat stitching, no loose threads. Recommended.", "date": "2 weeks ago"}]},
+ {id:22,title:"Maroon & Black EA7 Track Suit",slug:"maroon-black-ea7-track-suit",regularPrice:2499,salePrice:2499,rating:4.8,reviewCount:28,category:"Track Suits",ages:["2-4", "4-6", "6-8", "8-10"],sizes:["2-4Y", "4-6Y", "6-8Y", "8-10Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p22.jpg",fbNote:false,shortDesc:"Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",fullDesc:["Maroon & Black EA7 Track Suit is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Fatima S.", "city": "Rahim Yar Khan", "rating": 5, "text": "Quality is better than what we used to order from Karachi. Fit was exactly right.", "date": "2 days ago"}, {"name": "Ayesha K.", "city": "Multan", "rating": 5, "text": "Soft material and neat stitching. My little one wears it all day.", "date": "1 week ago"}, {"name": "Hira M.", "city": "Bahawalpur", "rating": 4, "text": "Colours are bright and delivery was quick. Happy with the purchase.", "date": "2 weeks ago"}]},
+ {id:23,title:"Orange Spider Print Sweatshirt Set",slug:"orange-spider-print-sweatshirt-set",regularPrice:2199,salePrice:2199,rating:4.7,reviewCount:12,category:"Sweatshirt Sets",ages:["1-2", "2-4", "4-6", "6-8", "8-10"],sizes:["1-3Y", "3-5Y", "5-7Y", "7-9Y", "9-10Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p23.jpg",fbNote:true,shortDesc:"Sweatshirt and bottom set from our Facebook collection — cosy, bright and playground-ready.",fullDesc:["Orange Spider Print Sweatshirt Set is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Maryam T.", "city": "Rahim Yar Khan", "rating": 5, "text": "Bought it after seeing it on their Facebook page — even better in person.", "date": "3 days ago"}, {"name": "Sana R.", "city": "Lahore", "rating": 4, "text": "Good fabric and finishing. Size chart was accurate.", "date": "1 week ago"}]},
+ {id:24,title:"Blue Polo Hoodie & Joggers Set",slug:"blue-polo-hoodie-joggers-set",regularPrice:2499,salePrice:2499,rating:4.6,reviewCount:19,category:"Track Suits",ages:["1-2", "2-4", "4-6", "6-8", "8-10"],sizes:["1-3Y", "3-5Y", "5-7Y", "7-9Y", "9-10Y"],featuredImage:"https://collections-by-zoni.surge.sh/products/p24.jpg",fbNote:true,shortDesc:"Two-piece track suit from our Facebook collection — soft, comfy and made for all-day play.",fullDesc:["Blue Polo Hoodie & Joggers Set is part of the range we post on our Facebook page, where new designs arrive every week.", "Made for active kids: breathable fabric, neat stitching and a comfortable fit that washes well.", "Order with Cash on Delivery anywhere in Pakistan, or message us on WhatsApp if you need help choosing a size."],reviews:[{"name": "Zainab A.", "city": "Rahim Yar Khan", "rating": 5, "text": "Washed many times, still soft and bright. Ordered the next size too.", "date": "1 day ago"}, {"name": "Mahnoor F.", "city": "Karachi", "rating": 4, "text": "Looks exactly like the photo on their page. True to size.", "date": "5 days ago"}, {"name": "Amna J.", "city": "Multan", "rating": 5, "text": "Neat stitching, no loose threads. Recommended.", "date": "2 weeks ago"}]}
+];
+const TESTIMONIALS = [
+ {name:"Fatima S.",city:"Rahim Yar Khan",rating:5,text:"Finally a kids store in our city with real variety. The track suit quality is better than what we used to order from Karachi."},
+ {name:"Ayesha K.",city:"Multan",rating:5,text:"Ordered a frock for my daughter's birthday. Size was perfect, delivery was on time and cash on delivery made it easy."},
+ {name:"Maryam T.",city:"Bahawalpur",rating:5,text:"The newborn gift set was beautifully packed and so soft. My sister loved it. This is our family store now."}
+];
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money = n => SETTINGS.currency + Number(n).toLocaleString("en-PK");
+const byId = id => PRODUCTS.find(p => p.id == id);
+const storeGet = k => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } };
+const storeSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+function starRow(r, cls){ let h = '<span class="stars">'; for (let i = 1; i <= 5; i++) h += '<svg class="star' + (i <= Math.round(r) ? " on" : "") + '" width="15" height="15" viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg>'; return h + "</span>"; }
+function toast(msg){ const t = $("#toast"); if (!t) return; t.textContent = msg; t.classList.add("show"); clearTimeout(t._timer); t._timer = setTimeout(() => t.classList.remove("show"), 2400); }
+
+/* ---------- page urls + state (multi-page; cart + last order persist across pages) ---------- */
+const PAGE = (document.body && document.body.dataset) ? (document.body.dataset.page || "home") : "home";
+const P_HOME = "design-" + DESIGN + ".html", P_SHOP = "shop-" + DESIGN + ".html", P_PROD = "product-" + DESIGN + ".html", P_CART = "cart-" + DESIGN + ".html", P_CK = "checkout-" + DESIGN + ".html", P_TRACK = "track-" + DESIGN + ".html";
+const CART_KEY = "zoni_cart_" + DESIGN, ORDER_KEY = "zoni_last_order_" + DESIGN;
+const SHOP_CATS = CATEGORIES.filter(c => c !== "All");
+const FALLBACK = {name:"",city:"Karachi",payment:"Cash on Delivery",date:new Date().toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}),items:1,total:2199};
+const state = { cart: storeGet(CART_KEY) || [], lastOrder: storeGet(ORDER_KEY) || null, age:"all", cat:"All", q:"", price:null, current:null, size:null, qty:1 };
+
+const cartCountTotal = () => state.cart.reduce((a, l) => a + l.qty, 0);
+const cartSubtotal = () => state.cart.reduce((a, l) => a + l.price * l.qty, 0);
+const shipFee = sub => (sub === 0 || sub >= SETTINGS.freeShippingThreshold) ? 0 : SETTINGS.flatShippingFee;
+function saveCart(){ storeSet(CART_KEY, state.cart); }
+function defaultSize(p){ return p.sizes[Math.min(1, p.sizes.length - 1)]; }
+function addLine(id, size, qty){ const line = state.cart.find(l => l.id === id && l.size === size); if (line) line.qty += qty; else state.cart.push({id:id, size:size, qty:qty, price:byId(id).salePrice}); saveCart(); }
+
+/* ---------- badge + sticky bar ---------- */
+function renderBadge(){
+  const n = cartCountTotal(), b = $("#cartCount");
+  if (b) b.textContent = n;
+  const sc = $("#stickyCount"); if (sc) sc.textContent = n + (n === 1 ? " item" : " items");
+  const st = $("#stickyTotal"); if (st) st.textContent = money(cartSubtotal());
+}
+function popBadge(){ const b = $("#cartCount"); if (!b) return; b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
+
+/* ---------- wave cascade reveal (Noor recipe) ---------- */
+let revealIO = null;
+function revealDelay(el){ const p = el.parentElement; if (!p) return 0; const sibs = Array.from(p.children).filter(c => c.classList && c.classList.contains("rv")); const i = sibs.indexOf(el); return Math.min(Math.max(i, 0) * 110, 660); }
+function doReveal(el){
+  if (!el.classList.contains("rv") || el.classList.contains("in")) return;
+  el.style.setProperty("--d", revealDelay(el) + "ms");
+  el.classList.add("in");
+  let cleaned = false;
+  const clean = () => { if (cleaned) return; cleaned = true; el.classList.remove("rv", "in"); el.style.removeProperty("--d"); };
+  el.addEventListener("transitionend", function h(e){ if (e.propertyName === "transform"){ el.removeEventListener("transitionend", h); clean(); } });
+  setTimeout(clean, 2400);
+}
+function armReveal(scope){
+  const els = Array.from((scope || document).querySelectorAll(".rv:not(.in)"));
+  if (!els.length) return;
+  if ("IntersectionObserver" in window){
+    if (!revealIO){
+      revealIO = new IntersectionObserver(entries => { entries.forEach(en => { if (en.isIntersecting){ doReveal(en.target); revealIO.unobserve(en.target); } }); }, { threshold:.12, rootMargin:"0px 0px -8% 0px" });
+    }
+    els.forEach(el => revealIO.observe(el));
+  } else { els.forEach(doReveal); }
+}
+function sweepReveal(){ $$(".rv:not(.in)").forEach(el => { const r = el.getBoundingClientRect(); if (r.top < window.innerHeight * 0.98 && r.bottom > 0) doReveal(el); }); }
+
+/* ---------- fly to cart (Noor recipe) ---------- */
+function flyToCart(img, cb){
+  const target = $(".cart-btn");
+  let done = false; const fin = () => { if (done) return; done = true; cb && cb(); };
+  if (!img || !target){ fin(); return; }
+  const r1 = img.getBoundingClientRect(), r2 = target.getBoundingClientRect();
+  if (!r1.width || !r2.width){ fin(); return; }
+  const clone = img.cloneNode();
+  clone.className = "fly-clone"; clone.removeAttribute("id");
+  Object.assign(clone.style, { left:r1.left + "px", top:r1.top + "px", width:r1.width + "px", height:r1.height + "px" });
+  document.body.appendChild(clone);
+  const dx = (r2.left + r2.width / 2) - (r1.left + r1.width / 2);
+  const dy = (r2.top + r2.height / 2) - (r1.top + r1.height / 2);
+  const lift = Math.min(170, Math.abs(dy) * 0.35 + 60);
+  try {
+    const anim = clone.animate([
+      { transform:"translate(0,0) scale(1)", opacity:"1" },
+      { transform:"translate(" + (dx * 0.5) + "px," + (dy * 0.55 - lift) + "px) scale(.42)", opacity:".92", offset:.55 },
+      { transform:"translate(" + dx + "px," + dy + "px) scale(.05)", opacity:".45" }
+    ], { duration:700, easing:"cubic-bezier(.45,.02,.35,1)", fill:"forwards" });
+    if (anim.finished && anim.finished.then) anim.finished.then(() => { clone.remove(); fin(); }).catch(() => { clone.remove(); fin(); });
+    else setTimeout(() => { clone.remove(); fin(); }, 730);
+  } catch (e) { clone.remove(); fin(); }
+}
+function addWithFly(img, id, size, qty){
+  addLine(id, size, qty);
+  flyToCart(img, () => { renderBadge(); popBadge(); toast("Added to cart: " + byId(id).title + " (" + size + ")"); });
+}
+
+/* ---------- announcement bar (all pages; rotating messages, NO RM gating) ---------- */
+const ABAR_MSGS = [
+  "Free delivery on orders above Rs 3,000",
+  "Cash on Delivery available across Pakistan",
+  "7-day easy exchange"
+];
+function initAnnounce(){
+  const el = $("#abarMsg"); if (!el) return;
+  let i = 0;
+  setInterval(() => {
+    el.classList.add("swap");
+    setTimeout(() => { i = (i + 1) % ABAR_MSGS.length; el.textContent = ABAR_MSGS[i]; el.classList.remove("swap"); }, 260);
+  }, 4000);
+}
+
+/* ---------- header / drawer / footer ---------- */
+/* Shop dropdown: click pins it open/closed; on hover-capable devices only
+   (hover:hover + pointer:fine, checked via matchMedia) plain hovering the
+   .nav-drop wrapper ALSO opens the same panel via the same .open class, so
+   the existing fade + translateY + item-stagger CSS animation is reused.
+   The panel lives inside the wrapper, so wrapper + panel are ONE hover
+   zone: moving into the panel never leaves the zone. Leaving the zone
+   closes a hover-opened menu only after a 200ms grace delay (diagonal
+   mouse travel across the 8px gap does not flicker it shut). A click-
+   pinned menu is NOT closed by mouse-leave; a click that closes a pinned
+   menu while the pointer is still over it suppresses hover-reopen until
+   the pointer has fully left the zone, so hover and click never fight. */
+let dropPinned = false, dropHovering = false, dropSuppressed = false, dropCloseTimer = null;
+function dropRender(){
+  const shouldOpen = dropPinned || (dropHovering && !dropSuppressed);
+  const m = $("#shopMenu"); if (m) m.classList.toggle("open", shouldOpen);
+  const b = $("#shopToggle"); if (b) b.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
+  return shouldOpen;
+}
+function dropCancelClose(){ if (dropCloseTimer){ clearTimeout(dropCloseTimer); dropCloseTimer = null; } }
+function dropScheduleClose(){
+  dropCancelClose();
+  dropCloseTimer = setTimeout(() => { dropCloseTimer = null; dropRender(); }, 200);
+}
+function closeDropdown(){
+  dropCancelClose(); dropPinned = false; dropHovering = false; dropSuppressed = false;
+  const m = $("#shopMenu"); if (m) m.classList.remove("open");
+  const b = $("#shopToggle"); if (b) b.setAttribute("aria-expanded", "false");
+}
+function toggleDropdown(){
+  dropCancelClose();
+  const isOpen = dropPinned || (dropHovering && !dropSuppressed);
+  if (isOpen && dropPinned){
+    dropPinned = false;
+    if (dropHovering) dropSuppressed = true;
+    dropRender();
+  } else if (isOpen){
+    dropPinned = true; dropRender();
+  } else {
+    dropPinned = true; dropSuppressed = false; dropRender();
+  }
+}
+function bindDropHover(){
+  const wrap = document.querySelector(".nav-drop");
+  if (!wrap || wrap.dataset.hoverBound) return;
+  let mq = null;
+  try { mq = window.matchMedia("(hover: hover) and (pointer: fine)"); } catch (e) {}
+  if (!mq || !mq.matches) return;
+  wrap.dataset.hoverBound = "1";
+  wrap.addEventListener("mouseenter", () => { dropCancelClose(); dropHovering = true; dropRender(); });
+  wrap.addEventListener("mouseleave", () => {
+    dropHovering = false; dropSuppressed = false;
+    if (!dropPinned) dropScheduleClose(); else dropRender();
+  });
+}
+function openDrawer(){ const d = $("#drawer"), bd = $("#drawerBackdrop"); if (d) d.classList.add("open"); if (bd) bd.classList.add("show"); }
+function closeDrawer(){ const d = $("#drawer"), bd = $("#drawerBackdrop"); if (d) d.classList.remove("open"); if (bd) bd.classList.remove("show"); }
+function renderFootCats(){
+  const box = $("#footCats"); if (!box) return;
+  box.innerHTML = SHOP_CATS.map(c => '<li><a href="' + P_SHOP + "?cat=" + encodeURIComponent(c) + '">' + esc(c) + "</a></li>").join("");
+}
+
+/* ---------- product grids (home + shop) ---------- */
+const BAND_COLORS = ["#FF6B5E","#FFB800","#34D399","#38BDF8","#B79CED","#F4A7B9"];
+/* Merchandising badges (Giggles-style flags): exactly ONE per product,
+   assigned deterministically by rotation over catalog order. Demo
+   placeholders like the sample prices — Phase 2 turns them into admin
+   flags; the colour mapping lives in each theme's CSS (.b-new etc.). */
+const BADGES = ["New Arrival", "Best Seller", "Trending", "Flash Deal"];
+const BADGE_CLS = ["b-new", "b-best", "b-trend", "b-flash"];
+function badgeHTML(p){ const i = (p.id - 1) % BADGES.length; return '<span class="pbadge ' + BADGE_CLS[i] + '">' + BADGES[i] + "</span>"; }
+function filtered(){
+  const q = state.q.trim().toLowerCase();
+  return PRODUCTS.filter(p =>
+    (state.cat === "All" || p.category === state.cat) &&
+    (state.age === "all" || p.ages.indexOf(state.age) >= 0) &&
+    (state.price == null || p.salePrice <= state.price) &&
+    (!q || p.title.toLowerCase().indexOf(q) >= 0 || p.category.toLowerCase().indexOf(q) >= 0));
+}
+function cardHTML(p, withRv, extra){
+  const off = p.regularPrice > p.salePrice ? Math.round((1 - p.salePrice / p.regularPrice) * 100) : 0;
+  const band = CATBAND[p.category] || BAND_COLORS[(p.id - 1) % BAND_COLORS.length];
+  return '<article class="card' + (withRv ? " rv" : "") + (extra || "") + '" data-action="open" data-id="' + p.id + '">' +
+    (DESIGN === 4 ? '<div class="card-band" style="background:' + band + '"></div>' : "") +
+    '<a class="card-imglink" href="' + P_PROD + "?id=" + p.id + '"><span class="card-img"><img src="' + p.featuredImage + '" alt="' + esc(p.title) + '" loading="lazy">' + badgeHTML(p) + (off ? '<span class="sale-badge">SAVE ' + off + "%</span>" : "") + "</span></a>" +
+    '<div class="card-body"><span class="card-cat">' + esc(p.category) + "</span>" +
+    '<a class="card-titlelink" href="' + P_PROD + "?id=" + p.id + '"><h3 class="card-title">' + esc(p.title) + "</h3></a>" +
+    '<span class="card-rating">' + starRow(p.rating) + '<span class="rc">' + p.rating.toFixed(1) + " (" + p.reviewCount + ")</span></span>" +
+    '<span class="card-foot"><span class="card-price">' + money(p.salePrice) + "</span>" + (off ? '<span class="was">' + money(p.regularPrice) + "</span>" : "") + "</span>" +
+    '<button class="btn primary add-btn" data-action="add" data-id="' + p.id + '">Add to Cart</button></div></article>';
+}
+function renderGrid(first){
+  const grid = $("#grid"); if (!grid) return;
+  const list = filtered();
+  const rc = $("#resCount"); if (rc) rc.textContent = "Showing " + list.length + " of " + PRODUCTS.length + " products";
+  grid.innerHTML = list.length ? list.map(p => cardHTML(p, !!first)).join("") : '<div class="empty">No products match your filters. Try another age or category.</div>';
+  if (first) armReveal(grid);
+}
+function renderAgeTiles(){
+  const box = $("#ageTiles"); if (!box) return;
+  box.innerHTML = AGES.map(a => '<button class="age-tile' + (state.age === a ? " active" : "") + '" data-action="age" data-age="' + a + '"><span class="age-num">' + a + '</span><span class="age-lab">Years</span></button>').join("") +
+    '<button class="age-tile' + (state.age === "all" ? " active" : "") + '" data-action="age" data-age="all"><span class="age-num">All</span><span class="age-lab">Ages</span></button>';
+}
+function renderChips(){
+  const box = $("#catChips"); if (!box) return;
+  box.innerHTML = CATEGORIES.map(c => '<button class="chip' + (state.cat === c ? " active" : "") + '" data-action="cat" data-cat="' + esc(c) + '">' + esc(c) + "</button>").join("");
+}
+function renderPriceChip(){
+  const row = $("#priceChipRow"); if (!row) return;
+  if (state.price == null){ row.hidden = true; row.innerHTML = ""; return; }
+  row.hidden = false;
+  row.innerHTML = '<span class="price-chip"><span class="price-chip-label">Under Rs ' + Number(state.price).toLocaleString("en-PK") + '</span>' +
+    '<button class="price-chip-x" data-action="price-clear" aria-label="Remove price filter">&times;</button></span>';
+}
+function initShopSection(){
+  if (PAGE === "shop"){
+    const qs = new URLSearchParams(location.search);
+    if (qs.get("cat") && SHOP_CATS.indexOf(qs.get("cat")) >= 0) state.cat = qs.get("cat");
+    if (qs.get("age") && AGES.indexOf(qs.get("age")) >= 0) state.age = qs.get("age");
+    if (qs.get("q")) state.q = qs.get("q");
+    const pv = Number(qs.get("price"));
+    if (qs.get("price") && isFinite(pv) && pv > 0) state.price = pv;
+  }
+  const si = $("#searchInput"); if (si && state.q) si.value = state.q;
+  renderAgeTiles(); renderChips(); renderPriceChip(); renderGrid(true);
+  if (location.hash === "#searchInput" && si) setTimeout(() => { try { si.focus({ preventScroll:true }); } catch (e) { si.focus(); } }, 60);
+}
+/* ---------- home: featured products (first 2 of each category, catalog order) ---------- */
+const FEATURED_IDS = (() => { const seen = {}; const out = []; PRODUCTS.forEach(p => { const n = (seen[p.category] || 0) + 1; seen[p.category] = n; if (n <= 2) out.push(p.id); }); return out; })();
+
+/* ---------- home: featured ENDLESS STEPPER (Round 6) ----------
+   Ibrar's spec: the featured row slides left-to-right RUK RUK KAR (step by
+   step) with a pyara JHATKA (a bump easing on the track, in each theme's
+   CSS) and ENDLESSLY — never stopping at an end, never showing a gap.
+   Mechanics: the track holds 3 copies of the 10-card set. fsPos counts
+   steps from the start of copy A. Stepping is one card width (incl. gap)
+   per ~2.8s. When a step lands on/past a full set boundary, the position
+   wraps by one set width WITHOUT animation — copy B/C are pixel-identical
+   to copy A, so the jump is invisible. Auto-stepping runs only while the
+   section is in view, the tab is visible, the pointer is not hovering
+   (hover pause bound ONLY on hover-capable fine pointers) and the user is
+   not dragging. It is NEVER gated on the reduced-motion setting.
+   Testability: the .fslider element carries data-fs-index (logical card
+   index 0..9), data-fs-pos (normalised step position) and data-fs-steps
+   (cumulative forward/back steps taken). */
+const FS_SET = FEATURED_IDS.length;
+let fsPos = 0, fsSteps = 0, fsStepW = 0, fsTimer = null;
+let fsInView = false, fsHover = false, fsDragging = false;
+function fsBox(){ return document.querySelector(".fslider"); }
+function fsTrack(){ return $("#featTrack"); }
+function fsMeasure(){
+  const track = fsTrack(); if (!track || track.children.length < 2) return 0;
+  const a = track.children[0].getBoundingClientRect(), b = track.children[1].getBoundingClientRect();
+  return Math.max(1, b.left - a.left);
+}
+function fsRenderedX(track){
+  try {
+    const t = getComputedStyle(track).transform;
+    if (t && t !== "none"){
+      const m = t.match(/matrix\(([^)]+)\)/);
+      if (m){ const parts = m[1].split(",").map(Number); if (parts.length === 6) return parts[4]; }
+    }
+  } catch (e) {}
+  return -fsPos * fsStepW;
+}
+function fsApply(anim){
+  const track = fsTrack(); if (!track) return;
+  if (!fsStepW) fsStepW = fsMeasure();
+  track.classList.toggle("noanim", !anim);
+  track.style.transform = "translateX(" + (-fsPos * fsStepW) + "px)";
+  const box = fsBox();
+  if (box){
+    box.setAttribute("data-fs-index", String(((fsPos % FS_SET) + FS_SET) % FS_SET));
+    box.setAttribute("data-fs-pos", String(fsPos));
+    box.setAttribute("data-fs-steps", String(fsSteps));
+  }
+  if (!anim){ void track.offsetWidth; track.classList.remove("noanim"); }
+}
+function fsNormalizeIdle(){
+  /* Only for a SETTLED track: if the resting position sits on a set
+     boundary, wrap silently by one set (identical pixels). */
+  if (fsPos >= FS_SET){ fsPos -= FS_SET; fsApply(false); }
+  else if (fsPos < 0){ fsPos += FS_SET; fsApply(false); }
+}
+function fsStep(dir){
+  const track = fsTrack(); if (!track) return;
+  if (!fsStepW) fsStepW = fsMeasure();
+  if (!fsStepW) return;
+  /* Boundary crossing while a transition may still be in flight (rapid
+     clicks / auto-step right at the wrap): shift BOTH the rendered pixels
+     and the logical position by one set width — the copies repeat every
+     set width, so the rendered frame does not change — then take the step
+     from the shifted position. This keeps motion seamless in all cases. */
+  if (fsPos >= FS_SET || (dir < 0 && fsPos <= 0)){
+    const shift = fsPos >= FS_SET ? -FS_SET : FS_SET;
+    const cur = fsRenderedX(track);
+    fsPos += shift;
+    track.classList.add("noanim");
+    track.style.transform = "translateX(" + (cur - shift * fsStepW) + "px)";
+    void track.offsetWidth;
+    track.classList.remove("noanim");
+  }
+  fsPos += dir; fsSteps++;
+  fsApply(true);
+  clearTimeout(fsStep._nt);
+  fsStep._nt = setTimeout(fsNormalizeIdle, 820);
+}
+function fsOnTransitionEnd(e){
+  if (e.target === fsTrack() && e.propertyName === "transform"){ clearTimeout(fsStep._nt); fsNormalizeIdle(); }
+}
+function fsUpdateTimer(){
+  const want = fsInView && !fsHover && !fsDragging && !document.hidden;
+  if (want && !fsTimer){ fsTimer = setInterval(() => fsStep(1), 2800); }
+  else if (!want && fsTimer){ clearInterval(fsTimer); fsTimer = null; }
+}
+function initFsDrag(){
+  const view = document.querySelector(".fview"); if (!view) return;
+  const track = fsTrack(); if (!track) return;
+  let pid = null, startX = 0, basePos = 0, moved = 0;
+  /* NOTE: no setPointerCapture — capturing the pointer on .fview retargets
+     the trailing click to .fview itself, which silently kills the card
+     links/buttons inside. Move/up are tracked on window instead. */
+  const onMove = e => {
+    if (pid === null || e.pointerId !== pid) return;
+    moved = e.clientX - startX;
+    track.style.transform = "translateX(" + (-(basePos * fsStepW) + moved) + "px)";
+  };
+  const onEnd = e => {
+    if (pid === null || (e && e.pointerId !== pid)) return;
+    pid = null; fsDragging = false;
+    window.removeEventListener("pointermove", onMove);
+    window.removeEventListener("pointerup", onEnd);
+    window.removeEventListener("pointercancel", onEnd);
+    track.classList.remove("noanim");
+    fsPos = basePos;
+    if (moved <= -40) fsStep(1);
+    else if (moved >= 40) fsStep(-1);
+    else fsApply(true);
+    /* A real drag must not turn into a card click (link / add-to-cart):
+       flag it and swallow the trailing click in the capture phase below. */
+    if (Math.abs(moved) > 8){ view.dataset.suppress = "1"; setTimeout(() => { delete view.dataset.suppress; }, 400); }
+    moved = 0; fsUpdateTimer();
+  };
+  view.addEventListener("pointerdown", e => {
+    if (pid !== null) return;
+    pid = e.pointerId; startX = e.clientX; basePos = fsPos; moved = 0;
+    fsDragging = true; fsUpdateTimer();
+    if (!fsStepW) fsStepW = fsMeasure();
+    track.classList.add("noanim");
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onEnd);
+    window.addEventListener("pointercancel", onEnd);
+  });
+  view.addEventListener("click", e => { if (view.dataset.suppress){ e.preventDefault(); e.stopPropagation(); } }, true);
+}
+function renderFeatured(){
+  const track = fsTrack(); if (!track) return;
+  /* 3 copies of the featured set: real DOM cards (same data attributes),
+     so clicks / fly-to-cart work identically on every copy. Cards are NOT
+     .rv — the section reveals as one unit via .fslider.rv in the markup,
+     and a card sliding through the viewport is never invisible. */
+  let html = "";
+  for (let copy = 0; copy < 3; copy++) html += FEATURED_IDS.map(id => cardHTML(byId(id), false)).join("");
+  track.innerHTML = html;
+  track.addEventListener("transitionend", fsOnTransitionEnd);
+  fsPos = 0; fsSteps = 0; fsStepW = fsMeasure(); fsApply(false);
+  const box = fsBox(); if (!box) return;
+  if ("IntersectionObserver" in window){
+    new IntersectionObserver(es => { es.forEach(en => { fsInView = en.isIntersecting; fsUpdateTimer(); }); }, { threshold:.2 }).observe(box);
+  } else { fsInView = true; fsUpdateTimer(); }
+  /* hover pause ONLY on hover-capable fine pointers (touch never trapped) */
+  let mq = null;
+  try { mq = window.matchMedia("(hover: hover) and (pointer: fine)"); } catch (e) {}
+  if (mq && mq.matches){
+    box.addEventListener("mouseenter", () => { fsHover = true; fsUpdateTimer(); });
+    box.addEventListener("mouseleave", () => { fsHover = false; fsUpdateTimer(); });
+  }
+  document.addEventListener("visibilitychange", fsUpdateTimer);
+  window.addEventListener("resize", () => { fsStepW = fsMeasure(); fsApply(false); });
+  initFsDrag();
+}
+/* ---------- home: shop-by-category showcase (photo + name + count per category) ---------- */
+const CAT_ARROW = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>';
+function renderCatShowcase(){
+  const box = $("#catShowcase"); if (!box) return;
+  box.innerHTML = SHOP_CATS.map(c => {
+    const first = PRODUCTS.find(p => p.category === c);
+    const n = PRODUCTS.filter(p => p.category === c).length;
+    return '<a class="cat-card rv" href="' + P_SHOP + "?cat=" + encodeURIComponent(c) + '">' +
+      '<span class="cat-img"><img src="' + first.featuredImage + '" alt="' + esc(c) + '" loading="lazy"></span>' +
+      '<span class="cat-meta"><span class="cat-name">' + esc(c) + '</span><span class="cat-count">' + n + (n === 1 ? " Product" : " Products") + "</span></span>" +
+      '<span class="cat-arrow" aria-hidden="true">' + CAT_ARROW + "</span></a>";
+  }).join("");
+  armReveal(box);
+}
+/* ---------- home: hero slider (auto-advance, dots, arrows, swipe; NO reduced-motion gating) ---------- */
+let slTimer = null, slIdx = 0;
+function sliderGo(i){
+  const hero = document.querySelector(".slider"); if (!hero) return;
+  const slides = hero.querySelectorAll(".slide"); if (!slides.length) return;
+  slIdx = ((i % slides.length) + slides.length) % slides.length;
+  slides.forEach((s, j) => s.classList.toggle("active", j === slIdx));
+  hero.querySelectorAll(".sl-dot").forEach((dt, j) => dt.classList.toggle("active", j === slIdx));
+}
+function sliderRestart(){
+  if (slTimer) clearInterval(slTimer);
+  slTimer = setInterval(() => sliderGo(slIdx + 1), 4500);
+}
+function sliderStop(){ if (slTimer){ clearInterval(slTimer); slTimer = null; } }
+function initSlider(){
+  const hero = document.querySelector(".slider"); if (!hero) return;
+  if (hero.querySelectorAll(".slide").length < 2) return;
+  hero.classList.add("slider-on");
+  sliderGo(0); sliderRestart();
+  /* pause on hover ONLY for hover-capable fine pointers — touch is never trapped */
+  let mq = null;
+  try { mq = window.matchMedia("(hover: hover) and (pointer: fine)"); } catch (e) {}
+  if (mq && mq.matches){
+    hero.addEventListener("mouseenter", sliderStop);
+    hero.addEventListener("mouseleave", sliderRestart);
+  }
+  let tx = null;
+  hero.addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, { passive:true });
+  hero.addEventListener("touchend", e => {
+    if (tx === null) return;
+    const dx = e.changedTouches[0].clientX - tx; tx = null;
+    if (Math.abs(dx) > 42){ sliderGo(slIdx + (dx < 0 ? 1 : -1)); sliderRestart(); }
+  }, { passive:true });
+  document.addEventListener("visibilitychange", () => { if (document.hidden) sliderStop(); else sliderRestart(); });
+}
+function renderTestimonials(){
+  const box = $("#testimonials"); if (!box) return;
+  box.innerHTML = TESTIMONIALS.map(t => '<div class="tcard">' + starRow(t.rating) + "<p>&ldquo;" + esc(t.text) + '&rdquo;</p><div class="tname">' + esc(t.name) + '</div><div class="tcity">' + esc(t.city) + "</div></div>").join("");
+}
+
+/* ---------- product page ---------- */
+function reviewHTML(r){
+  return '<div class="review"><div class="rev-head"><strong>' + esc(r.name) + "</strong>" + starRow(r.rating) + '<span class="rc">' + esc(r.city) + " &middot; " + esc(r.date) + '</span></div><p>' + esc(r.text) + "</p></div>";
+}
+function renderProduct(p){
+  state.current = p; state.size = defaultSize(p); state.qty = 1;
+  const off = p.regularPrice > p.salePrice ? Math.round((1 - p.salePrice / p.regularPrice) * 100) : 0;
+  $("#productDetail").innerHTML =
+    '<div class="pd-img"><img id="pdImg" src="' + p.featuredImage + '" alt="' + esc(p.title) + '">' + badgeHTML(p) + "</div>" +
+    '<div class="pd-info"><span class="card-cat">' + esc(p.category) + '</span><h1 class="pd-title">' + esc(p.title) + "</h1>" +
+    '<span class="card-rating">' + starRow(p.rating) + '<span class="rc">' + p.rating.toFixed(1) + " &middot; " + p.reviewCount + " reviews</span></span>" +
+    '<div class="pd-price">' + money(p.salePrice) + (off ? '<span class="was">' + money(p.regularPrice) + '</span><span class="sale-badge">SAVE ' + off + "%</span>" : "") + "</div>" +
+    '<p class="pd-desc">' + esc(p.shortDesc) + "</p>" + p.fullDesc.slice(1).map(d => '<p class="pd-desc2">' + esc(d) + "</p>").join("") +
+    (p.fbNote ? '<p class="fb-note">Sizes as posted on our Facebook page.</p>' : "") +
+    '<div class="pd-label">Select Size</div><div class="sizes" id="pdSizes">' + p.sizes.map(s => '<button class="size-pill' + (s === state.size ? " active" : "") + '" data-action="size" data-size="' + esc(s) + '">' + esc(s) + "</button>").join("") + "</div>" +
+    '<p class="admin-note">Sizes are set by the admin for each product (demo data).</p>' +
+    '<div class="pd-label">Quantity</div><div class="qty-row"><button class="qty-btn" data-action="qty-dec" aria-label="Decrease quantity">&minus;</button><span id="pdQty">1</span><button class="qty-btn" data-action="qty-inc" aria-label="Increase quantity">+</button></div>' +
+    '<div class="pd-actions"><button class="btn primary big" data-action="add-current">Add to Cart</button><a class="btn ghost big" href="' + P_CART + '">View Cart</a></div>' +
+    '<p class="pd-meta">Cash on Delivery available &middot; Delivery ' + money(SETTINGS.flatShippingFee) + ", free above " + money(SETTINGS.freeShippingThreshold) + " &middot; WhatsApp " + esc(SETTINGS.phoneDisplay) + "</p></div>";
+  const rl = $("#reviewsList");
+  if (rl) rl.innerHTML = p.reviews.map(reviewHTML).join("");
+}
+function initProduct(){
+  const id = Number(new URLSearchParams(location.search).get("id"));
+  renderProduct(byId(id) || PRODUCTS[0]);
+}
+
+/* ---------- cart page ---------- */
+function lineHTML(l){
+  const p = byId(l.id); if (!p) return "";
+  return '<div class="cline rv" data-key="' + l.id + "|" + esc(l.size) + '"><img src="' + p.featuredImage + '" alt="' + esc(p.title) + '">' +
+    '<div class="cline-main"><div class="cline-title">' + esc(p.title) + '</div><div class="cline-size">Size: ' + esc(l.size) + (l.qty > 1 ? ' &middot; <span class="cline-unit">' + money(l.price) + " each</span>" : "") + "</div>" +
+    '<div class="cline-price" data-line-total>' + money(l.price * l.qty) + "</div>" +
+    '<div class="qty-row sm"><button class="qty-btn" data-action="line-dec" aria-label="Decrease quantity">&minus;</button><span data-line-qty>' + l.qty + '</span><button class="qty-btn" data-action="line-inc" aria-label="Increase quantity">+</button></div></div>' +
+    '<button class="line-remove" data-action="line-remove" aria-label="Remove item">&times;</button></div>';
+}
+function pulseEls(els){ els.forEach(el => { if (!el) return; el.classList.remove("pulse"); void el.offsetWidth; el.classList.add("pulse"); }); }
+function renderCartTotals(pulse){
+  const sub = cartSubtotal(), ship = shipFee(sub);
+  const sEl = $("#cartSubtotal"), shEl = $("#cartShip"), tEl = $("#cartTotal");
+  if (sEl) sEl.textContent = money(sub);
+  if (shEl) shEl.textContent = ship === 0 ? "FREE" : money(ship);
+  if (tEl) tEl.textContent = money(sub + ship);
+  if (pulse) pulseEls([tEl]);
+  const ck = $("#ckBtn"); const tot = $("#cartTotals");
+  if (state.cart.length === 0){ if (tot) tot.style.display = "none"; }
+  else if (tot) tot.style.display = "";
+}
+function renderCartPage(){
+  const box = $("#cartLines"); if (!box) return;
+  if (!state.cart.length){
+    box.innerHTML = '<div class="empty">Your cart is empty.<br><a class="btn primary" href="' + P_SHOP + '" style="margin-top:14px;display:inline-block">Start Shopping</a></div>';
+  } else {
+    box.innerHTML = state.cart.map(lineHTML).join("");
+    armReveal(box);
+  }
+  renderCartTotals(false); renderBadge();
+}
+function changeLine(key, delta, btn){
+  const line = state.cart.find(l => (l.id + "|" + l.size) === key); if (!line) return;
+  line.qty += delta;
+  if (line.qty <= 0){ removeLine(key, btn); return; }
+  saveCart();
+  const row = btn.closest(".cline");
+  if (row){
+    const q = row.querySelector("[data-line-qty]"); if (q) q.textContent = line.qty;
+    const lt = row.querySelector("[data-line-total]"); if (lt){ lt.textContent = money(line.price * line.qty); pulseEls([lt]); }
+    const unit = row.querySelector(".cline-unit"); if (unit) unit.textContent = money(line.price) + " each";
+  }
+  renderCartTotals(true); renderBadge();
+}
+function removeLine(key, btn){
+  state.cart = state.cart.filter(l => (l.id + "|" + l.size) !== key);
+  saveCart(); renderBadge(); renderCartTotals(true);
+  const row = btn ? btn.closest(".cline") : null;
+  if (row){
+    row.classList.add("leaving");
+    row.style.height = row.offsetHeight + "px";
+    requestAnimationFrame(() => { row.style.height = "0px"; row.style.opacity = "0"; row.style.marginBottom = "0px"; row.style.paddingTop = "0px"; row.style.paddingBottom = "0px"; });
+    setTimeout(() => { renderCartPage(); }, 400);
+  } else renderCartPage();
+  toast("Removed from cart");
+}
+
+/* ---------- checkout ---------- */
+function renderCkSummary(){
+  const box = $("#ckSummary"); if (!box) return;
+  const sub = cartSubtotal(), ship = shipFee(sub);
+  box.innerHTML = (state.cart.length ? state.cart.map(l => { const p = byId(l.id); return '<div class="sum-line"><span>' + esc(p ? p.title : "Item") + " (" + esc(l.size) + ") &times; " + l.qty + "</span><span>" + money(l.price * l.qty) + "</span></div>"; }).join("") : '<div class="sum-line"><span>Your cart is empty</span><span>' + money(0) + "</span></div>") +
+    '<div class="sum-line"><span>Subtotal</span><span>' + money(sub) + '</span></div>' +
+    '<div class="sum-line"><span>Delivery</span><span>' + (ship === 0 ? "FREE" : money(ship)) + '</span></div>' +
+    '<div class="sum-line total"><span>Total</span><span>' + money(sub + ship) + "</span></div>";
+}
+function placeOrder(form){
+  const fv = n => { const el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ""; };
+  const name = fv("cname"), phone = fv("cphone"), wa = fv("cwhats") || phone, city = fv("ccity"), address = fv("caddress"), email = fv("cemail");
+  const err = $("#ckError");
+  if (!name || !phone || !address){ if (err){ err.textContent = "Please fill your full name, phone number and complete address so we can deliver your order."; err.style.display = "block"; } return; }
+  if (err) err.style.display = "none";
+  if (!state.cart.length){ toast("Your cart is empty."); return; }
+  const btn = $("#placeBtn");
+  if (btn){ btn.disabled = true; btn.classList.add("loading"); const lab = btn.querySelector(".po-label"); if (lab) lab.textContent = "Placing Order..."; }
+  setTimeout(() => {
+    const sub = cartSubtotal(), ship = shipFee(sub);
+    const order = {
+      orderNumber: "ZB-" + (1000 + Math.floor(Math.random() * 9000)),
+      name:name, phone:phone, whatsapp:wa, city:city || "Rahim Yar Khan", email:email,
+      payment:fv("payment") || "Cash on Delivery",
+      date:new Date().toLocaleDateString("en-GB", { day:"numeric", month:"short", year:"numeric" }),
+      items:cartCountTotal(), total:sub + ship
+    };
+    state.lastOrder = order; storeSet(ORDER_KEY, order);
+    state.cart = []; saveCart(); renderBadge();
+    const wrap = $("#ckWrap"); if (wrap) wrap.style.display = "none";
+    const back = $("#ckBack"); if (back) back.style.display = "none";
+    const box = $("#doneBox");
+    if (box){
+      box.innerHTML = '<svg class="ckmark" viewBox="0 0 52 52" aria-hidden="true"><circle class="ckm-circle" cx="26" cy="26" r="24"></circle><path class="ckm-tick" d="M15 27l7.5 7.5L37 19"></path></svg>' +
+        "<h2>Thank you, " + esc(name.split(" ")[0]) + "!</h2>" +
+        '<p class="done-id">Your order number is <strong>' + esc(order.orderNumber) + "</strong></p>" +
+        "<p>Items: " + order.items + " · Total: <strong>" + money(order.total) + "</strong> · Payment: " + esc(order.payment) + "</p>" +
+        (email ? '<p>A confirmation email has been sent to <strong>' + esc(email) + "</strong>.</p>" : "") +
+        "<p>Our team will confirm your order on WhatsApp (" + esc(wa) + ") shortly, then pack it and hand it to TCS.</p>" +
+        '<div class="pd-actions" style="justify-content:center"><a class="btn primary big" href="' + P_TRACK + '">Track Your Order</a><a class="btn ghost big" href="' + P_HOME + '">Continue Shopping</a></div>';
+      box.hidden = false;
+      requestAnimationFrame(() => { box.classList.add("show"); box.scrollIntoView({ block:"center", behavior:"smooth" }); });
+    }
+  }, 900);
+}
+
+/* ---------- track order ---------- */
+const TRACK_STEPS = [
+  { t:"Order Placed", d:"Your order has been received." },
+  { t:"Packed", d:"Your items are packed and ready." },
+  { t:"Shipped via TCS", d:"Handed to TCS courier for delivery." },
+  { t:"Out for Delivery", d:"The rider is on the way to your address." }
+];
+function timelineHTML(o, isDemo){
+  const doneUpto = isDemo ? 3 : 2;
+  return (isDemo ? '<p class="demo-note">Demo timeline — place an order in this demo to track it live here.</p>' : "") +
+    '<div class="track-head"><strong>' + esc(o.orderNumber) + "</strong>" + (isDemo ? "<span>Courier: TCS</span>" : "<span>" + esc(o.name) + " · " + esc(o.city) + " · " + money(o.total) + "</span>") + "</div>" +
+    '<ol class="timeline anim"><span class="tl-progress"></span>' + TRACK_STEPS.map((s, i) =>
+      '<li class="' + (i < doneUpto ? "done" : (i === doneUpto ? "current" : "")) + '"><span class="dot"></span><div><strong>' + s.t + "</strong><p>" + s.d + "</p></div></li>").join("") + "</ol>" +
+    '<p class="track-courier">Courier: <strong>TCS</strong> · Need help? WhatsApp us at <a href="' + SETTINGS.whatsapp + '" target="_blank" rel="noopener">' + esc(SETTINGS.phoneDisplay) + "</a></p>";
+}
+function animateTimeline(box, isDemo){
+  const ol = box.querySelector(".timeline"); if (!ol) return;
+  const doneUpto = isDemo ? 3 : 2;
+  const lis = Array.from(ol.querySelectorAll("li"));
+  lis.forEach((li, i) => { li.style.setProperty("--i", i); });
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    lis.forEach(li => li.classList.add("tl-in"));
+    const prog = ol.querySelector(".tl-progress");
+    const dots = ol.querySelectorAll(".dot");
+    if (prog && dots.length > 1){
+      const idx = Math.min(doneUpto, dots.length - 1);
+      const li0 = lis[0], liI = lis[idx];
+      const y0 = li0.offsetTop + dots[0].offsetTop + dots[0].offsetHeight / 2;
+      const yi = liI.offsetTop + dots[idx].offsetTop + dots[idx].offsetHeight / 2;
+      prog.style.top = y0 + "px";
+      prog.style.height = Math.max(0, yi - y0) + "px";
+    }
+  }));
+}
+function doTrack(id){
+  const box = $("#trackResult"); if (!box) return;
+  const clean = String(id || "").trim().toUpperCase();
+  if (!clean){ box.innerHTML = '<p class="demo-note">Please enter your order number, for example the one from your confirmation (ZB-1234).</p>'; return; }
+  const real = state.lastOrder && state.lastOrder.orderNumber.toUpperCase() === clean;
+  const o = real ? state.lastOrder : Object.assign({}, FALLBACK, { orderNumber: clean });
+  box.innerHTML = timelineHTML(o, !real);
+  animateTimeline(box, !real);
+}
+
+/* ---------- global binding (single delegated listener) ---------- */
+function bindGlobal(){
+  if (document.body.dataset.zoniBound) return;
+  document.body.dataset.zoniBound = "1";
+  document.addEventListener("click", e => {
+    const dropWrap = e.target.closest(".nav-drop");
+    if (!dropWrap) closeDropdown();
+    const drawerLink = e.target.closest("#drawer a");
+    if (drawerLink) closeDrawer();
+    const el = e.target.closest("[data-action]");
+    if (!el) return;
+    const a = el.dataset.action;
+    if (a === "shop-menu"){
+      if (!$("#shopMenu")) return;
+      toggleDropdown();
+    }
+    else if (a === "drawer-open") openDrawer();
+    else if (a === "drawer-close") closeDrawer();
+    else if (a === "acc-toggle"){
+      const panel = $("#accPanel"); if (!panel) return;
+      const open = panel.classList.toggle("open");
+      el.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    else if (a === "sl-prev"){ sliderGo(slIdx - 1); sliderRestart(); }
+    else if (a === "sl-next"){ sliderGo(slIdx + 1); sliderRestart(); }
+    else if (a === "sl-dot"){ sliderGo(Number(el.dataset.i || 0)); sliderRestart(); }
+    else if (a === "fs-prev" || a === "rail-prev"){ if (fsTrack()) fsStep(-1); }
+    else if (a === "fs-next" || a === "rail-next"){ if (fsTrack()) fsStep(1); }
+    else if (a === "age"){
+      /* On the HOME page the age tiles are navigation: they land on the shop
+         page with the age filter applied (the full catalog lives there). */
+      if (PAGE === "home"){ location.href = P_SHOP + (el.dataset.age === "all" ? "" : "?age=" + encodeURIComponent(el.dataset.age)); return; }
+      state.age = el.dataset.age; renderAgeTiles(); renderGrid(false);
+      /* On shop pages the age tiles sit BELOW the grid: after filtering,
+         smoothly bring the grid back into view so the result is seen. */
+      if (PAGE === "shop"){ const s = $("#shop"); if (s) s.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    }
+    else if (a === "cat"){ state.cat = el.dataset.cat; renderChips(); renderGrid(false); }
+    else if (a === "price-clear"){ state.price = null; renderPriceChip(); renderGrid(false); }
+    else if (a === "add"){
+      e.preventDefault(); e.stopPropagation();
+      const card = el.closest(".card");
+      addWithFly(card ? card.querySelector("img") : null, Number(el.dataset.id), defaultSize(byId(Number(el.dataset.id))), 1);
+    }
+    else if (a === "open"){
+      if (e.target.closest("a") || e.target.closest("button")) return;
+      location.href = P_PROD + "?id=" + el.dataset.id;
+    }
+    else if (a === "size"){
+      state.size = el.dataset.size;
+      $$("#pdSizes .size-pill").forEach(b => b.classList.toggle("active", b.dataset.size === state.size));
+    }
+    else if (a === "qty-inc"){ state.qty++; const q = $("#pdQty"); if (q) q.textContent = state.qty; }
+    else if (a === "qty-dec"){ state.qty = Math.max(1, state.qty - 1); const q = $("#pdQty"); if (q) q.textContent = state.qty; }
+    else if (a === "add-current"){ addWithFly($("#pdImg"), state.current.id, state.size, state.qty); }
+    else if (a === "line-inc" || a === "line-dec"){ const row = el.closest(".cline"); if (row) changeLine(row.dataset.key, a === "line-inc" ? 1 : -1, el); }
+    else if (a === "line-remove"){ const row = el.closest(".cline"); if (row) removeLine(row.dataset.key, el); }
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape"){ closeDropdown(); closeDrawer(); } });
+  bindDropHover();
+  document.addEventListener("input", e => { if (e.target && e.target.id === "searchInput"){ state.q = e.target.value; renderGrid(false); } });
+  document.addEventListener("submit", e => {
+    const f = e.target;
+    if (f.id === "newsletterForm"){
+      e.preventDefault();
+      const em = f.querySelector("input[type=email]");
+      const msg = $("#newsMsg");
+      if (!em || !em.value.trim()) return;
+      if (msg) msg.innerHTML = '<span class="ok">Thank you for subscribing. Welcome to the Zoni family.</span>';
+      f.reset();
+    }
+    else if (f.id === "reviewForm"){
+      e.preventDefault();
+      const p = state.current; if (!p) return;
+      const name = f.rvname.value.trim(), city = f.rvcity.value.trim(), text = f.rvtext.value.trim();
+      if (!name || !text){ toast("Please add your name and a short review."); return; }
+      p.reviews.unshift({ name:name, city:city || "Rahim Yar Khan", rating:Number(f.rvrating.value), text:text, date:"Just now" });
+      p.reviewCount++;
+      const rl = $("#reviewsList"); if (rl) rl.innerHTML = p.reviews.map(reviewHTML).join("");
+      const rc = $("#productDetail .rc"); if (rc) rc.textContent = p.rating.toFixed(1) + " · " + p.reviewCount + " reviews";
+      f.reset(); toast("Thank you! Your review is live.");
+    }
+    else if (f.id === "checkoutForm"){ e.preventDefault(); placeOrder(f); }
+    else if (f.id === "trackForm"){ e.preventDefault(); doTrack($("#trackInput").value); }
+  });
+}
+
+/* ---------- init ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  bindGlobal();
+  initAnnounce();
+  renderBadge(); renderFootCats();
+  if (PAGE === "shop") initShopSection();
+  if (PAGE === "home"){ renderAgeTiles(); renderFeatured(); renderCatShowcase(); renderTestimonials(); initSlider(); }
+  if (PAGE === "product") initProduct();
+  if (PAGE === "cart") renderCartPage();
+  if (PAGE === "checkout") renderCkSummary();
+  if (PAGE === "track"){ const inp = $("#trackInput"); if (inp && state.lastOrder) inp.value = state.lastOrder.orderNumber; }
+  armReveal(document);
+  requestAnimationFrame(() => requestAnimationFrame(sweepReveal));
+  setTimeout(() => { $$(".rv:not(.in)").forEach(doReveal); }, 1800);
+});
+
+</script>
+<script src="zoni-connector.js?v=10"></script>
+</body>
+</html>

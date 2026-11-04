@@ -157,6 +157,18 @@
         if (key === "whatsapp" && SETTINGS.whatsapp) el.setAttribute("href", SETTINGS.whatsapp);
         else if (key === "email" && SETTINGS.email) el.setAttribute("href", "mailto:" + SETTINGS.email);
       });
+      document.querySelectorAll("[data-bind-products-count]").forEach(function (el) {
+        if (typeof PRODUCTS !== "undefined" && PRODUCTS.length) el.textContent = String(PRODUCTS.length);
+      });
+      document.querySelectorAll("[data-bind-cats-count]").forEach(function (el) {
+        if (typeof CATEGORIES !== "undefined") el.textContent = String(CATEGORIES.filter(function (c) { return c && c !== "All"; }).length);
+      });
+      if (typeof CATEGORIES !== "undefined") {
+        document.querySelectorAll("[data-bind-categories]").forEach(function (ul) {
+          var names = CATEGORIES.filter(function (c) { return c && c !== "All"; });
+          if (names.length) ul.innerHTML = names.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("");
+        });
+      }
     } catch (e) { /* binding is best-effort */ }
   }
 
