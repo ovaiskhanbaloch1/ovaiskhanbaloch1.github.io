@@ -141,9 +141,47 @@
     } catch (e) { /* branding is best-effort */ }
   }
 
+  /* ---------- 2c) Generic Settings bindings (data-bind / data-bind-href) ---------- */
+  function applyDataBind() {
+    if (typeof SETTINGS === "undefined") return;
+    try {
+      document.querySelectorAll("[data-bind]").forEach(function (el) {
+        var key = el.getAttribute("data-bind");
+        var v = SETTINGS[key];
+        if (v == null || v === "") return;
+        if (el.getAttribute("data-bind-format") === "rs") el.textContent = "Rs. " + Number(v).toLocaleString("en-PK");
+        else el.textContent = String(v);
+      });
+      document.querySelectorAll("[data-bind-href]").forEach(function (el) {
+        var key = el.getAttribute("data-bind-href");
+        if (key === "whatsapp" && SETTINGS.whatsapp) el.setAttribute("href", SETTINGS.whatsapp);
+        else if (key === "email" && SETTINGS.email) el.setAttribute("href", "mailto:" + SETTINGS.email);
+      });
+    } catch (e) { /* binding is best-effort */ }
+  }
+
+  /* ---------- 2d) Contact page: message form opens WhatsApp to the store number ---------- */
+  function hookContact() {
+    var form = document.getElementById("zoniContactForm");
+    if (!form) return;
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var fv = function (n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ""; };
+      var name = fv("zname"), phone = fv("zphone"), msg = fv("zmsg");
+      if (!name || !phone || !msg) return;
+      var NL = String.fromCharCode(10);
+      var text = ["Message from the website (Contact page)", "Name: " + name, "Phone: " + phone, "Message:", msg].join(NL);
+      var url = ((typeof SETTINGS !== "undefined" && SETTINGS.whatsapp) || "https://wa.me/923416008008") + "?text=" + encodeURIComponent(text);
+      var w = null;
+      try { w = window.open(url, "_blank"); } catch (err) {}
+      if (!w) { try { location.href = url; } catch (err) {} }
+    });
+  }
+
   /* ---------- 3) Page enhancements after the store renders ---------- */
   document.addEventListener("DOMContentLoaded", function () {
     var page = (document.body && document.body.dataset.page) || "home";
+    applyDataBind();
 
     if (hasAdmin) {
       applyBrand();
@@ -156,6 +194,7 @@
     if (page === "product") enhanceProduct();
     if (page === "checkout") { hookCheckout(); hookCheckoutPayments(); }
     if (page === "track") hookTrack();
+    if (page === "contact") hookContact();
   });
 
   function curProduct() { try { return state.current || null; } catch (e) { return null; } }
