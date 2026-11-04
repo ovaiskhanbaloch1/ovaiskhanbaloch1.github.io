@@ -77,7 +77,34 @@ tr.clickable{cursor:pointer}tr.clickable:hover{background:#FFFDF4}
 .mut{color:var(--mut);font-size:13px}
 .searchbar{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
 .searchbar input{max-width:340px}
-@media(max-width:860px){.side{position:static;width:auto}.side .nav{display:flex;flex-wrap:wrap}.main{margin-left:0;padding:16px}.grid2,.grid3{grid-template-columns:1fr}}
+@media(max-width:860px){
+  html,body{overflow-x:clip}
+  .side{position:static;width:auto;padding:14px 12px}
+  .side .brand{padding:0 4px 2px}
+  .side .sub{padding:0 4px 10px}
+  .side .nav{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:6px;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+  .nav button{width:auto;flex:0 0 auto;padding:9px 13px;font-size:14px;white-space:nowrap}
+  .nav .sep{display:none}
+  .side a.store{margin-top:8px}
+  .main{margin-left:0;padding:14px 12px 50px}
+  .topbar h2{font-size:20px}
+  .cards{grid-template-columns:1fr 1fr;gap:10px}
+  .stat{padding:12px}
+  .stat .n{font-size:21px}
+  .panel{padding:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{min-width:600px;font-size:13.5px}
+  th,td{padding:8px 6px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .modal{padding:10px}
+  .modal .box{padding:16px;border-radius:16px}
+  .sizerow{grid-template-columns:1fr 1fr .6fr .3fr}
+  .chartrow{grid-template-columns:1fr 1fr .3fr}
+  input,select,textarea{font-size:16px}
+  #gate .box{padding:22px}
+  #toast{max-width:92vw;text-align:center}
+  .searchbar input{max-width:none}
+  .thumb{width:44px;height:44px}
+}
 </style>
 </head>
 <body>
@@ -143,7 +170,10 @@ const SEED = {
   "email": "contact@collectionsbyzoni.com",
   "freeShippingThreshold": 3000,
   "flatShippingFee": 200,
-  "currency": "Rs. "
+  "currency": "Rs. ",
+  "bankName": "Dummy Bank",
+  "bankTitle": "Collections By Zoni",
+  "bankAccount": "PK36 DUMMY 0000 0000 0000 0000"
  },
  "CATEGORIES": [
   "All",
@@ -1780,6 +1810,7 @@ function openOrder(num){
   '<label>Internal note</label><textarea id="om_note" rows="2">'+esc(o.note||"")+'</textarea></div></div>'+
   '<h3 style="margin:14px 0 8px">Items</h3><table><tr><th>Product</th><th>Size</th><th>Qty</th><th>Price</th><th>Amount</th></tr>'+(items||'<tr><td colspan="5" class="mut">Item detail not stored for this order.</td></tr>')+
   '<tr><td colspan="4">Subtotal</td><td>'+money(o.subtotal)+'</td></tr><tr><td colspan="4">Delivery</td><td>'+(o.shipping?money(o.shipping):"FREE")+'</td></tr><tr><td colspan="4"><strong>Total</strong></td><td><strong>'+money(o.total)+'</strong></td></tr></table>'+
+  (o.screenshot?('<h3 style="margin:14px 0 8px">Payment screenshot (customer)</h3><img src="'+o.screenshot+'" alt="Payment screenshot" style="max-width:320px;width:100%;border:1.5px solid #E7D9A8;border-radius:12px">'):'')+
   '<div style="display:flex;gap:9px;margin-top:16px;flex-wrap:wrap"><button class="btn" id="omSave">Save Changes</button>'+
   '<a class="btn ghost" target="_blank" rel="noopener" href="'+waLink(o.whatsapp||o.phone)+'">WhatsApp Customer</a>'+
   '<button class="btn ghost" id="omPrint">Print Invoice</button>'+
@@ -1834,6 +1865,9 @@ function renderSettings(){
   '<div class="panel"><h3>Delivery &amp; currency</h3><div class="grid3">'+
   fldN("Free delivery above (Rs)","s_threshold",s.freeShippingThreshold)+ fldN("Flat delivery fee (Rs)","s_fee",s.flatShippingFee)+ fld("Currency symbol","s_currency",s.currency)+
   '</div><label>TCS tracking page URL (use {no} where the consignment number goes)</label><input id="s_tcs" value="'+esc(s.tcsTrackUrl||"")+'" placeholder="https://www.tcsexpress.com/tracking"></div>'+
+  '<div class="panel"><h3>Payments — bank transfer details</h3><div class="grid3">'+
+  fld("Bank name","s_bankName",s.bankName||"")+ fld("Account title","s_bankTitle",s.bankTitle||"")+ fld("Account number / IBAN","s_bankAccount",s.bankAccount||"")+
+  '</div><p class="mut">These bank details are shown to customers who choose Bank Transfer at checkout. Dummy details are in place for now — replace them with the real account whenever you are ready. WhatsApp orders are sent to the Phone / WhatsApp number above.</p></div>'+
   '<div class="panel"><h3>Admin password</h3><div class="rowline" style="max-width:480px"><input type="password" id="s_newpass" placeholder="New password"><button class="btn ghost" id="chPassBtn">Change</button></div></div>'+
   '<button class="btn" id="saveSettingsBtn">Save Settings</button>';
   function fld(l,id,v){ return '<div><label>'+l+'</label><input id="'+id+'" value="'+esc(v||"")+'"></div>'; }
@@ -1844,6 +1878,7 @@ function renderSettings(){
     var digs=waNum.replace(/\D/g,"");
     if(digs.length){ if(digs.charAt(0)==="0") digs="92"+digs.slice(1); else if(digs.length===10 && digs.charAt(0)==="3") digs="92"+digs; s.whatsapp="https://wa.me/"+digs; }
     s.email=$("#s_email").value; s.city=$("#s_city").value; s.address=$("#s_address").value;
+    s.bankName=$("#s_bankName").value; s.bankTitle=$("#s_bankTitle").value; s.bankAccount=$("#s_bankAccount").value;
     s.freeShippingThreshold=Number($("#s_threshold").value)||0; s.flatShippingFee=Number($("#s_fee").value)||0; s.currency=$("#s_currency").value||"Rs. ";
     s.tcsTrackUrl=$("#s_tcs").value.trim();
     var ann=$("#s_announce").value.trim(); if(ann) state.announcements=[ann].concat((state.announcements||[]).slice(1));

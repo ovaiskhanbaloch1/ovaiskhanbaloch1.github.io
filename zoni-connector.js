@@ -88,7 +88,16 @@
     "#zoniTrackInfo{margin-top:16px}" +
     ".zoni-track-card{border:1.5px solid var(--acc-sep,#FCE7AE);background:#FFFDF4;border-radius:16px;padding:14px 16px;font-size:15px}" +
     ".zoni-status{display:inline-block;background:var(--acc,#F5B301);color:var(--acc-ink,#262019);font-weight:700;border-radius:999px;padding:3px 12px;font-size:13px;margin-left:6px}" +
-    ".zoni-tcs-btn{display:inline-block;margin-top:8px;background:#1F7A3D;color:#fff;padding:8px 16px;border-radius:999px;font-weight:700;text-decoration:none}";
+    ".zoni-tcs-btn{display:inline-block;margin-top:8px;background:#1F7A3D;color:#fff;padding:8px 16px;border-radius:999px;font-weight:700;text-decoration:none}" +
+    ".zoni-pay-panel{margin-top:12px;border:1.5px solid var(--acc-sep,#FCE7AE);background:#FFFDF4;border-radius:14px;padding:13px 15px;font-size:14.5px}" +
+    ".zoni-pay-panel p{margin:4px 0}" +
+    ".zoni-pay-hint{color:#3C4057}" +
+    ".zoni-bank b{color:var(--acc-ink,#262019)}" +
+    ".zoni-shot-label{display:block;font-weight:600;margin-top:10px}" +
+    ".zoni-shot-btn{display:inline-block;margin-top:6px;background:var(--acc,#F5B301);color:var(--acc-ink,#262019);padding:9px 16px;border-radius:999px;font-weight:700;cursor:pointer;font-size:14px}" +
+    ".zoni-shot-name{margin-left:9px;color:#3C4057;font-size:13.5px}" +
+    ".zoni-shot-img{display:block;margin-top:9px;max-width:180px;border-radius:10px;border:1.5px solid var(--acc-sep,#FCE7AE)}" +
+    ".zoni-wa-send{display:block;text-align:center;margin-top:14px;background:#1F7A3D;color:#fff;padding:13px 18px;border-radius:999px;font-weight:700;text-decoration:none;font-size:16px}";
   document.head.appendChild(css);
 
   /* ---------- 2b) Apply Settings branding (name/tagline/contacts) to static header/footer ---------- */
@@ -145,7 +154,7 @@
       if (waTxt) waTxt.textContent = SETTINGS.phoneDisplay;
     }
     if (page === "product") enhanceProduct();
-    if (page === "checkout") hookCheckout();
+    if (page === "checkout") { hookCheckout(); hookCheckoutPayments(); }
     if (page === "track") hookTrack();
   });
 
@@ -286,6 +295,101 @@
       obs.disconnect();
     });
     obs.observe(done, { childList: true, subtree: true });
+  }
+
+  /* ---------- 3c) Checkout payments: 3 methods, bank details, screenshot, WhatsApp order ---------- */
+  function hookCheckoutPayments() {
+    var sel = document.getElementById("ck-pay");
+    if (!sel) return;
+    var NL = String.fromCharCode(10);
+    var sset = (st && st.settings) || {};
+    var bankName = sset.bankName || "Dummy Bank";
+    var bankTitle = sset.bankTitle || "Collections By Zoni";
+    var bankAccount = sset.bankAccount || "PK36 DUMMY 0000 0000 0000 0000";
+    var hasWA = Array.prototype.some.call(sel.options, function (o) { return o.text === "Place Order on WhatsApp"; });
+    if (!hasWA) { var op = document.createElement("option"); op.text = "Place Order on WhatsApp"; sel.appendChild(op); }
+    var panel = document.createElement("div");
+    panel.className = "zoni-pay-panel"; panel.id = "zoniPayPanel";
+    var note = document.querySelector(".pay-note");
+    var anchor = note || sel.closest(".field") || sel;
+    anchor.parentNode.insertBefore(panel, anchor.nextSibling);
+    var shotData = "";
+    function shotHtml() {
+      return '<label class="zoni-shot-label">Payment screenshot (optional)</label>' +
+        '<label class="zoni-shot-btn">Upload screenshot<input type="file" accept="image/*" class="zoni-shot-file" style="display:none"></label>' +
+        '<span class="zoni-shot-name">' + (shotData ? "Screenshot attached — it will be saved with your order." : "Attach the receipt screenshot of your transfer.") + '</span>' +
+        (shotData ? '<img class="zoni-shot-img" src="' + shotData + '" alt="Payment screenshot">' : "");
+    }
+    function render() {
+      var m = sel.value;
+      if (m === "Bank Transfer") {
+        panel.innerHTML = '<div class="zoni-bank"><b>Bank Transfer details</b>' +
+          '<p>Bank: ' + esc(bankName) + '<br>Account title: ' + esc(bankTitle) + '<br>Account number: <b>' + esc(bankAccount) + '</b></p>' +
+          '<p class="zoni-pay-hint">Send your payment to this account, then upload the screenshot here (optional).</p></div>' + shotHtml();
+      } else if (m === "Place Order on WhatsApp") {
+        panel.innerHTML = '<p class="zoni-pay-hint">After placing the order, a WhatsApp button will appear — one tap sends your complete order details to our number <b>' + esc(SETTINGS.phoneDisplay || "") + '</b>. If you have a payment screenshot, attach it here and it will be saved with your order (you can also send it in the WhatsApp chat).</p>' + shotHtml();
+      } else {
+        panel.innerHTML = '<p class="zoni-pay-hint">Cash on Delivery — pay the rider when your parcel arrives.</p>';
+      }
+    }
+    sel.addEventListener("change", render);
+    render();
+    panel.addEventListener("change", function (e) {
+      if (!e.target.classList || !e.target.classList.contains("zoni-shot-file")) return;
+      var file = e.target.files && e.target.files[0]; if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function () {
+        var raw = reader.result;
+        var img = new Image();
+        img.onload = function () {
+          try {
+            var scale = Math.min(1, 900 / Math.max(img.width || 1, img.height || 1));
+            var c = document.createElement("canvas");
+            c.width = Math.round((img.width || 1) * scale); c.height = Math.round((img.height || 1) * scale);
+            c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+            var out = c.toDataURL("image/jpeg", 0.78), q = 0.62;
+            while (out.length > 420000 && q > 0.3) { out = c.toDataURL("image/jpeg", q); q -= 0.12; }
+            shotData = out.length <= 700000 ? out : "";
+          } catch (err) { shotData = ""; }
+          render();
+        };
+        img.onerror = function () { shotData = ""; render(); };
+        img.src = raw;
+      };
+      reader.readAsDataURL(file);
+    });
+    var tries = 0;
+    var timer = setInterval(function () {
+      tries++;
+      if (tries > 75) { clearInterval(timer); return; }
+      var lo = null; try { lo = state.lastOrder; } catch (e) {}
+      if (!lo || !lo.orderNumber) return;
+      var st2 = load();
+      if (!st2 || !st2.orders) return;
+      var ord = null;
+      for (var i = 0; i < st2.orders.length; i++) if (st2.orders[i].orderNumber === lo.orderNumber) { ord = st2.orders[i]; break; }
+      if (!ord) return;
+      if (shotData && !ord.screenshot) { ord.screenshot = shotData; save(st2); }
+      var liveDone = document.getElementById("doneBox");
+      if (!liveDone || !liveDone.innerHTML) return;
+      if (liveDone.querySelector("#zoniWaSend")) { clearInterval(timer); return; }
+      var lines = (ord.items || []).map(function (l) { return "- " + l.title + " (" + l.size + ") x" + l.qty + " — Rs. " + Number(l.price * l.qty).toLocaleString("en-PK"); });
+      var msg = ["New Order " + ord.orderNumber + " — " + (SETTINGS.siteName || "Collections By Zoni"),
+        "Name: " + ord.name, "Phone: " + ord.phone, "WhatsApp: " + (ord.whatsapp || ord.phone),
+        "City: " + ord.city, "Address: " + ord.address,
+        "Items:", lines.join(NL),
+        "Subtotal: Rs. " + Number(ord.subtotal || 0).toLocaleString("en-PK"),
+        "Delivery: " + (ord.shipping ? "Rs. " + Number(ord.shipping).toLocaleString("en-PK") : "FREE"),
+        "Total: Rs. " + Number(ord.total || 0).toLocaleString("en-PK"),
+        "Payment: " + ord.payment + (shotData ? " (payment screenshot saved with the order in admin panel)" : "")].join(NL);
+      var a = document.createElement("a");
+      a.id = "zoniWaSend";
+      a.className = "zoni-wa-send";
+      a.target = "_blank"; a.rel = "noopener";
+      a.href = (SETTINGS.whatsapp || "https://wa.me/923416008008") + "?text=" + encodeURIComponent(msg);
+      a.textContent = ord.payment === "Place Order on WhatsApp" ? "Send Order on WhatsApp" : "Send order details to us on WhatsApp";
+      liveDone.appendChild(a);
+    }, 400);
   }
 
   function hookTrack() {
