@@ -315,6 +315,7 @@
     var anchor = note || sel.closest(".field") || sel;
     anchor.parentNode.insertBefore(panel, anchor.nextSibling);
     var shotData = "";
+    function freshSet() { var s = null; try { s = (load() || {}).settings; } catch (e) {} return s || sset; }
     function shotHtml() {
       return '<label class="zoni-shot-label">Payment screenshot (optional)</label>' +
         '<label class="zoni-shot-btn">Upload screenshot<input type="file" accept="image/*" class="zoni-shot-file" style="display:none"></label>' +
@@ -324,11 +325,12 @@
     function render() {
       var m = sel.value;
       if (m === "Bank Transfer") {
+        var fb = freshSet();
         panel.innerHTML = '<div class="zoni-bank"><b>Bank Transfer details</b>' +
-          '<p>Bank: ' + esc(bankName) + '<br>Account title: ' + esc(bankTitle) + '<br>Account number: <b>' + esc(bankAccount) + '</b></p>' +
+          '<p>Bank: ' + esc(fb.bankName || bankName) + '<br>Account title: ' + esc(fb.bankTitle || bankTitle) + '<br>Account number: <b>' + esc(fb.bankAccount || bankAccount) + '</b></p>' +
           '<p class="zoni-pay-hint">Send your payment to this account, then upload the screenshot here (optional).</p></div>' + shotHtml();
       } else if (m === "Place Order on WhatsApp") {
-        panel.innerHTML = '<p class="zoni-pay-hint">After placing the order, a WhatsApp button will appear — one tap sends your complete order details to our number <b>' + esc(SETTINGS.phoneDisplay || "") + '</b>. If you have a payment screenshot, attach it here and it will be saved with your order (you can also send it in the WhatsApp chat).</p>' + shotHtml();
+        panel.innerHTML = '<p class="zoni-pay-hint">After placing the order, a WhatsApp button will appear — one tap sends your complete order details to our number <b>' + esc(freshSet().phoneDisplay || SETTINGS.phoneDisplay || "") + '</b>. If you have a payment screenshot, attach it here and it will be saved with your order (you can also send it in the WhatsApp chat).</p>' + shotHtml();
       } else {
         panel.innerHTML = '<p class="zoni-pay-hint">Cash on Delivery — pay the rider when your parcel arrives.</p>';
       }
@@ -362,7 +364,7 @@
     var tries = 0;
     var timer = setInterval(function () {
       tries++;
-      if (tries > 75) { clearInterval(timer); return; }
+      if (tries > 450) { clearInterval(timer); return; }
       var lo = null; try { lo = state.lastOrder; } catch (e) {}
       if (!lo || !lo.orderNumber) return;
       var st2 = load();
@@ -373,22 +375,36 @@
       if (shotData && !ord.screenshot) { ord.screenshot = shotData; save(st2); }
       var liveDone = document.getElementById("doneBox");
       if (!liveDone || !liveDone.innerHTML) return;
-      if (liveDone.querySelector("#zoniWaSend")) { clearInterval(timer); return; }
-      var lines = (ord.items || []).map(function (l) { return "- " + l.title + " (" + l.size + ") x" + l.qty + " — Rs. " + Number(l.price * l.qty).toLocaleString("en-PK"); });
-      var msg = ["New Order " + ord.orderNumber + " — " + (SETTINGS.siteName || "Collections By Zoni"),
+      var fs = (st2 && st2.settings) || sset;
+      var dispNum = fs.phoneDisplay || SETTINGS.phoneDisplay || "";
+      var waLink = fs.whatsapp || SETTINGS.whatsapp || "https://wa.me/923416008008";
+      if (dispNum) {
+        var tw = document.createTreeWalker(liveDone, NodeFilter.SHOW_TEXT, null);
+        var tn = [], nn;
+        while ((nn = tw.nextNode())) tn.push(nn);
+        tn.forEach(function (node) {
+          if (/WhatsApp \([0-9+ ]+\)/.test(node.nodeValue)) node.nodeValue = node.nodeValue.replace(/WhatsApp \([0-9+ ]+\)/g, "WhatsApp (" + dispNum + ")");
+        });
+      }
+      var lines = (ord.items || []).map(function (l) { return "- " + l.title + " (" + l.size + ") x" + l.qty + " \u2014 Rs. " + Number(l.price * l.qty).toLocaleString("en-PK"); });
+      var msg = ["New Order " + ord.orderNumber + " \u2014 " + (fs.siteName || SETTINGS.siteName || "Collections By Zoni"),
         "Name: " + ord.name, "Phone: " + ord.phone, "WhatsApp: " + (ord.whatsapp || ord.phone),
         "City: " + ord.city, "Address: " + ord.address,
         "Items:", lines.join(NL),
         "Subtotal: Rs. " + Number(ord.subtotal || 0).toLocaleString("en-PK"),
         "Delivery: " + (ord.shipping ? "Rs. " + Number(ord.shipping).toLocaleString("en-PK") : "FREE"),
         "Total: Rs. " + Number(ord.total || 0).toLocaleString("en-PK"),
-        "Payment: " + ord.payment + (shotData ? " (payment screenshot saved with the order in admin panel)" : "")].join(NL);
+        "Payment: " + ord.payment + ((shotData || ord.screenshot) ? " (payment screenshot saved with the order in admin panel)" : "")].join(NL);
+      var href = waLink + "?text=" + encodeURIComponent(msg);
+      var label = ord.payment === "Place Order on WhatsApp" ? "Send Order on WhatsApp" : "Send order details to us on WhatsApp";
+      var btn = liveDone.querySelector("#zoniWaSend");
+      if (btn) { if (btn.getAttribute("href") !== href) btn.setAttribute("href", href); if (btn.textContent !== label) btn.textContent = label; return; }
       var a = document.createElement("a");
       a.id = "zoniWaSend";
       a.className = "zoni-wa-send";
       a.target = "_blank"; a.rel = "noopener";
-      a.href = (SETTINGS.whatsapp || "https://wa.me/923416008008") + "?text=" + encodeURIComponent(msg);
-      a.textContent = ord.payment === "Place Order on WhatsApp" ? "Send Order on WhatsApp" : "Send order details to us on WhatsApp";
+      a.href = href;
+      a.textContent = label;
       liveDone.appendChild(a);
     }, 400);
   }
