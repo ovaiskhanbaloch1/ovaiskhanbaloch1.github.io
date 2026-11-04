@@ -1826,7 +1826,7 @@ function renderSettings(){
   $("#view-settings").innerHTML =
   '<div class="panel"><h3>Store information</h3><div class="grid2">'+
   fld("Store name","s_siteName",s.siteName)+ fld("Tagline","s_tagline",s.tagline)+
-  fld("Phone (display)","s_phoneDisplay",s.phoneDisplay)+ fld("WhatsApp link","s_whatsapp",s.whatsapp)+
+  '<div style="grid-column:1/-1"><label>Phone / WhatsApp number</label><input id="s_waNumber" value="'+esc(s.phoneDisplay||"")+'"><p class="mut" style="margin-top:4px">Just type the number — e.g. 0341 600 8008 or 923416008008. Every WhatsApp button on the website and the phone number shown to customers will use this number; the WhatsApp link is created automatically.</p></div>'+
   fld("Email","s_email",s.email)+ fld("City","s_city",s.city)+
   '</div><label>Shop address</label><input id="s_address" value="'+esc(s.address)+'">'+
   '<label>Announcement bar message</label><input id="s_announce" value="'+esc((state.announcements||[])[0]||"")+'">'+
@@ -1839,8 +1839,11 @@ function renderSettings(){
   function fld(l,id,v){ return '<div><label>'+l+'</label><input id="'+id+'" value="'+esc(v||"")+'"></div>'; }
   function fldN(l,id,v){ return '<div><label>'+l+'</label><input type="number" min="0" id="'+id+'" value="'+(v==null?"":v)+'"></div>'; }
   $("#saveSettingsBtn").addEventListener("click", function(){
-    s.siteName=$("#s_siteName").value; s.tagline=$("#s_tagline").value; s.phoneDisplay=$("#s_phoneDisplay").value;
-    s.whatsapp=$("#s_whatsapp").value; s.email=$("#s_email").value; s.city=$("#s_city").value; s.address=$("#s_address").value;
+    s.siteName=$("#s_siteName").value; s.tagline=$("#s_tagline").value;
+    var waNum=$("#s_waNumber").value.trim(); s.phoneDisplay=waNum;
+    var digs=waNum.replace(/\D/g,"");
+    if(digs.length){ if(digs.charAt(0)==="0") digs="92"+digs.slice(1); else if(digs.length===10 && digs.charAt(0)==="3") digs="92"+digs; s.whatsapp="https://wa.me/"+digs; }
+    s.email=$("#s_email").value; s.city=$("#s_city").value; s.address=$("#s_address").value;
     s.freeShippingThreshold=Number($("#s_threshold").value)||0; s.flatShippingFee=Number($("#s_fee").value)||0; s.currency=$("#s_currency").value||"Rs. ";
     s.tcsTrackUrl=$("#s_tcs").value.trim();
     var ann=$("#s_announce").value.trim(); if(ann) state.announcements=[ann].concat((state.announcements||[]).slice(1));

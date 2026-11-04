@@ -91,11 +91,53 @@
     ".zoni-tcs-btn{display:inline-block;margin-top:8px;background:#1F7A3D;color:#fff;padding:8px 16px;border-radius:999px;font-weight:700;text-decoration:none}";
   document.head.appendChild(css);
 
+  /* ---------- 2b) Apply Settings branding (name/tagline/contacts) to static header/footer ---------- */
+  var BAKED = { siteName: "Collection's by Zoni", tagline: "Little style, big smile", phoneDisplay: "0341 600 8008", email: "contact@collectionsbyzoni.com", address: "Main Bazaar Road, Rahim Yar Khan, Punjab, Pakistan" };
+  function applyBrand() {
+    if (!hasAdmin || typeof SETTINGS === "undefined") return;
+    try {
+      var nameChanged = SETTINGS.siteName && SETTINGS.siteName !== BAKED.siteName;
+      var tagChanged = SETTINGS.tagline && SETTINGS.tagline !== BAKED.tagline;
+      if (nameChanged) {
+        document.querySelectorAll(".wordmark").forEach(function (w) { w.innerHTML = esc(SETTINGS.siteName) + "<small>" + esc(SETTINGS.tagline || "") + "</small>"; });
+        document.querySelectorAll(".foot-word").forEach(function (w) { w.textContent = SETTINGS.siteName; });
+      } else if (tagChanged) {
+        document.querySelectorAll(".wordmark small").forEach(function (s) { s.textContent = SETTINGS.tagline; });
+      }
+      if (tagChanged) document.querySelectorAll(".foot-tag").forEach(function (t) { t.textContent = SETTINGS.tagline; });
+      var pairs = [
+        [BAKED.siteName, SETTINGS.siteName],
+        [BAKED.phoneDisplay, SETTINGS.phoneDisplay],
+        [BAKED.email, SETTINGS.email],
+        [BAKED.address, SETTINGS.address]
+      ].filter(function (p) { return p[1] && p[1] !== p[0]; });
+      if (pairs.length) {
+        var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+          acceptNode: function (n) {
+            if (!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+            var pn = n.parentNode && n.parentNode.nodeName;
+            if (pn === "SCRIPT" || pn === "STYLE") return NodeFilter.FILTER_REJECT;
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        });
+        var nodes = [], n;
+        while ((n = walker.nextNode())) nodes.push(n);
+        nodes.forEach(function (node) {
+          var v = node.nodeValue, nv = v;
+          pairs.forEach(function (p) { nv = nv.split(p[0]).join(p[1]); });
+          if (nv !== v) node.nodeValue = nv;
+        });
+        if (nameChanged && document.title.indexOf(BAKED.siteName) > -1) document.title = document.title.split(BAKED.siteName).join(SETTINGS.siteName);
+      }
+    } catch (e) { /* branding is best-effort */ }
+  }
+
   /* ---------- 3) Page enhancements after the store renders ---------- */
   document.addEventListener("DOMContentLoaded", function () {
     var page = (document.body && document.body.dataset.page) || "home";
 
     if (hasAdmin) {
+      applyBrand();
       document.querySelectorAll('a[href^="https://wa.me/"]').forEach(function (a) { a.href = SETTINGS.whatsapp; });
       var mail = document.querySelector('footer a[href^="mailto:"]');
       if (mail) { mail.href = "mailto:" + SETTINGS.email; mail.textContent = SETTINGS.email; }
