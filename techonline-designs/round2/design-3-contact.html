@@ -110,7 +110,7 @@ footer a{display:block;color:#aebedd;font-size:13.5px;padding:3.5px 0}
 .toast.show{transform:translate(-50%,0);opacity:1}
 .rv{opacity:0;transform:translateY(26px);transition:opacity 1s cubic-bezier(.22,.61,.21,1),transform 1s cubic-bezier(.22,.61,.21,1)}.rv.in{opacity:1;transform:none}
 .marq{background:var(--acc);color:var(--acctx);overflow:hidden;white-space:nowrap;padding:9px 0;font-weight:800;font-size:13px;letter-spacing:.05em}
-.marq div{display:inline-block;animation:mar 26s linear infinite}.marq:hover div{animation-play-state:paused}
+.marq div{display:inline-block;animation:mar 26s linear infinite}
 @keyframes mar{to{transform:translateX(-50%)}}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
 .floaty{animation:floaty 5s ease-in-out infinite}
@@ -314,7 +314,7 @@ body{overflow-x:hidden}header{position:sticky}
 .card .add{padding:10px 12px;font-size:12.5px;margin-top:9px}
 .mq{overflow:hidden;position:relative;padding:6px 2px 12px}
 .mqtrack{display:flex;width:max-content;animation:mqslide 30s linear infinite}
-.mq:hover .mqtrack{animation-play-state:paused}
+/* marquees never pause on hover (user rule) */
 .mqhalf{display:flex;gap:16px;padding-right:16px;align-items:stretch}
 @keyframes mqslide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .catmq .mqtrack{animation-duration:26s}
