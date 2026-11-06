@@ -215,6 +215,9 @@ footer a{display:block;color:#aebedd;font-size:13.5px;padding:3.5px 0}
 .article-body h3{font-size:19px;margin:24px 0 8px}
 .article-body ul{color:var(--mut);line-height:1.85;font-size:15px;margin:0 0 16px;padding-left:20px}
 
+a[style*="min-height: 56px"],a[style*="min-height:56px"]{flex:1 1 150px;justify-content:center}
+a[style*="min-height: 56px"] img,a[style*="min-height:56px"] img{height:32px!important}
+
 .payblock{display:flex;flex-direction:column;gap:10px}
 .payopt2{position:relative;display:flex;align-items:center;gap:13px;border:1.6px solid var(--line);border-radius:14px;padding:13px 15px;cursor:pointer;background:var(--card);transition:border-color .2s,background .2s;margin:0!important}
 .payopt2:hover{border-color:var(--acc)}
@@ -245,7 +248,13 @@ footer a{display:block;color:#aebedd;font-size:13.5px;padding:3.5px 0}
   header nav{display:none!important}
   .mobnav-hide{display:none!important}
 }
-body{overflow-x:hidden}header{position:sticky}.card{position:relative;overflow:hidden}.card::after{content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-18deg);transition:left .7s ease;pointer-events:none}.card:hover::after{left:130%}
+body{overflow-x:hidden}header{position:sticky}
+.rev{display:flex;flex-direction:column;padding:18px;height:100%}
+.rev .stars{font-size:13px;letter-spacing:2px}
+.rev p{font-size:13.5px;line-height:1.6;color:var(--mut);margin:8px 0 14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rev .who{margin-top:auto;display:flex;gap:10px;align-items:center}
+.rev .who b{font-size:14px}
+.card{position:relative;overflow:hidden}.card::after{content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-18deg);transition:left .7s ease;pointer-events:none}.card:hover::after{left:130%}
 html,body{overflow-x:hidden}
 img,svg,video,table,iframe{max-width:100%}
 @media(max-width:860px){
@@ -292,6 +301,8 @@ img,svg,video,table,iframe{max-width:100%}
   [style*="grid-template-columns: repeat(3, 1fr)"]{grid-template-columns: 1fr 1fr!important}
   [style*="flex-direction: row"]{flex-direction: column!important}
   [style*="grid-template-columns: 1.9fr 1fr"]{grid-template-columns: 1fr!important}
+  .sec-h{flex-direction: column!important;text-align: center;align-items: center;justify-content: center}
+  .band{text-align: center}
 }
 </style></head><body>
     <div style="background:#0a1122;color:#aebedd;font-size:12.5px"><div class="wrap" style="display:flex;justify-content:space-between;gap:12px;padding-top:7px;padding-bottom:7px;flex-wrap:wrap"><span>Mon–Sat 10 AM – 8 PM · WhatsApp 0317 4959342</span><span>Free delivery on orders over Rs 900</span></div></div>
