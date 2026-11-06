@@ -75,7 +75,9 @@ section{padding:56px 0;overflow:hidden}
 h2.title{font-family:'Trebuchet MS','Segoe UI',sans-serif;font-size:clamp(24px,3.4vw,36px);text-align:center;line-height:1.2}
 .sub{text-align:center;color:#7d675a;max-width:640px;margin:10px auto 34px}
 .kicker{text-align:center;color:#bf5426;font-weight:800;letter-spacing:2.5px;font-size:12.5px;text-transform:uppercase;margin-bottom:8px}
-.grid{display:grid;gap:18px}
+.grid{display:grid;gap:18px;align-items:stretch}
+.grid>*{min-width:0}
+.grid>.card{height:100%}
 .g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
 .card{background:#fffaf2;border:1px solid #eeddc4;border-radius:16px;padding:24px 20px;transition:.28s;box-shadow:0 3px 12px rgba(10,30,50,.05)}
 .card:hover{transform:translateY(-6px);box-shadow:0 16px 30px rgba(10,30,50,.13)}
@@ -167,9 +169,9 @@ footer .frow svg{width:17px;height:17px;flex:0 0 auto;margin-top:2px;color:#e9a1
 .rv{opacity:0}
 .anim-up .rv{transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
 .anim-fade .rv{transform:scale(.965);transition:opacity .95s ease,transform .95s ease}
-.anim-side .rv{transform:translateX(-34px);transition:opacity .7s cubic-bezier(.2,.8,.3,1),transform .7s cubic-bezier(.2,.8,.3,1)}
-.anim-side .rv:nth-child(even){transform:translateX(34px)}
-.anim-zoom .rv{transform:scale(1.05);transition:opacity .8s ease,transform .8s ease}
+.anim-side .rv{transform:translateX(-10px);transition:opacity .7s cubic-bezier(.2,.8,.3,1),transform .7s cubic-bezier(.2,.8,.3,1)}
+.anim-side .rv:nth-child(even){transform:translateX(-10px)}
+.anim-zoom .rv{transform:scale(1.03);transition:opacity .8s ease,transform .8s ease}
 .anim-bounce .rv{transform:translateY(24px);transition:opacity .65s cubic-bezier(.34,1.56,.64,1),transform .65s cubic-bezier(.34,1.56,.64,1)}
 .rv.vis{opacity:1;transform:none;filter:none}
 @media(max-width:960px){.sgrid{grid-template-columns:1fr 1fr}.g4{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}footer .cols{grid-template-columns:1fr 1fr}}
