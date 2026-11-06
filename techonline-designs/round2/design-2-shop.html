@@ -248,7 +248,20 @@ a[style*="min-height: 56px"] img,a[style*="min-height:56px"] img{height:32px!imp
   header nav{display:none!important}
   .mobnav-hide{display:none!important}
 }
-body{overflow-x:hidden}header{position:sticky}.rv{opacity:0;transform:translateX(-22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}.grid>.rv:nth-child(even){transform:translateX(22px)}.rv.in{opacity:1;transform:none}
+body{overflow-x:hidden}header{position:sticky}
+.rev{display:flex;flex-direction:column;padding:18px;height:100%}
+.rev .stars{font-size:13px;letter-spacing:2px}
+.rev p{font-size:13.5px;line-height:1.6;color:var(--mut);margin:8px 0 14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rev .who{margin-top:auto;display:flex;gap:10px;align-items:center}
+.rev .who b{font-size:14px}
+.card .cb{padding:13px 14px 15px}
+.card h3{font-size:14.5px;line-height:1.35}
+.card h3 a{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:39px}
+.card .cat{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .stars{font-size:12px;letter-spacing:1.5px}
+.card .price b{font-size:16.5px}
+.card .add{padding:10px 12px;font-size:12.5px;margin-top:9px}
+.rv{opacity:0;transform:translateX(-22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}.grid>.rv:nth-child(even){transform:translateX(22px)}.rv.in{opacity:1;transform:none}
 html,body{overflow-x:hidden}
 img,svg,video,table,iframe{max-width:100%}
 @media(max-width:860px){
@@ -297,6 +310,8 @@ img,svg,video,table,iframe{max-width:100%}
   [style*="grid-template-columns: 1.9fr 1fr"]{grid-template-columns: 1fr!important}
   .sec-h{flex-direction: column!important;text-align: center;align-items: center;justify-content: center}
   .band{text-align: center}
+  .announce{display: none!important}
+  [style*="background: #0a1122"],[style*="background:#0a1122"]{display: none!important}
 }
 </style></head><body>
     <div class="announce" style="display:flex;justify-content:space-between;text-align:left"><span>MON-SAT 10 AM – 8 PM</span><span>FREE DELIVERY OVER RS 900</span><span>WHATSAPP 0317 4959342</span></div>
