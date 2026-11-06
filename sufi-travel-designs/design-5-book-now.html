@@ -75,7 +75,22 @@ section{padding:56px 0;overflow:hidden}
 h2.title{font-family:'Segoe UI',system-ui,Arial,sans-serif;font-size:clamp(24px,3.4vw,36px);text-align:center;line-height:1.2}
 .sub{text-align:center;color:#56756e;max-width:640px;margin:10px auto 34px}
 .kicker{text-align:center;color:#0e7c7b;font-weight:800;letter-spacing:2.5px;font-size:12.5px;text-transform:uppercase;margin-bottom:8px}
-.grid{display:grid;gap:18px}
+.grid{display:grid;gap:18px;align-items:stretch}
+.grid>*{min-width:0}
+.grid>.card{height:100%}
+.svcrows{display:flex;flex-direction:column}
+.svcrow{display:flex;gap:16px;padding:19px 8px;border-bottom:1px solid #e2f4ec;align-items:flex-start}
+.svcrow:last-child{border-bottom:0}
+.svcrow .ic{flex:0 0 auto;margin:0}
+.svcrow h3{margin:2px 0 6px}
+.svcnum{font-size:31px;font-weight:800;color:#ffb340;min-width:54px;line-height:1;font-family:'Segoe UI',system-ui,Arial,sans-serif}
+.bandcard{padding:0!important;overflow:hidden}
+.bandcard .band{height:88px;display:flex;align-items:center;justify-content:center;background:linear-gradient(130deg,#0b3d3a,#0e7c7b);color:#fff}
+.bandcard .bin{padding:20px}
+.blogrow{display:flex;gap:0;background:#f4fbf8;border:1px solid #cfe8dd;border-radius:22px;overflow:hidden;margin-bottom:18px}
+.blogrow img{width:250px;min-height:190px;object-fit:cover;flex:0 0 auto}
+.blogrow .bin{padding:20px 22px}
+@media(max-width:640px){.blogrow{flex-direction:column}.blogrow img{width:100%;height:180px}}
 .g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
 .card{background:#f4fbf8;border:1px solid #cfe8dd;border-radius:22px;padding:24px 20px;transition:.28s;box-shadow:0 3px 12px rgba(10,30,50,.05)}
 .card:hover{transform:translateY(-6px);box-shadow:0 16px 30px rgba(10,30,50,.13)}
@@ -125,10 +140,13 @@ h2.title{font-family:'Segoe UI',system-ui,Arial,sans-serif;font-size:clamp(24px,
 .faq button span{display:inline-block;transition:transform .4s ease}
 .faq.open button span{transform:rotate(45deg)}
 .blogimg{height:190px;width:100%;object-fit:cover;border-radius:22px 22px 0 0}
-article.full{display:none;background:#f4fbf8;border:1px solid #cfe8dd;border-radius:22px;padding:26px;margin-top:20px}
-article.full.open{display:block;animation:artIn .65s cubic-bezier(.2,.8,.3,1) both}
+article.full{display:grid;grid-template-rows:0fr;opacity:0;background:#f4fbf8;border:1px solid #cfe8dd;border-radius:22px;padding:0 26px;margin-top:0;transition:grid-template-rows .65s cubic-bezier(.2,.8,.3,1),opacity .55s ease,padding .65s cubic-bezier(.2,.8,.3,1),margin .65s cubic-bezier(.2,.8,.3,1)}
+article.full>div{overflow:hidden;min-height:0}
+article.full.open{grid-template-rows:1fr;opacity:1;padding:26px;margin-top:20px}
 @keyframes artIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 .split2{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center}
+.split2.swap>:nth-child(1){order:2}
+.split2.swap>:nth-child(2){order:1}
 .bigimg{border-radius:22px;height:100%;min-height:300px;width:100%;object-fit:cover}
 footer{background:#08302d;color:#dbe6f0;padding:52px 0 0;margin-top:0}
 footer .cols{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:26px}
@@ -167,9 +185,9 @@ footer .frow svg{width:17px;height:17px;flex:0 0 auto;margin-top:2px;color:#ffb3
 .rv{opacity:0}
 .anim-up .rv{transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
 .anim-fade .rv{transform:scale(.965);transition:opacity .95s ease,transform .95s ease}
-.anim-side .rv{transform:translateX(-34px);transition:opacity .7s cubic-bezier(.2,.8,.3,1),transform .7s cubic-bezier(.2,.8,.3,1)}
-.anim-side .rv:nth-child(even){transform:translateX(34px)}
-.anim-zoom .rv{transform:scale(1.05);transition:opacity .8s ease,transform .8s ease}
+.anim-side .rv{transform:translateX(-10px);transition:opacity .7s cubic-bezier(.2,.8,.3,1),transform .7s cubic-bezier(.2,.8,.3,1)}
+.anim-side .rv:nth-child(even){transform:translateX(-10px)}
+.anim-zoom .rv{transform:scale(1.03);transition:opacity .8s ease,transform .8s ease}
 .anim-bounce .rv{transform:translateY(24px);transition:opacity .65s cubic-bezier(.34,1.56,.64,1),transform .65s cubic-bezier(.34,1.56,.64,1)}
 .rv.vis{opacity:1;transform:none;filter:none}
 @media(max-width:960px){.sgrid{grid-template-columns:1fr 1fr}.g4{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}footer .cols{grid-template-columns:1fr 1fr}}
@@ -183,7 +201,7 @@ footer .frow svg{width:17px;height:17px;flex:0 0 auto;margin-top:2px;color:#ffb3
  .rev{flex-basis:290px}
 }
 @media(max-width:560px){.g4{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr}footer .cols{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}
-.hero{background:linear-gradient(120deg,#0b3d3a,#0e7c7b)}.searchbox{border:2px solid #cfe8dd}.card{box-shadow:0 10px 24px rgba(14,124,123,.10)}.stat{background:linear-gradient(120deg,#0e7c7b,#2fbf9b)}</style></head>
+.hero{background:linear-gradient(120deg,#0b3d3a,#0e7c7b)}.searchbox{border:2px solid #cfe8dd}.card{box-shadow:0 10px 24px rgba(14,124,123,.10)}.stat{background:linear-gradient(120deg,#0e7c7b,#2fbf9b)}.slide .cap{background:rgba(5,43,41,.55);border-radius:22px;padding:26px 30px;max-width:620px}nav.main a{border-radius:999px}</style></head>
 <body class="anim-bounce"><div class="topstrip"><div class="wrap">
       <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13 1 .36 1.96.7 2.9a2 2 0 0 1-.45 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.94.34 1.9.57 2.9.7A2 2 0 0 1 22 16.9Z"/></svg> UK: +44 7366 474582</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13 1 .36 1.96.7 2.9a2 2 0 0 1-.45 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.94.34 1.9.57 2.9.7A2 2 0 0 1 22 16.9Z"/></svg> US: +1 (737) 321-0640</span>
       <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg> Support.sufitraveltours@gmail.com</span><span style="margin-left:auto"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Mon - Sun: 09:00 am - 05:00 pm</span></div></div>
@@ -218,7 +236,7 @@ footer .frow svg{width:17px;height:17px;flex:0 0 auto;margin-top:2px;color:#ffb3
           <a class="btn" style="margin-top:12px" href="https://wa.me/447366474582" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
       </div></div>
       <div style="margin-top:34px"><div class="stats"><div class="stat rv"><b>10,000+</b><span>Happy Travelers</span></div><div class="stat rv"><b>$1.5 Million</b><span>Discounts Provided Annually</span></div><div class="stat rv"><b>500+</b><span>Affordable Flight Deals</span></div><div class="stat rv"><b>30+</b><span>Destinations Worldwide</span></div><div class="stat rv"><b>98%</b><span>Customer Satisfaction</span></div></div></div>
-    </div></section><footer><div class="wrap"><div class="cols">
+    </div></section><div style="display:flex;justify-content:center;padding:28px 16px 2px" aria-hidden="true"><svg width="230" height="22" viewBox="0 0 230 22" fill="none" aria-hidden="true"><path d="M2 11c19-9 38-9 57 0s38 9 57 0 38-9 57 0 38 9 55 0" stroke="#0e7c7b" stroke-width="3" stroke-linecap="round"/></svg></div><footer><div class="wrap"><div class="cols">
       <div><h4>Sufi Travel &amp; Tours LLC</h4><p>Budget travel packages and exclusive cheap airfare deals to the UK, US, Africa and South Asia. Embark on your next adventure without breaking the bank.</p>
       <div class="badges">
         <span class="pbadge"><span class="pic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 11.5 2 2 4-4"/></svg></span><span><b>ATOL Protected</b><small>Financial protection</small></span></span>
@@ -255,7 +273,7 @@ function go(i){ if(!slides.length) return; slides[cur].classList.remove('on'); $
 function restart(){ clearInterval(timer); if(slides.length>1) timer=setInterval(()=>go(cur+1),5200); }
 const pv=$('#prev'), nx=$('#next'); if(pv){ pv.addEventListener('click',()=>go(cur-1)); nx.addEventListener('click',()=>go(cur+1)); $$('.dots button').forEach((d,i)=>d.addEventListener('click',()=>go(i))); restart(); }
 /* reveal on scroll + safety fallback so nothing stays hidden */
-const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target);} }),{threshold:.08});
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const t=e.target; t.classList.add('vis'); io.unobserve(t); setTimeout(()=>{ t.style.transitionDelay='0s'; },1000); } }),{threshold:.08});
 $$('.rv').forEach((el,i)=>{ el.style.transitionDelay=(i%4)*0.07+'s'; io.observe(el); });
 setTimeout(()=>$$('.rv').forEach(el=>el.classList.add('vis')),3000);
 /* airport search filter */
@@ -264,7 +282,7 @@ if(si) si.addEventListener('input',()=>{ const q=si.value.trim().toLowerCase(); 
 /* faq */
 $$('.faq button').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
 /* blog read more */
-$$('[data-article]').forEach(b=>b.addEventListener('click',()=>{ const a=document.getElementById(b.dataset.article); a.classList.toggle('open'); if(a.classList.contains('open')) a.scrollIntoView({behavior:'smooth',block:'center'}); }));
+$$('[data-article]').forEach(b=>b.addEventListener('click',()=>{ const a=document.getElementById(b.dataset.article); a.classList.toggle('open'); if(a.classList.contains('open')) setTimeout(()=>a.scrollIntoView({behavior:'smooth',block:'center'}),180); }));
 /* validation helpers */
 function bad(el,msg){ const f=el.closest('.field'); f.classList.add('err'); const m=f.querySelector('.err-msg'); if(m&&msg)m.textContent=msg; return false; }
 function ok(el){ el.closest('.field').classList.remove('err'); return true; }
