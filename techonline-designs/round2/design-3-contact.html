@@ -178,6 +178,13 @@ footer a{display:block;color:#aebedd;font-size:13.5px;padding:3.5px 0}
 #orderOk.show .okbox{transform:none}
 .okbox h3{font-size:22px;margin:14px 0 7px}.okbox p{color:#667085;font-size:14px;line-height:1.6}
 .okbox button{margin-top:18px;background:var(--acc);color:var(--acctx);border:0;padding:12px 26px;border-radius:999px;font-weight:800;font-size:14px;cursor:pointer}
+.okbox{max-width:520px}
+.okdet{margin:16px 0 4px;text-align:left;background:#f8fafc;border:1px solid #eaecf0;border-radius:14px;padding:6px 16px}
+.okrow{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px dashed #e2e8f0;font-size:13.5px}
+.okrow:last-child{border-bottom:0}
+.okrow span{color:#667085;flex:0 0 auto}
+.okrow b{color:#101828;text-align:right}
+.oktrack{display:block;margin-top:14px;background:linear-gradient(135deg,#22c55e,#0d9488);color:#fff!important;padding:13px;border-radius:12px;font-weight:800;font-size:14px;text-decoration:none;text-align:center}
 .okring{width:86px;height:86px;fill:none;stroke:var(--acc);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .okring circle{stroke-dasharray:151;stroke-dashoffset:151}
 .okring path{stroke-dasharray:42;stroke-dashoffset:42}
@@ -235,6 +242,41 @@ a[style*="min-height: 56px"] img,a[style*="min-height:56px"] img{height:32px!imp
 .payblock:has(#payOnline:checked) .paysub{display:flex;animation:accIn .3s ease both}
 .paybadge{display:flex;align-items:center;flex:0 0 auto}
 .paybadge svg{height:32px;width:auto;border-radius:7px;box-shadow:0 2px 8px rgba(16,24,40,.13)}
+.paygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:560px){.paygrid{grid-template-columns:1fr 1fr}}
+.jazzpanel,.easypanel{display:none}
+.payblock:has(#payJazz:checked) .jazzpanel{display:block;animation:accIn .3s ease both}
+.payblock:has(#payEasy:checked) .easypanel{display:block;animation:accIn .3s ease both}
+.jazzcard{background:linear-gradient(135deg,#2b0d10,#571418)}
+.easycard{background:linear-gradient(135deg,#0d2417,#14532d)}
+.payinstr{color:var(--mut);font-size:13.5px;line-height:1.6;margin:12px 2px 0}
+.paygrid .payopt2{flex-direction:column;justify-content:center;text-align:center;padding:18px 10px 15px;gap:9px}
+.paygrid .paytx b{font-size:14.5px}
+.paygrid .paytx small{display:none}
+.paygrid .payradio{position:absolute;top:10px;right:10px}
+.bankpanel{display:none}
+.payblock:has(#payBank:checked) .bankpanel{display:block;animation:accIn .3s ease both}
+.bankcard{background:linear-gradient(135deg,#0b1526,#12233f);color:#e8eef7;border-radius:16px;padding:18px}
+.bankcard .bchd{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.14);padding-bottom:11px;margin-bottom:6px}
+.bankcard .bchd b{font-size:16px}
+.bankcard .bchd small{display:block;color:#9fb2cc;font-size:11.5px;letter-spacing:.4px;margin-top:2px}
+.bankcard .bctag{font-size:10.5px;font-weight:800;letter-spacing:1.2px;color:#f5c86b}
+.bcrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.12)}
+.bcrow:last-child{border-bottom:0}
+.bcrow span{color:#9fb2cc;font-size:13px;min-width:118px}
+.bcrow b{flex:1;font-size:14.5px;letter-spacing:.3px;word-break:break-all}
+.copybtn{flex:0 0 auto;background:#f5c86b;color:#231a04;border:0;border-radius:8px;padding:6px 13px;font-weight:800;font-size:12.5px;cursor:pointer}
+.upl{display:flex;flex-direction:column;gap:2px;border:1.8px dashed var(--line);border-radius:14px;padding:15px;text-align:center;cursor:pointer;margin-top:12px;background:var(--alt)}
+.upl input{display:none}
+.upl span{font-weight:800;font-size:14px;color:var(--ink)}
+.upl small{color:var(--mut);font-size:12.5px}
+.confirmbank{width:100%;margin-top:12px;background:#1d4ed8;color:#fff;border:0;border-radius:13px;padding:14px;font-size:15.5px;font-weight:800;cursor:pointer}
+.wapanel{display:none;background:#f0fdf4;border:1.6px solid #bbf7d0;border-radius:16px;padding:20px 18px;text-align:center}
+.payblock:has(#payWa:checked) .wapanel{display:block;animation:accIn .3s ease both}
+.wapanel h4{margin:0 0 8px;font-size:17px;color:#15803d;display:flex;align-items:center;justify-content:center;gap:8px}
+.wapanel h4 svg{width:21px;height:21px}
+.wapanel p{margin:0 auto 15px;color:#3f6212;font-size:13.5px;line-height:1.6;max-width:460px}
+.confirmwa{width:100%;background:linear-gradient(135deg,#22c55e,#0d9488);color:#fff;border:0;border-radius:13px;padding:15px;font-size:15px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;cursor:pointer}
 
 .hamb{display:none;width:42px;height:42px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--ink);align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;padding:0}
 .hamb svg{width:22px;height:22px}
@@ -397,14 +439,27 @@ function addCart(b){
   ov.innerHTML = '<div class="okbox" style="position:relative"><svg class="okring" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg><h3>Order Placed Successfully!</h3><p>Your order number is <b id="oknum">TO-1001</b>.<br>Our team will confirm your order on WhatsApp (0317 4959342) shortly. Thank you for shopping with Tech Online!</p><button onclick="document.getElementById(\'orderOk\').classList.remove(\'show\')">Continue Shopping</button></div>';
   document.body.appendChild(ov);
   document.addEventListener('submit', function(e){
-    var btn = e.target.querySelector('button[type=submit], button:not([type])');
-    if(btn && btn.textContent.indexOf('Place Order') > -1){
+    var btn = null;
+    e.target.querySelectorAll('button').forEach(function(b){ if(!btn && (b.textContent.indexOf('Place Order') > -1 || (b.textContent.indexOf('Confirm') > -1 && b.textContent.indexOf('Order') > -1))) btn = b; });
+    if(btn){
       e.preventDefault(); e.stopPropagation();
       var onum = 'TO-' + (1001 + Math.floor(Math.random()*400));
       document.getElementById('oknum').textContent = onum;
       try{
         var f = e.target, fields = [];
         f.querySelectorAll('input, textarea').forEach(function(el){ if(el.tagName === 'TEXTAREA' || el.type === 'text' || el.type === 'tel') fields.push(el.value); });
+        var gv = function(id){ var el = document.getElementById(id); return el ? el.value.trim() : ''; };
+        if(document.getElementById('fName')){
+          var nm = gv('fName'), ph = gv('fPhone').replace(/[\s-]/g, ''), ct = gv('fCity'), ad = gv('fAddr');
+          var bad = [];
+          var mark = function(id, isBad){ var el = document.getElementById(id); if(el){ el.classList.toggle('invalid', isBad); var er = document.getElementById(id + 'Err'); if(er) er.style.display = isBad ? 'block' : 'none'; } if(isBad) bad.push(id); };
+          var nmLow = nm.replace(/\s+/g, '').toLowerCase();
+          mark('fName', !(/^[A-Za-z][A-Za-z .']{2,}$/.test(nm) && /[aeiou]/i.test(nm) && ['abc','abcd','xyz','test','asdf','qwerty','aaaa','name','none','abcde'].indexOf(nmLow) === -1));
+          mark('fPhone', !(/^03\d{9}$/.test(ph) || /^\+\d{10,15}$/.test(ph)));
+          mark('fCity', !ct);
+          mark('fAddr', ad.length < 10);
+          if(bad.length){ toast('Please fill the required fields correctly — a proper name, a valid mobile number, your city and a complete address are required.'); var fe = document.getElementById(bad[0]); if(fe) fe.scrollIntoView({block: 'center', behavior: 'smooth'}); return; }
+        }
         var pay = 'Cash on Delivery';
         var pr = f.querySelector('input[name=pay]:checked');
         if(pr){ var lb = pr.closest('label'), bt = lb ? lb.querySelector('.paytx b') : null; if(bt) pay = bt.textContent;
@@ -413,9 +468,32 @@ function addCart(b){
         document.querySelectorAll('.sumitem').forEach(function(it){ var bs = it.querySelectorAll('b'); if(bs.length) items.push('- ' + bs[0].textContent + ' - ' + bs[bs.length - 1].textContent); });
         var tot = '';
         document.querySelectorAll('.sumrow').forEach(function(r){ if(r.textContent.indexOf('Total') > -1) tot = r.textContent.replace(/\s+/g, ' ').trim(); });
-        var lines = ['New Order ' + onum + ' - Tech Online', 'Name: ' + (fields[0] || ''), 'Phone: ' + (fields[1] || ''), 'City: ' + (fields[2] || ''), 'Address: ' + (fields[3] || ''), 'Payment Method: ' + pay, 'Items:'].concat(items).concat([tot]);
-        try{ var all = JSON.parse(localStorage.getItem('techonline_orders') || '[]'); all.push({no: onum, name: fields[0] || '', phone: fields[1] || '', city: fields[2] || '', address: fields[3] || '', payment: pay, items: items, total: tot, at: new Date().toISOString()}); localStorage.setItem('techonline_orders', JSON.stringify(all)); }catch(err){}
+        var cName = gv('fName') || fields[0] || '', cPhone = gv('fPhone') || fields[1] || '', cCity = gv('fCity') || fields[2] || '', cCountry = gv('fCountry') || 'Pakistan', cAddr = gv('fAddr') || fields[3] || '', cNotes = gv('fNotes');
+        var lines = ['New Order ' + onum + ' - Tech Online', 'Name: ' + cName, 'Phone: ' + cPhone, 'City: ' + cCity, 'Country: ' + cCountry, 'Address: ' + cAddr];
+        if(cNotes) lines.push('Order Notes: ' + cNotes);
+        lines.push('Payment Method: ' + pay);
+        var slipMap = {'Bank Transfer': 'slipFile', 'JazzCash': 'slipJazz', 'EasyPaisa': 'slipEasy'};
+        var slipEl = document.getElementById(slipMap[pay] || 'none');
+        var slip = (slipEl && slipEl.files && slipEl.files.length) ? slipEl.files[0].name : '';
+        if(slip) lines.push('Payment Slip: ' + slip + ' (attached by customer)');
+        lines.push('Items:');
+        lines = lines.concat(items).concat([tot]);
+        try{ var all = JSON.parse(localStorage.getItem('techonline_orders') || '[]'); all.push({no: onum, name: cName, phone: cPhone, city: cCity, country: cCountry, address: cAddr, notes: cNotes, payment: pay, slip: slip, items: items, total: tot, at: new Date().toISOString()}); localStorage.setItem('techonline_orders', JSON.stringify(all)); }catch(err){}
         window.open('https://wa.me/923174959342?text=' + encodeURIComponent(lines.join(String.fromCharCode(10))), '_blank');
+      }catch(err){}
+      try{
+        var bb = ov.querySelector('.okbox');
+        var det = document.getElementById('okDet');
+        if(!det){ det = document.createElement('div'); det.className = 'okdet'; det.id = 'okDet'; bb.insertBefore(det, bb.querySelector('button')); }
+        var rows = [['Order Number', onum], ['Payment Method', pay], ['Amount Payable', tot.replace(/^Total\s*/i, '')], ['Phone Number', cPhone], ['Shipping Address', cAddr + (cCity ? ', ' + cCity : '')], ['Items', items.map(function(x){ return x.replace(/^- /, ''); }).join('<br>')], ['Estimated Delivery', '2 - 5 Working Days']];
+        det.innerHTML = rows.map(function(r){ return '<div class="okrow"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>'; }).join('');
+        var trk = document.getElementById('okTrack');
+        if(!trk){ trk = document.createElement('a'); trk.id = 'okTrack'; trk.className = 'oktrack'; trk.target = '_blank'; bb.insertBefore(trk, bb.querySelector('button')); }
+        trk.textContent = 'Track on WhatsApp (0317 4959342)';
+        trk.href = 'https://wa.me/923174959342?text=' + encodeURIComponent('Assalam o Alaikum! I placed order ' + onum + ' on Tech Online (' + cName + '). Please share my order tracking status.');
+        var msg = bb.querySelector('p');
+        if(msg) msg.innerHTML = 'Thank you <b>' + cName + '</b>! Your order <b>' + onum + '</b> has been received and is being prepared for fast dispatch. Our team will confirm your order on WhatsApp shortly.';
+        var bk = bb.querySelector('button'); if(bk) bk.textContent = 'Back to Store';
       }catch(err){}
       ov.classList.add('show');
       var box = ov.querySelector('.okbox');
@@ -531,5 +609,8 @@ function filterCat(e, cat){ e.preventDefault(); FSTATE.cat = cat;
   document.addEventListener('click', function(e){ if(!hdr.contains(e.target)) panel.classList.remove('open'); });
   acts.appendChild(btn); hdr.appendChild(panel);
 })();
+</script><script>
+window.copyTxt = function(btn, txt){ function done(){ toast('Copied to clipboard'); } if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done, done); } else { var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(e){} ta.remove(); done(); } };
+window.slipName = function(inp, tid){ var s = document.getElementById(tid || 'slipName'); if(inp.files && inp.files.length){ if(s) s.textContent = 'Attached: ' + inp.files[0].name; toast('Payment slip attached'); } };
 </script>
     </body></html>
