@@ -75,7 +75,22 @@ section{padding:56px 0;overflow:hidden}
 h2.title{font-family:Georgia,'Times New Roman',serif;font-size:clamp(24px,3.4vw,36px);text-align:center;line-height:1.2}
 .sub{text-align:center;color:#a79f8d;max-width:640px;margin:10px auto 34px}
 .kicker{text-align:center;color:#d4af37;font-weight:800;letter-spacing:2.5px;font-size:12.5px;text-transform:uppercase;margin-bottom:8px}
-.grid{display:grid;gap:18px}
+.grid{display:grid;gap:18px;align-items:stretch}
+.grid>*{min-width:0}
+.grid>.card{height:100%}
+.svcrows{display:flex;flex-direction:column}
+.svcrow{display:flex;gap:16px;padding:19px 8px;border-bottom:1px solid #1a1a1e;align-items:flex-start}
+.svcrow:last-child{border-bottom:0}
+.svcrow .ic{flex:0 0 auto;margin:0}
+.svcrow h3{margin:2px 0 6px}
+.svcnum{font-size:31px;font-weight:800;color:#d4af37;min-width:54px;line-height:1;font-family:Georgia,'Times New Roman',serif}
+.bandcard{padding:0!important;overflow:hidden}
+.bandcard .band{height:88px;display:flex;align-items:center;justify-content:center;background:linear-gradient(130deg,#0a0a0c,#d4af37);color:#fff}
+.bandcard .bin{padding:20px}
+.blogrow{display:flex;gap:0;background:#101012;border:1px solid #33322c;border-radius:3px;overflow:hidden;margin-bottom:18px}
+.blogrow img{width:250px;min-height:190px;object-fit:cover;flex:0 0 auto}
+.blogrow .bin{padding:20px 22px}
+@media(max-width:640px){.blogrow{flex-direction:column}.blogrow img{width:100%;height:180px}}
 .g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
 .card{background:#101012;border:1px solid #33322c;border-radius:3px;padding:24px 20px;transition:.28s;box-shadow:0 3px 12px rgba(10,30,50,.05)}
 .card:hover{transform:translateY(-6px);box-shadow:0 16px 30px rgba(10,30,50,.13)}
@@ -125,10 +140,13 @@ h2.title{font-family:Georgia,'Times New Roman',serif;font-size:clamp(24px,3.4vw,
 .faq button span{display:inline-block;transition:transform .4s ease}
 .faq.open button span{transform:rotate(45deg)}
 .blogimg{height:190px;width:100%;object-fit:cover;border-radius:3px 3px 0 0}
-article.full{display:none;background:#101012;border:1px solid #33322c;border-radius:3px;padding:26px;margin-top:20px}
-article.full.open{display:block;animation:artIn .65s cubic-bezier(.2,.8,.3,1) both}
+article.full{display:grid;grid-template-rows:0fr;opacity:0;background:#101012;border:1px solid #33322c;border-radius:3px;padding:0 26px;margin-top:0;transition:grid-template-rows .65s cubic-bezier(.2,.8,.3,1),opacity .55s ease,padding .65s cubic-bezier(.2,.8,.3,1),margin .65s cubic-bezier(.2,.8,.3,1)}
+article.full>div{overflow:hidden;min-height:0}
+article.full.open{grid-template-rows:1fr;opacity:1;padding:26px;margin-top:20px}
 @keyframes artIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 .split2{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center}
+.split2.swap>:nth-child(1){order:2}
+.split2.swap>:nth-child(2){order:1}
 .bigimg{border-radius:3px;height:100%;min-height:300px;width:100%;object-fit:cover}
 footer{background:#070708;color:#dbe6f0;padding:52px 0 0;margin-top:0}
 footer .cols{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:26px}
@@ -167,9 +185,9 @@ footer .frow svg{width:17px;height:17px;flex:0 0 auto;margin-top:2px;color:#d4af
 .rv{opacity:0}
 .anim-up .rv{transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
 .anim-fade .rv{transform:scale(.965);transition:opacity .95s ease,transform .95s ease}
-.anim-side .rv{transform:translateX(-34px);transition:opacity .7s cubic-bezier(.2,.8,.3,1),transform .7s cubic-bezier(.2,.8,.3,1)}
-.anim-side .rv:nth-child(even){transform:translateX(34px)}
-.anim-zoom .rv{transform:scale(1.05);transition:opacity .8s ease,transform .8s ease}
+.anim-side .rv{transform:translateX(-10px);transition:opacity .7s cubic-bezier(.2,.8,.3,1),transform .7s cubic-bezier(.2,.8,.3,1)}
+.anim-side .rv:nth-child(even){transform:translateX(-10px)}
+.anim-zoom .rv{transform:scale(1.03);transition:opacity .8s ease,transform .8s ease}
 .anim-bounce .rv{transform:translateY(24px);transition:opacity .65s cubic-bezier(.34,1.56,.64,1),transform .65s cubic-bezier(.34,1.56,.64,1)}
 .rv.vis{opacity:1;transform:none;filter:none}
 @media(max-width:960px){.sgrid{grid-template-columns:1fr 1fr}.g4{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}footer .cols{grid-template-columns:1fr 1fr}}
@@ -192,7 +210,7 @@ footer .frow svg{width:17px;height:17px;flex:0 0 auto;margin-top:2px;color:#d4af
       <nav class="main"><a href="design-4-home.html" class="">Home</a><a href="design-4-about.html" class="">About</a><a href="design-4-services.html" class="">Services</a><a href="design-4-hajj-umrah.html" class="">Hajj & Umrah</a><a href="design-4-pricing.html" class="">Pricing</a><a href="design-4-blog.html" class="">Blog</a><a href="design-4-contact.html" class="">Contact</a><a class="btn " href="design-4-book-now.html"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a3 3 0 0 0 0 6v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a3 3 0 0 0 0-6Z"/><path d="M13 5v2M13 11v2M13 17v2"/></svg> Book Now</a></nav>
       <button class="burger" id="burger" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div></div><div class="mobnav" id="mobnav"><div class="mclose"><b>Menu</b><button type="button" id="mclose" aria-label="Close menu">&times;</button></div><a href="design-4-home.html">Home</a><a href="design-4-about.html">About</a><a href="design-4-services.html">Services</a><a href="design-4-hajj-umrah.html">Hajj & Umrah</a><a href="design-4-pricing.html">Pricing</a><a href="design-4-blog.html">Blog</a><a href="design-4-contact.html">Contact</a><a href="design-4-book-now.html">Book Now</a></div><div class="movl" id="movl"></div></header><div class="pagehero"><div class="wrap"><h1>Book Now</h1><p>Book your affordable flight tickets today. Fill in your details and our team will confirm the best fare for you.</p></div></div>
-    <section><div class="wrap"><div class="split2" style="align-items:start">
+    <section><div class="wrap"><div class="split2 swap" style="align-items:start">
       <form id="bookForm" class="card rv" novalidate style="padding:28px 24px">
         <h3 style="margin-bottom:16px">Your Journey Starts Here</h3>
         <div class="grid g2" style="gap:13px">
@@ -218,7 +236,7 @@ footer .frow svg{width:17px;height:17px;flex:0 0 auto;margin-top:2px;color:#d4af
           <a class="btn" style="margin-top:12px" href="https://wa.me/447366474582" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
       </div></div>
       <div style="margin-top:34px"><div class="stats"><div class="stat rv"><b>10,000+</b><span>Happy Travelers</span></div><div class="stat rv"><b>$1.5 Million</b><span>Discounts Provided Annually</span></div><div class="stat rv"><b>500+</b><span>Affordable Flight Deals</span></div><div class="stat rv"><b>30+</b><span>Destinations Worldwide</span></div><div class="stat rv"><b>98%</b><span>Customer Satisfaction</span></div></div></div>
-    </div></section><footer><div class="wrap"><div class="cols">
+    </div></section><div style="display:flex;justify-content:center;padding:28px 16px 2px" aria-hidden="true"><span style="display:flex;align-items:center;gap:14px;width:min(430px,82%)"><span style="flex:1;height:1px;background:#d4af37"></span><span style="color:#d4af37;display:inline-flex"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg></span><span style="flex:1;height:1px;background:#d4af37"></span></span></div><footer><div class="wrap"><div class="cols">
       <div><h4>Sufi Travel &amp; Tours LLC</h4><p>Budget travel packages and exclusive cheap airfare deals to the UK, US, Africa and South Asia. Embark on your next adventure without breaking the bank.</p>
       <div class="badges">
         <span class="pbadge"><span class="pic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 11.5 2 2 4-4"/></svg></span><span><b>ATOL Protected</b><small>Financial protection</small></span></span>
@@ -255,7 +273,7 @@ function go(i){ if(!slides.length) return; slides[cur].classList.remove('on'); $
 function restart(){ clearInterval(timer); if(slides.length>1) timer=setInterval(()=>go(cur+1),5200); }
 const pv=$('#prev'), nx=$('#next'); if(pv){ pv.addEventListener('click',()=>go(cur-1)); nx.addEventListener('click',()=>go(cur+1)); $$('.dots button').forEach((d,i)=>d.addEventListener('click',()=>go(i))); restart(); }
 /* reveal on scroll + safety fallback so nothing stays hidden */
-const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target);} }),{threshold:.08});
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const t=e.target; t.classList.add('vis'); io.unobserve(t); setTimeout(()=>{ t.style.transitionDelay='0s'; },1000); } }),{threshold:.08});
 $$('.rv').forEach((el,i)=>{ el.style.transitionDelay=(i%4)*0.07+'s'; io.observe(el); });
 setTimeout(()=>$$('.rv').forEach(el=>el.classList.add('vis')),3000);
 /* airport search filter */
@@ -264,7 +282,7 @@ if(si) si.addEventListener('input',()=>{ const q=si.value.trim().toLowerCase(); 
 /* faq */
 $$('.faq button').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
 /* blog read more */
-$$('[data-article]').forEach(b=>b.addEventListener('click',()=>{ const a=document.getElementById(b.dataset.article); a.classList.toggle('open'); if(a.classList.contains('open')) a.scrollIntoView({behavior:'smooth',block:'center'}); }));
+$$('[data-article]').forEach(b=>b.addEventListener('click',()=>{ const a=document.getElementById(b.dataset.article); a.classList.toggle('open'); if(a.classList.contains('open')) setTimeout(()=>a.scrollIntoView({behavior:'smooth',block:'center'}),180); }));
 /* validation helpers */
 function bad(el,msg){ const f=el.closest('.field'); f.classList.add('err'); const m=f.querySelector('.err-msg'); if(m&&msg)m.textContent=msg; return false; }
 function ok(el){ el.closest('.field').classList.remove('err'); return true; }
