@@ -178,6 +178,13 @@ footer a{display:block;color:#aebedd;font-size:13.5px;padding:3.5px 0}
 #orderOk.show .okbox{transform:none}
 .okbox h3{font-size:22px;margin:14px 0 7px}.okbox p{color:#667085;font-size:14px;line-height:1.6}
 .okbox button{margin-top:18px;background:var(--acc);color:var(--acctx);border:0;padding:12px 26px;border-radius:999px;font-weight:800;font-size:14px;cursor:pointer}
+.okbox{max-width:520px}
+.okdet{margin:16px 0 4px;text-align:left;background:#f8fafc;border:1px solid #eaecf0;border-radius:14px;padding:6px 16px}
+.okrow{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px dashed #e2e8f0;font-size:13.5px}
+.okrow:last-child{border-bottom:0}
+.okrow span{color:#667085;flex:0 0 auto}
+.okrow b{color:#101828;text-align:right}
+.oktrack{display:block;margin-top:14px;background:linear-gradient(135deg,#22c55e,#0d9488);color:#fff!important;padding:13px;border-radius:12px;font-weight:800;font-size:14px;text-decoration:none;text-align:center}
 .okring{width:86px;height:86px;fill:none;stroke:var(--acc);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .okring circle{stroke-dasharray:151;stroke-dashoffset:151}
 .okring path{stroke-dasharray:42;stroke-dashoffset:42}
@@ -235,7 +242,14 @@ a[style*="min-height: 56px"] img,a[style*="min-height:56px"] img{height:32px!imp
 .payblock:has(#payOnline:checked) .paysub{display:flex;animation:accIn .3s ease both}
 .paybadge{display:flex;align-items:center;flex:0 0 auto}
 .paybadge svg{height:32px;width:auto;border-radius:7px;box-shadow:0 2px 8px rgba(16,24,40,.13)}
-.paygrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.paygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:560px){.paygrid{grid-template-columns:1fr 1fr}}
+.jazzpanel,.easypanel{display:none}
+.payblock:has(#payJazz:checked) .jazzpanel{display:block;animation:accIn .3s ease both}
+.payblock:has(#payEasy:checked) .easypanel{display:block;animation:accIn .3s ease both}
+.jazzcard{background:linear-gradient(135deg,#2b0d10,#571418)}
+.easycard{background:linear-gradient(135deg,#0d2417,#14532d)}
+.payinstr{color:var(--mut);font-size:13.5px;line-height:1.6;margin:12px 2px 0}
 .paygrid .payopt2{flex-direction:column;justify-content:center;text-align:center;padding:18px 10px 15px;gap:9px}
 .paygrid .paytx b{font-size:14.5px}
 .paygrid .paytx small{display:none}
@@ -423,7 +437,7 @@ function addCart(b){
   document.body.appendChild(ov);
   document.addEventListener('submit', function(e){
     var btn = null;
-    e.target.querySelectorAll('button').forEach(function(b){ if(!btn && (b.textContent.indexOf('Place Order') > -1 || b.textContent.indexOf('Confirm Bank Order') > -1 || b.textContent.indexOf('Send Order via WhatsApp') > -1)) btn = b; });
+    e.target.querySelectorAll('button').forEach(function(b){ if(!btn && (b.textContent.indexOf('Place Order') > -1 || (b.textContent.indexOf('Confirm') > -1 && b.textContent.indexOf('Order') > -1))) btn = b; });
     if(btn){
       e.preventDefault(); e.stopPropagation();
       var onum = 'TO-' + (1001 + Math.floor(Math.random()*400));
@@ -455,13 +469,28 @@ function addCart(b){
         var lines = ['New Order ' + onum + ' - Tech Online', 'Name: ' + cName, 'Phone: ' + cPhone, 'City: ' + cCity, 'Country: ' + cCountry, 'Address: ' + cAddr];
         if(cNotes) lines.push('Order Notes: ' + cNotes);
         lines.push('Payment Method: ' + pay);
-        var slipEl = document.getElementById('slipFile');
-        var slip = (pay === 'Bank Transfer' && slipEl && slipEl.files && slipEl.files.length) ? slipEl.files[0].name : '';
+        var slipMap = {'Bank Transfer': 'slipFile', 'JazzCash': 'slipJazz', 'EasyPaisa': 'slipEasy'};
+        var slipEl = document.getElementById(slipMap[pay] || 'none');
+        var slip = (slipEl && slipEl.files && slipEl.files.length) ? slipEl.files[0].name : '';
         if(slip) lines.push('Payment Slip: ' + slip + ' (attached by customer)');
         lines.push('Items:');
         lines = lines.concat(items).concat([tot]);
         try{ var all = JSON.parse(localStorage.getItem('techonline_orders') || '[]'); all.push({no: onum, name: cName, phone: cPhone, city: cCity, country: cCountry, address: cAddr, notes: cNotes, payment: pay, slip: slip, items: items, total: tot, at: new Date().toISOString()}); localStorage.setItem('techonline_orders', JSON.stringify(all)); }catch(err){}
         window.open('https://wa.me/923174959342?text=' + encodeURIComponent(lines.join(String.fromCharCode(10))), '_blank');
+      }catch(err){}
+      try{
+        var bb = ov.querySelector('.okbox');
+        var det = document.getElementById('okDet');
+        if(!det){ det = document.createElement('div'); det.className = 'okdet'; det.id = 'okDet'; bb.insertBefore(det, bb.querySelector('button')); }
+        var rows = [['Order Number', onum], ['Payment Method', pay], ['Amount Payable', tot.replace(/^Total\s*/i, '')], ['Phone Number', cPhone], ['Shipping Address', cAddr + (cCity ? ', ' + cCity : '')], ['Items', items.map(function(x){ return x.replace(/^- /, ''); }).join('<br>')], ['Estimated Delivery', '2 - 5 Working Days']];
+        det.innerHTML = rows.map(function(r){ return '<div class="okrow"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>'; }).join('');
+        var trk = document.getElementById('okTrack');
+        if(!trk){ trk = document.createElement('a'); trk.id = 'okTrack'; trk.className = 'oktrack'; trk.target = '_blank'; bb.insertBefore(trk, bb.querySelector('button')); }
+        trk.textContent = 'Track on WhatsApp (0317 4959342)';
+        trk.href = 'https://wa.me/923174959342?text=' + encodeURIComponent('Assalam o Alaikum! I placed order ' + onum + ' on Tech Online (' + cName + '). Please share my order tracking status.');
+        var msg = bb.querySelector('p');
+        if(msg) msg.innerHTML = 'Thank you <b>' + cName + '</b>! Your order <b>' + onum + '</b> has been received and is being prepared for fast dispatch. Our team will confirm your order on WhatsApp shortly.';
+        var bk = bb.querySelector('button'); if(bk) bk.textContent = 'Back to Store';
       }catch(err){}
       ov.classList.add('show');
       var box = ov.querySelector('.okbox');
@@ -579,6 +608,6 @@ function filterCat(e, cat){ e.preventDefault(); FSTATE.cat = cat;
 })();
 </script><script>
 window.copyTxt = function(btn, txt){ function done(){ toast('Copied to clipboard'); } if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done, done); } else { var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(e){} ta.remove(); done(); } };
-window.slipName = function(inp){ var s = document.getElementById('slipName'); if(inp.files && inp.files.length){ if(s) s.textContent = 'Attached: ' + inp.files[0].name; toast('Payment slip attached'); } };
+window.slipName = function(inp, tid){ var s = document.getElementById(tid || 'slipName'); if(inp.files && inp.files.length){ if(s) s.textContent = 'Attached: ' + inp.files[0].name; toast('Payment slip attached'); } };
 </script>
     </body></html>
