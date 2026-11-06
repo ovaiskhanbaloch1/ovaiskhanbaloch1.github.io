@@ -303,6 +303,15 @@ body{overflow-x:hidden}header{position:sticky}
 .card .stars{font-size:12px;letter-spacing:1.5px}
 .card .price b{font-size:16.5px}
 .card .add{padding:10px 12px;font-size:12.5px;margin-top:9px}
+.mq{overflow:hidden;position:relative;padding:6px 2px 12px}
+.mqtrack{display:flex;width:max-content;animation:mqslide 30s linear infinite}
+.mq:hover .mqtrack{animation-play-state:paused}
+.mqhalf{display:flex;gap:16px;padding-right:16px;align-items:stretch}
+@keyframes mqslide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.catmq .mqtrack{animation-duration:26s}
+.catmq .catitem{flex:0 0 auto;width:118px}
+.revmq .mqtrack{animation-duration:42s}
+.revmq .rev{flex:0 0 330px;max-width:84vw}
 .rv{transform:translateY(38px) scale(.95);transition:opacity .85s ease,transform .85s cubic-bezier(.2,.8,.3,1)}
 html,body{overflow-x:hidden}
 img,svg,video,table,iframe{max-width:100%}
