@@ -78,6 +78,19 @@ h2.title{font-family:'Segoe UI',system-ui,Arial,sans-serif;font-size:clamp(24px,
 .grid{display:grid;gap:18px;align-items:stretch}
 .grid>*{min-width:0}
 .grid>.card{height:100%}
+.svcrows{display:flex;flex-direction:column}
+.svcrow{display:flex;gap:16px;padding:19px 8px;border-bottom:1px solid #fdf2e4;align-items:flex-start}
+.svcrow:last-child{border-bottom:0}
+.svcrow .ic{flex:0 0 auto;margin:0}
+.svcrow h3{margin:2px 0 6px}
+.svcnum{font-size:31px;font-weight:800;color:#f0b000;min-width:54px;line-height:1;font-family:'Segoe UI',system-ui,Arial,sans-serif}
+.bandcard{padding:0!important;overflow:hidden}
+.bandcard .band{height:88px;display:flex;align-items:center;justify-content:center;background:linear-gradient(130deg,#2b1608,#e86400);color:#fff}
+.bandcard .bin{padding:20px}
+.blogrow{display:flex;gap:0;background:#ffffff;border:1px solid #f2ddc6;border-radius:14px;overflow:hidden;margin-bottom:18px}
+.blogrow img{width:250px;min-height:190px;object-fit:cover;flex:0 0 auto}
+.blogrow .bin{padding:20px 22px}
+@media(max-width:640px){.blogrow{flex-direction:column}.blogrow img{width:100%;height:180px}}
 .g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
 .card{background:#ffffff;border:1px solid #f2ddc6;border-radius:14px;padding:24px 20px;transition:.28s;box-shadow:0 3px 12px rgba(10,30,50,.05)}
 .card:hover{transform:translateY(-6px);box-shadow:0 16px 30px rgba(10,30,50,.13)}
@@ -132,6 +145,8 @@ article.full>div{overflow:hidden;min-height:0}
 article.full.open{grid-template-rows:1fr;opacity:1;padding:26px;margin-top:20px}
 @keyframes artIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 .split2{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center}
+.split2.swap>:nth-child(1){order:2}
+.split2.swap>:nth-child(2){order:1}
 .bigimg{border-radius:14px;height:100%;min-height:300px;width:100%;object-fit:cover}
 footer{background:#1c0e04;color:#dbe6f0;padding:52px 0 0;margin-top:0}
 footer .cols{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:26px}
@@ -205,7 +220,7 @@ footer .frow svg{width:17px;height:17px;flex:0 0 auto;margin-top:2px;color:#f0b0
         <div style="padding:22px"><span style="background:#fdf2e4;color:#e86400;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px">Travel Tips</span>
         <h3 style="margin:11px 0 8px">Travel Protection Explained: ATOL, Booking and Payment Cover</h3><p>What does travel protection actually cover, and why does it matter before you pay for a flight? A plain-English guide from our team.</p>
         <button class="btn" type="button" data-article="art2" style="margin-top:13px;padding:9px 18px">Read Full Article</button></div></div></div><article class="full" id="art0"><div><h3 style="margin-bottom:10px">How to Find Discounted Air Tickets Without the Stress</h3><p style="color:#7d6a58">Start with the airports you can realistically use. Flying from Manchester instead of London, or into Gatwick instead of Heathrow, often unlocks cheaper fares on the same route. Next, stay flexible on dates: midweek departures are usually priced lower than weekend flights, and a one-day shift can change the fare completely. Finally, talk to a travel agent before you pay. Agents can see consolidated fares that never appear on public search engines, and they can hold the right combination of flights while you confirm your plans.</p></div></article><article class="full" id="art1"><div><h3 style="margin-bottom:10px">Hajj & Umrah: When to Book for the Best Rates</h3><p style="color:#7d6a58">Umrah demand rises sharply in Ramadan and during school holidays, and Hajj places are limited every year. Booking early gives you first choice of hotels near the sacred sites in Makkah and Madinah, better flight times, and fares before peak pricing begins. It also leaves time to arrange visas, vaccinations and travel protection properly. Our complete packages combine flights, handpicked hotels and guided tours, and every package can be tailored to your family, your dates and your budget.</p></div></article><article class="full" id="art2"><div><h3 style="margin-bottom:10px">Travel Protection Explained: ATOL, Booking and Payment Cover</h3><p style="color:#7d6a58">Payment protection safeguards the money you pay for your flights against unforeseen circumstances. Booking protection means changes and cancellations are managed for you smoothly, instead of leaving you alone with an airline call centre. ATOL protection adds a financial safety net for your holiday in the unlikely event of a company failure. Together, they mean one thing: you can book your discounted ticket with confidence, knowing your journey and your money are looked after from the moment you reserve.</p></div></article>
-    <div style="text-align:center;margin-top:30px"><a class="btn acc" href="design-1-book-now.html">Book Your Discounted Air Tickets Today</a></div></div></section><footer><div class="wrap"><div class="cols">
+    <div style="text-align:center;margin-top:30px"><a class="btn acc" href="design-1-book-now.html">Book Your Discounted Air Tickets Today</a></div></div></section><div style="display:flex;justify-content:center;padding:28px 16px 2px" aria-hidden="true"><svg width="130" height="36" viewBox="0 0 130 36" fill="none" aria-hidden="true"><path d="M40 33a25 25 0 0 1 50 0Z" fill="#f0b000"/><g stroke="#f0b000" stroke-width="3" stroke-linecap="round"><path d="M65 2v7"/><path d="M38 8l5 6"/><path d="M92 8l-5 6"/><path d="M18 20l8 3"/><path d="M112 20l-8 3"/></g></svg></div><footer><div class="wrap"><div class="cols">
       <div><h4>Sufi Travel &amp; Tours LLC</h4><p>Budget travel packages and exclusive cheap airfare deals to the UK, US, Africa and South Asia. Embark on your next adventure without breaking the bank.</p>
       <div class="badges">
         <span class="pbadge"><span class="pic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="m9 11.5 2 2 4-4"/></svg></span><span><b>ATOL Protected</b><small>Financial protection</small></span></span>
@@ -242,7 +257,7 @@ function go(i){ if(!slides.length) return; slides[cur].classList.remove('on'); $
 function restart(){ clearInterval(timer); if(slides.length>1) timer=setInterval(()=>go(cur+1),5200); }
 const pv=$('#prev'), nx=$('#next'); if(pv){ pv.addEventListener('click',()=>go(cur-1)); nx.addEventListener('click',()=>go(cur+1)); $$('.dots button').forEach((d,i)=>d.addEventListener('click',()=>go(i))); restart(); }
 /* reveal on scroll + safety fallback so nothing stays hidden */
-const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target);} }),{threshold:.08});
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const t=e.target; t.classList.add('vis'); io.unobserve(t); setTimeout(()=>{ t.style.transitionDelay='0s'; },1000); } }),{threshold:.08});
 $$('.rv').forEach((el,i)=>{ el.style.transitionDelay=(i%4)*0.07+'s'; io.observe(el); });
 setTimeout(()=>$$('.rv').forEach(el=>el.classList.add('vis')),3000);
 /* airport search filter */
