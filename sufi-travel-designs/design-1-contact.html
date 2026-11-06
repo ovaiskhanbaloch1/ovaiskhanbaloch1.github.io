@@ -88,7 +88,7 @@ h2.title{font-family:'Segoe UI',system-ui,Arial,sans-serif;font-size:clamp(24px,
 /* marquee */
 .marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .mtrack{display:flex;gap:16px;width:max-content;animation:mq 42s linear infinite;padding:6px 0}
-.marquee:hover .mtrack{animation-play-state:paused}
+
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .ap-chip{flex:0 0 auto;display:flex;gap:12px;align-items:center;background:#ffffff;border:1px solid #f2ddc6;border-radius:14px;padding:13px 20px;min-width:250px}
 .ap-chip b{font-size:23px;color:#e86400;letter-spacing:1px}
@@ -113,11 +113,16 @@ h2.title{font-family:'Segoe UI',system-ui,Arial,sans-serif;font-size:clamp(24px,
 .pagehero p{opacity:.92;max-width:620px;margin:0 auto}
 .faq{border:1px solid #f2ddc6;border-radius:14px;background:#ffffff;margin-bottom:11px;overflow:hidden}
 .faq button{width:100%;text-align:left;background:none;border:0;padding:17px 20px;font-size:16px;font-weight:700;cursor:pointer;color:#2e1c0e;display:flex;justify-content:space-between;gap:10px;font-family:inherit}
-.faq .a{display:none;padding:0 20px 17px;color:#7d6a58;font-size:15px}
-.faq.open .a{display:block}
+.faq .a{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .5s cubic-bezier(.4,0,.2,1),opacity .45s ease}
+.faq .ain{overflow:hidden;min-height:0;padding:0 20px;color:#7d6a58;font-size:15px;transition:padding-bottom .5s cubic-bezier(.4,0,.2,1)}
+.faq.open .a{grid-template-rows:1fr;opacity:1}
+.faq.open .ain{padding-bottom:17px}
+.faq button span{display:inline-block;transition:transform .4s ease}
+.faq.open button span{transform:rotate(45deg)}
 .blogimg{height:190px;width:100%;object-fit:cover;border-radius:14px 14px 0 0}
 article.full{display:none;background:#ffffff;border:1px solid #f2ddc6;border-radius:14px;padding:26px;margin-top:20px}
-article.full.open{display:block}
+article.full.open{display:block;animation:artIn .65s cubic-bezier(.2,.8,.3,1) both}
+@keyframes artIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 .split2{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center}
 .bigimg{border-radius:14px;height:100%;min-height:300px;width:100%;object-fit:cover}
 footer{background:#1c0e04;color:#dbe6f0;padding:52px 0 0;margin-top:0}
