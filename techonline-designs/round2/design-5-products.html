@@ -242,11 +242,12 @@ a[style*="min-height: 56px"] img,a[style*="min-height:56px"] img{height:32px!imp
 .payblock:has(#payOnline:checked) .paysub{display:flex;animation:accIn .3s ease both}
 .paybadge{display:flex;align-items:center;flex:0 0 auto}
 .paybadge svg{height:32px;width:auto;border-radius:7px;box-shadow:0 2px 8px rgba(16,24,40,.13)}
-.paygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-@media(max-width:560px){.paygrid{grid-template-columns:1fr 1fr}}
+.paygrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .jazzpanel,.easypanel{display:none}
-.payblock:has(#payJazz:checked) .jazzpanel{display:block;animation:accIn .3s ease both}
-.payblock:has(#payEasy:checked) .easypanel{display:block;animation:accIn .3s ease both}
+.onlinepanel{display:none}
+.payblock:has(#payOnline:checked) .onlinepanel{display:block;animation:accIn .3s ease both}
+.onlinepanel:has(#onlJazz:checked) .jazzpanel{display:block;animation:accIn .3s ease both}
+.onlinepanel:has(#onlEasy:checked) .easypanel{display:block;animation:accIn .3s ease both}
 .jazzcard{background:linear-gradient(135deg,#2b0d10,#571418)}
 .easycard{background:linear-gradient(135deg,#0d2417,#14532d)}
 .payinstr{color:var(--mut);font-size:13.5px;line-height:1.6;margin:12px 2px 0}
@@ -312,6 +313,8 @@ body{overflow-x:hidden}header{position:sticky}
 .catmq .catitem{flex:0 0 auto;width:118px}
 .revmq .mqtrack{animation-duration:42s}
 .revmq .rev{flex:0 0 330px;max-width:84vw}
+#orderOk{display:block;overflow-y:auto;padding:26px 10px}
+.okbox{margin:0 auto}
 .rv{transform:translateY(38px) scale(.95);transition:opacity .85s ease,transform .85s cubic-bezier(.2,.8,.3,1)}
 html,body{overflow-x:hidden}
 img,svg,video,table,iframe{max-width:100%}
@@ -475,14 +478,15 @@ function addCart(b){
         var lines = ['New Order ' + onum + ' - Tech Online', 'Name: ' + cName, 'Phone: ' + cPhone, 'City: ' + cCity, 'Country: ' + cCountry, 'Address: ' + cAddr];
         if(cNotes) lines.push('Order Notes: ' + cNotes);
         lines.push('Payment Method: ' + pay);
-        var slipMap = {'Bank Transfer': 'slipFile', 'JazzCash': 'slipJazz', 'EasyPaisa': 'slipEasy'};
-        var slipEl = document.getElementById(slipMap[pay] || 'none');
+        var slipId = pay.indexOf('JazzCash') > -1 ? 'slipJazz' : (pay.indexOf('EasyPaisa') > -1 ? 'slipEasy' : (pay === 'Bank Transfer' ? 'slipFile' : ''));
+        var slipEl = slipId ? document.getElementById(slipId) : null;
         var slip = (slipEl && slipEl.files && slipEl.files.length) ? slipEl.files[0].name : '';
+        var waOpen = (pay === 'Cash on Delivery' || pay === 'WhatsApp Deal');
         if(slip) lines.push('Payment Slip: ' + slip + ' (attached by customer)');
         lines.push('Items:');
         lines = lines.concat(items).concat([tot]);
         try{ var all = JSON.parse(localStorage.getItem('techonline_orders') || '[]'); all.push({no: onum, name: cName, phone: cPhone, city: cCity, country: cCountry, address: cAddr, notes: cNotes, payment: pay, slip: slip, items: items, total: tot, at: new Date().toISOString()}); localStorage.setItem('techonline_orders', JSON.stringify(all)); }catch(err){}
-        window.open('https://wa.me/923174959342?text=' + encodeURIComponent(lines.join(String.fromCharCode(10))), '_blank');
+        if(waOpen) window.open('https://wa.me/923174959342?text=' + encodeURIComponent(lines.join(String.fromCharCode(10))), '_blank');
       }catch(err){}
       try{
         var bb = ov.querySelector('.okbox');
@@ -495,7 +499,7 @@ function addCart(b){
         trk.textContent = 'Track on WhatsApp (0317 4959342)';
         trk.href = 'https://wa.me/923174959342?text=' + encodeURIComponent('Assalam o Alaikum! I placed order ' + onum + ' on Tech Online (' + cName + '). Please share my order tracking status.');
         var msg = bb.querySelector('p');
-        if(msg) msg.innerHTML = 'Thank you <b>' + cName + '</b>! Your order <b>' + onum + '</b> has been received and is being prepared for fast dispatch. Our team will confirm your order on WhatsApp shortly.';
+        if(msg) msg.innerHTML = 'Thank you <b>' + cName + '</b>! Your order <b>' + onum + '</b> has been received and is being prepared for fast dispatch. ' + (waOpen ? 'Our team will confirm your order on WhatsApp shortly.' : 'Your order details have been saved with us — please complete the payment using the account details shown; our team will verify it and confirm your order.');
         var bk = bb.querySelector('button'); if(bk) bk.textContent = 'Back to Store';
       }catch(err){}
       ov.classList.add('show');
