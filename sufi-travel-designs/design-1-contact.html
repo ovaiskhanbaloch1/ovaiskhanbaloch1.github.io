@@ -127,8 +127,9 @@ h2.title{font-family:'Segoe UI',system-ui,Arial,sans-serif;font-size:clamp(24px,
 .faq button span{display:inline-block;transition:transform .4s ease}
 .faq.open button span{transform:rotate(45deg)}
 .blogimg{height:190px;width:100%;object-fit:cover;border-radius:14px 14px 0 0}
-article.full{display:none;background:#ffffff;border:1px solid #f2ddc6;border-radius:14px;padding:26px;margin-top:20px}
-article.full.open{display:block;animation:artIn .65s cubic-bezier(.2,.8,.3,1) both}
+article.full{display:grid;grid-template-rows:0fr;opacity:0;background:#ffffff;border:1px solid #f2ddc6;border-radius:14px;padding:0 26px;margin-top:0;transition:grid-template-rows .65s cubic-bezier(.2,.8,.3,1),opacity .55s ease,padding .65s cubic-bezier(.2,.8,.3,1),margin .65s cubic-bezier(.2,.8,.3,1)}
+article.full>div{overflow:hidden;min-height:0}
+article.full.open{grid-template-rows:1fr;opacity:1;padding:26px;margin-top:20px}
 @keyframes artIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 .split2{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center}
 .bigimg{border-radius:14px;height:100%;min-height:300px;width:100%;object-fit:cover}
@@ -248,7 +249,7 @@ if(si) si.addEventListener('input',()=>{ const q=si.value.trim().toLowerCase(); 
 /* faq */
 $$('.faq button').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
 /* blog read more */
-$$('[data-article]').forEach(b=>b.addEventListener('click',()=>{ const a=document.getElementById(b.dataset.article); a.classList.toggle('open'); if(a.classList.contains('open')) a.scrollIntoView({behavior:'smooth',block:'center'}); }));
+$$('[data-article]').forEach(b=>b.addEventListener('click',()=>{ const a=document.getElementById(b.dataset.article); a.classList.toggle('open'); if(a.classList.contains('open')) setTimeout(()=>a.scrollIntoView({behavior:'smooth',block:'center'}),180); }));
 /* validation helpers */
 function bad(el,msg){ const f=el.closest('.field'); f.classList.add('err'); const m=f.querySelector('.err-msg'); if(m&&msg)m.textContent=msg; return false; }
 function ok(el){ el.closest('.field').classList.remove('err'); return true; }
