@@ -119,7 +119,7 @@ footer a{display:block;color:#aebedd;font-size:13.5px;padding:3.5px 0}
 @media(max-width:480px){.grid,.grid.g3{grid-template-columns:1fr 1fr;gap:12px}.fcols{grid-template-columns:1fr}.trust{grid-template-columns:1fr}.waf span{display:none}.waf{padding:13px}}
 .card{background:rgba(255,255,255,.75);backdrop-filter:blur(8px);border:1px solid rgba(124,58,237,.18);box-shadow:0 10px 30px rgba(124,58,237,.08)}.btn{background:linear-gradient(90deg,var(--acc),var(--acc2))}.flashbar{background:linear-gradient(90deg,var(--acc),var(--acc2))}</style><style>
 .slider{position:relative;overflow:hidden}
-.strack{display:flex;transition:transform .65s cubic-bezier(.6,.05,.2,1)}
+.strack{display:flex;transition:transform .85s cubic-bezier(.4,.05,.2,1)}
 .slide{min-width:100%}
 .sgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;padding:52px 20px}
 .simg{width:100%;height:320px;object-fit:contain;display:block}
@@ -289,9 +289,9 @@ a[style*="min-height: 56px"] img,a[style*="min-height:56px"] img{height:32px!imp
 
 .hamb{display:none;width:42px;height:42px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--ink);align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;padding:0}
 .hamb svg{width:22px;height:22px}
-.mnav-panel{display:none;position:absolute;top:100%;left:0;right:0;background:var(--card);border-top:1px solid var(--line);box-shadow:0 24px 40px rgba(16,24,40,.18);z-index:75;padding:8px 16px 14px;max-height:78vh;overflow-y:auto}
-.mnav-panel.open{display:block;animation:accIn .25s ease both}
-.mnav-panel a{display:block;padding:12px 6px;font-weight:700;font-size:15px;color:var(--ink);border-bottom:1px solid var(--line)}
+.mnav-panel{position:absolute;top:100%;left:0;width:min(300px,82vw);background:var(--card);border-top:1px solid var(--line);border-radius:0 0 16px 0;box-shadow:0 24px 40px rgba(16,24,40,.18);z-index:75;padding:6px 14px 10px;max-height:74vh;overflow-y:auto;transform:translateX(-106%);opacity:0;pointer-events:none;transition:transform .42s cubic-bezier(.22,.61,.21,1),opacity .32s ease}
+.mnav-panel.open{transform:translateX(0);opacity:1;pointer-events:auto}
+.mnav-panel a{display:block;padding:10px 6px;font-weight:700;font-size:14.5px;color:var(--ink);border-bottom:1px solid var(--line)}
 .mnav-panel a:last-child{border-bottom:0}
 @media(max-width:860px){
   .hamb{display:inline-flex}
@@ -301,9 +301,9 @@ a[style*="min-height: 56px"] img,a[style*="min-height:56px"] img{height:32px!imp
 }
 body{overflow-x:hidden}header{position:sticky}
 .rev{display:flex;flex-direction:column;padding:18px;height:100%}
-.rev .stars{font-size:13px;letter-spacing:2px}
-.rev p{font-size:13.5px;line-height:1.6;color:var(--mut);margin:8px 0 14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.rev .who{margin-top:auto;display:flex;gap:10px;align-items:center}
+.rev .stars{font-size:13px;letter-spacing:2px;margin-bottom:8px}
+.rev p{font-size:13.5px;line-height:1.6;color:var(--mut);margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rev .who{display:flex;gap:10px;align-items:center;margin-bottom:10px}
 .rev .who b{font-size:14px}
 .card .cb{padding:13px 14px 15px}
 .card h3{font-size:14.5px;line-height:1.35}
@@ -323,6 +323,12 @@ body{overflow-x:hidden}header{position:sticky}
 .revmq .rev{flex:0 0 330px;max-width:84vw}
 #orderOk{display:block;overflow-y:auto;padding:26px 10px}
 .okbox{margin:0 auto}
+.post .pb{padding:13px 15px 14px}
+.post h3{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.post .pb p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.post>img{height:140px}
+@keyframes pagein{from{opacity:0}to{opacity:1}}
+body{animation:pagein .5s ease}
 .phbg{display:none!important}
 .card{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 .sk-glass .simgwrap{backdrop-filter:none;-webkit-backdrop-filter:none}
@@ -549,6 +555,38 @@ function addCart(b){
   function restart(){ clearInterval(timer); timer = setInterval(function(){ go(i + 1); }, 5200); }
   /* auto-slide keeps running even on hover (user rule: never pause) */
   go(0); restart();
+})();
+(function(){
+  var main = document.getElementById('pmain'); if(!main) return;
+  var thumbs = [].slice.call(document.querySelectorAll('.thumbs img, .thumbsv img'));
+  if(thumbs.length < 2) return;
+  main.style.transition = 'opacity .45s ease';
+  var gi = 0, gtimer = null;
+  function gshow(n){
+    gi = (n + thumbs.length) % thumbs.length;
+    main.style.opacity = '0';
+    setTimeout(function(){
+      main.src = thumbs[gi].src;
+      var bg = document.getElementById('pbg'); if(bg) bg.src = thumbs[gi].src;
+      thumbs.forEach(function(x, k){ x.classList.toggle('on', k === gi); });
+      main.style.opacity = '1';
+    }, 340);
+  }
+  function grestart(){ clearInterval(gtimer); gtimer = setInterval(function(){ gshow(gi + 1); }, 4200); }
+  window.swapImg = function(el){ var n = thumbs.indexOf(el); if(n > -1){ gshow(n); grestart(); } };
+  var host = main.closest('.main') || main.parentElement;
+  if(host){
+    host.style.position = 'relative';
+    [['left:10px', -1, 'M15 5l-7 7 7 7', 'Previous image'], ['right:10px', 1, 'M9 5l7 7-7 7', 'Next image']].forEach(function(cfg){
+      var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', cfg[3]);
+      b.innerHTML = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="' + cfg[2] + '"/></svg>';
+      b.style.cssText = 'position:absolute;top:50%;transform:translateY(-50%);' + cfg[0] + ';width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.15);padding:0';
+      (function(d){ b.addEventListener('click', function(){ gshow(gi + d); grestart(); }); })(cfg[1]);
+      host.appendChild(b);
+    });
+  }
+  /* auto-slide keeps running even on hover (user rule: never pause) */
+  grestart();
 })();
 </script>
 <script>
