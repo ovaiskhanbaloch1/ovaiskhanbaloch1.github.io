@@ -113,8 +113,12 @@ h2.title{font-family:Georgia,'Times New Roman',serif;font-size:clamp(24px,3.4vw,
 .pagehero p{opacity:.92;max-width:620px;margin:0 auto}
 .faq{border:1px solid #33322c;border-radius:3px;background:#101012;margin-bottom:11px;overflow:hidden}
 .faq button{width:100%;text-align:left;background:none;border:0;padding:17px 20px;font-size:16px;font-weight:700;cursor:pointer;color:#f2ead8;display:flex;justify-content:space-between;gap:10px;font-family:inherit}
-.faq .a{display:none;padding:0 20px 17px;color:#a79f8d;font-size:15px}
-.faq.open .a{display:block}
+.faq .a{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .5s cubic-bezier(.4,0,.2,1),opacity .45s ease}
+.faq .ain{overflow:hidden;min-height:0;padding:0 20px;color:#a79f8d;font-size:15px;transition:padding-bottom .5s cubic-bezier(.4,0,.2,1)}
+.faq.open .a{grid-template-rows:1fr;opacity:1}
+.faq.open .ain{padding-bottom:17px}
+.faq button span{display:inline-block;transition:transform .4s ease}
+.faq.open button span{transform:rotate(45deg)}
 .blogimg{height:190px;width:100%;object-fit:cover;border-radius:3px 3px 0 0}
 article.full{display:none;background:#101012;border:1px solid #33322c;border-radius:3px;padding:26px;margin-top:20px}
 article.full.open{display:block}
