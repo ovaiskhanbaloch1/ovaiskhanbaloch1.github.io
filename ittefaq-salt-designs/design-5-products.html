@@ -200,6 +200,30 @@ a.ccard{display:block;cursor:pointer;transition:transform .25s,box-shadow .25s} 
 .prow{grid-template-columns:1fr} footer .cols{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.grid3,.steps{grid-template-columns:1fr} .certs{grid-template-columns:1fr 1fr} section{padding:46px 0} footer .cols{grid-template-columns:1fr}
 .hero .wrap{padding-left:46px;padding-right:46px} .htags span{font-size:11.5px;padding:5px 11px}}
+@media(max-width:768px){
+/* Mobile hero: image-led full-bleed slide, minimal text over a soft bottom gradient */
+.hero .slide .wrap{padding:0}
+.hero .slide .grid{grid-template-columns:1fr;gap:0;padding:0;position:relative;height:82vh;height:82svh;min-height:500px;max-height:780px}
+.hero .slide .phwrap{position:absolute;inset:0;border-radius:0}
+.hero .slide .phwrap img.ph{width:100%;height:100%;border-radius:0;object-position:var(--fp,50% 50%)}
+.hero .slide .seal{display:none}
+.hero .slide .grid::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(12,6,4,.70) 0%,rgba(12,6,4,.42) 38%,rgba(12,6,4,.10) 64%,rgba(12,6,4,0) 80%);pointer-events:none}
+.hero:not(.panel) .slide .kick,.hero:not(.panel) .slide h1{text-shadow:0 1px 12px rgba(0,0,0,.45),0 0 2px rgba(0,0,0,.35)}
+.hero .slide .cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:18px 20px 52px}
+.hero .slide .kick{font-size:10.5px;letter-spacing:2.2px}
+.hero .slide h1{font-size:clamp(27px,7.4vw,31px);line-height:1.13;margin:9px 0 0}
+.hero .slide p{display:none}
+.hero .slide .htags{display:none}
+.hero .slide .hbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;flex-wrap:nowrap}
+.hero .slide .hbtns .btn{justify-content:center;padding:12px 8px;font-size:13.5px;gap:6px;white-space:nowrap;min-width:0}
+.hero .slide .hbtns .btn .ic{width:18px;height:18px;flex:none}
+.hero .dots{bottom:18px;left:20px}
+.hero .harrow{top:44%}
+.hero.panel .slide .cap{left:14px;right:14px;bottom:14px;padding:18px 18px 40px}
+.hero.panel .dots{left:32px;bottom:27px}
+.hero.panel .dots button{background:rgba(20,12,8,.28)}
+.hero.panel .dots button.on{background:var(--acc)}
+}
 </style></head><body data-page="products.html">
 <div class="topstrip"><div class="wrap"><span class="loc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span><span>Lahore, Pakistan &nbsp;·&nbsp; Mining &amp; Manufacturing since 1983</span></span>
 <span><a href="mailto:sales@piarasalt.com"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span> sales@piarasalt.com</a> &nbsp; <a href="tel:+924235211692"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span> +92 42 35211692</a></span></div></div>
