@@ -73,6 +73,7 @@ body.drawer-open .drawer{transform:translateX(0)} body.drawer-open .drawer-ov{op
 .dots{position:absolute;bottom:30px;left:20px;display:flex;gap:7px;z-index:5}
 .dots button{width:26px;height:5px;border-radius:3px;border:0;background:rgba(255,255,255,.45);cursor:pointer;padding:0}
 .dots button.on{background:var(--acc)}
+.slide img.ph.mimg{display:none}
 section{padding:64px 0}
 .sec-head{max-width:720px;margin-bottom:30px} .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
 .sec-head h2{font-size:clamp(26px,3.4vw,38px);margin:8px 0 10px;text-wrap:balance} .sec-head p{color:var(--mut)}
@@ -206,6 +207,8 @@ a.ccard{display:block;cursor:pointer;transition:transform .25s,box-shadow .25s} 
 .hero .slide .grid{grid-template-columns:1fr;gap:0;padding:0;position:relative;height:82vh;height:82svh;min-height:500px;max-height:780px}
 .hero .slide .phwrap{position:absolute;inset:0;border-radius:0}
 .hero .slide .phwrap img.ph{width:100%;height:100%;border-radius:0;object-position:var(--fp,50% 50%)}
+.hero .slide .phwrap img.ph.dimg{display:none}
+.hero .slide .phwrap img.ph.mimg{display:block}
 .hero .slide .seal{display:none}
 .hero .slide .grid::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(12,6,4,.70) 0%,rgba(12,6,4,.42) 38%,rgba(12,6,4,.10) 64%,rgba(12,6,4,0) 80%);pointer-events:none}
 .hero:not(.panel) .slide .kick,.hero:not(.panel) .slide h1{text-shadow:0 1px 12px rgba(0,0,0,.45),0 0 2px rgba(0,0,0,.35)}
@@ -224,6 +227,7 @@ a.ccard{display:block;cursor:pointer;transition:transform .25s,box-shadow .25s} 
 .hero.panel .dots button{background:rgba(20,12,8,.28)}
 .hero.panel .dots button.on{background:var(--acc)}
 }
+@media(min-width:769px){.slide.mslide{display:none}.dots button.mdot{display:none}}
 </style></head><body data-page="quality.html">
 <div class="topstrip"><div class="wrap"><span class="loc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span><span>Lahore, Pakistan &nbsp;·&nbsp; Mining &amp; Manufacturing since 1983</span></span>
 <span><a href="mailto:sales@piarasalt.com"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span> sales@piarasalt.com</a> &nbsp; <a href="tel:+924235211692"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span> +92 42 35211692</a></span></div></div>
@@ -266,15 +270,25 @@ a.ccard{display:block;cursor:pointer;transition:transform .25s,box-shadow .25s} 
   var x=document.querySelector('.drawer .x'); if(x)x.addEventListener('click',closeD);
   document.querySelectorAll('.drawer a').forEach(function(a){a.addEventListener('click',closeD)});
   // hero slider (never pauses on hover)
-  var slides=[].slice.call(document.querySelectorAll('.slide')), dots=[].slice.call(document.querySelectorAll('.dots button')), cur=0, timer=null;
+  // Slides/dots flagged .mslide/.mdot are mobile-only (<=768px, matching the
+  // hero CSS): they join the rotation on small screens only, so desktop keeps
+  // the original three slides, three dots and rotation exactly as before.
+  var allSlides=[].slice.call(document.querySelectorAll('.slide')), allDots=[].slice.call(document.querySelectorAll('.dots button')), cur=0, timer=null;
+  var heroMq=window.matchMedia('(max-width:768px)'), slides=[], dots=[];
+  function pickActive(){ slides=allSlides.filter(function(s){return heroMq.matches||!s.classList.contains('mslide')});
+    dots=allDots.filter(function(dt){return heroMq.matches||!dt.classList.contains('mdot')}); }
   function show(i){ if(!slides.length)return; cur=(i+slides.length)%slides.length;
-    slides.forEach(function(s,k){s.classList.toggle('on',k===cur)});
-    dots.forEach(function(s,k){s.classList.toggle('on',k===cur)}); }
+    allSlides.forEach(function(s){s.classList.remove('on')});
+    allDots.forEach(function(dt){dt.classList.remove('on')});
+    slides[cur].classList.add('on'); if(dots[cur])dots[cur].classList.add('on'); }
   function auto(){ if(timer)clearInterval(timer); if(slides.length>1)timer=setInterval(function(){show(cur+1)},4500); }
   var pv=document.querySelector('[data-prev]'), nx=document.querySelector('[data-next]');
   if(pv)pv.addEventListener('click',function(){show(cur-1);auto()});
   if(nx)nx.addEventListener('click',function(){show(cur+1);auto()});
-  dots.forEach(function(dt,k){dt.addEventListener('click',function(){show(k);auto()})});
+  allDots.forEach(function(dt){dt.addEventListener('click',function(){var k=dots.indexOf(dt); if(k>=0){show(k);auto()}})});
+  function syncHero(){ var keep=slides[cur]; pickActive(); var ni=slides.indexOf(keep); show(ni<0?0:ni); auto(); }
+  if(heroMq.addEventListener)heroMq.addEventListener('change',syncHero); else if(heroMq.addListener)heroMq.addListener(syncHero);
+  pickActive();
   var hero=document.querySelector('.hero'), tx=null;
   if(hero){ hero.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
     hero.addEventListener('touchend',function(e){ if(tx===null)return; var dx=e.changedTouches[0].clientX-tx;
