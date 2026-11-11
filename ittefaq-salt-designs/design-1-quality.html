@@ -151,10 +151,13 @@ footer img.flogo{height:56px;margin-bottom:12px} footer p{font-size:14.5px;opaci
 .seal b{font-size:19px;letter-spacing:0}
 .phwrap{position:relative;overflow:hidden;border-radius:var(--r)}
 .certstrip{background:var(--dark);border-top:1px solid rgba(255,255,255,.15)}
-.certstrip .wrap{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;padding-top:12px;padding-bottom:12px}
-.certstrip span{display:inline-flex;align-items:center;gap:6px;color:#fff;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:6px 13px;font-size:12.5px;font-weight:700}
-.certstrip span .ic{width:14px;height:14px;color:var(--acc);flex:none}
+.certstrip .wrap{display:block;padding-top:16px;padding-bottom:18px;text-align:center}
 .certstrip b{color:var(--acc);font-size:12.5px;letter-spacing:2px}
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:10px;margin-top:13px}
+.ctile{display:flex;align-items:center;justify-content:center;gap:9px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.32);border-radius:var(--r);padding:13px 12px}
+.ctile .ic{width:23px;height:23px;color:var(--acc);flex:none}
+.ctile span{color:#fff;font-size:13px;font-weight:700;line-height:1.3}
+@media(max-width:560px){.cgrid{grid-template-columns:repeat(2,1fr);gap:8px}.ctile{padding:12px 10px}.ctile .ic{width:21px;height:21px}.ctile span{font-size:12.5px}}
 .grains{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
 .grain{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;text-align:center}
 .grain .dot{border-radius:50%;background:var(--acc);margin:0 auto 10px}
