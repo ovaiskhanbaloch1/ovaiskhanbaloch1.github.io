@@ -225,6 +225,10 @@ footer.site .flogo{height:64px;width:auto;margin-bottom:12px}
 .fwa{position:fixed;bottom:18px;right:18px;z-index:150;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.3)}
 .toast{position:fixed;bottom:86px;right:18px;z-index:160;background:#33161c;color:#f3e9d7;padding:12px 18px;border-radius:10px;font-weight:600;opacity:0;transform:translateY(10px);transition:.4s;pointer-events:none}
 .toast.show{opacity:1;transform:none}
+body{transition:opacity .38s ease,transform .38s ease}body.pgleave{opacity:0;transform:translateY(10px)}
+.ptoc{position:relative;overflow:hidden}
+.ptoc.sweep::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-120%);animation:ptsweep .45s ease forwards}
+@keyframes ptsweep{to{transform:translateX(120%)}}
 .flyimg{position:fixed;z-index:400;border-radius:10px;pointer-events:none;object-fit:cover;transition:all .8s cubic-bezier(.22,.61,.21,1)}
 .pagehead{background:#33161c;color:#f3e9d7;padding:44px 0;text-align:center}
 .pagehead h1{font-size:clamp(28px,4vw,44px)}
@@ -343,7 +347,7 @@ nav.main .ddmenu a:hover{background:#7a1f2b;color:#ffffff}
 <aside class="cdrawer" id="cdrawer"><div class="dhead" style="display:flex;justify-content:space-between;align-items:center"><h3 class="fd">Your Cart</h3><button class="dclose" onclick="closeAll()" aria-label="Close cart"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
 <div id="citems"></div>
 <div class="sumrow tot"><span>Total</span><span id="ctotal">Rs 0</span></div>
-<a class="btn" style="width:100%;justify-content:center;margin-top:12px" href="design-1-checkout.html">Proceed to Checkout</a>
+<a class="btn ptoc" style="width:100%;justify-content:center;margin-top:12px" href="design-1-checkout.html">Proceed to Checkout</a>
 <a class="btn wa" id="waorder" style="width:100%;justify-content:center;margin-top:9px" href="#" onclick="return false"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" stroke="none" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Order Bag via WhatsApp</a>
 <p style="font-size:12.5px;color:var(--muted);margin-top:9px;text-align:center">Delivery Rs 250 - FREE over Rs 900</p></aside>
 <div class="qvmodal" id="qvmodal" role="dialog" aria-modal="true" aria-label="Quick view">
@@ -368,32 +372,32 @@ nav.main .ddmenu a:hover{background:#7a1f2b;color:#ffffff}
 <div class="pagehead"><div class="wrap"><h1>Checkout</h1><p>Secure checkout - Cash on Delivery available across Pakistan.</p></div></div>
 <section class="sec"><div class="wrap"><div class="cowrap">
 <div>
-<div class="panel"><h3>Step 1 - Shipping Address</h3>
+<div class="panel rv"><h3>Step 1 - Shipping Address</h3>
 <div class="frow"><div class="field"><label>Full Name *</label><input id="f-name" placeholder="e.g. Ayesha Khan"><span class="err">Please enter your proper full name.</span></div>
 <div class="field"><label>Mobile Number *</label><input id="f-phone" placeholder="03xxxxxxxxx or +92..."><span class="err">Enter a valid Pakistani mobile (03 + 11 digits) or an international number starting with +.</span></div></div>
 <div class="field"><label>Complete Delivery Address *</label><input id="f-addr" placeholder="House, street, area"><span class="err">Please enter your complete delivery address.</span></div>
 <div class="frow"><div class="field"><label>City *</label><select id="f-city"><option value="">Select your city</option><option>Karachi</option><option>Lahore</option><option>Islamabad</option><option>Rawalpindi</option><option>Faisalabad</option><option>Multan</option><option>Peshawar</option><option>Quetta</option><option>Hyderabad</option><option>Sialkot</option><option>Gujranwala</option><option>Bahawalpur</option><option>Sargodha</option><option>Other</option></select><span class="err">Please select your city.</span></div>
 <div class="field"><label>Country</label><input value="Pakistan" readonly></div></div>
 <div class="field"><label>Order Notes / Instructions (optional)</label><textarea id="f-notes" rows="2" placeholder="Anything we should know?"></textarea></div></div>
-<div class="panel"><h3>Step 2 - Payment Method</h3>
+<div class="panel rv" style="transition-delay:90ms"><h3>Step 2 - Payment Method</h3>
 <div class="paytiles"><button type="button" class="paytile on" data-pay="cod"><span style="color:#0e7a6d"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span>Cash on Delivery</button><button type="button" class="paytile " data-pay="bank"><span style="color:#1d4e9e"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h11v9H2zM13 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="1.8"/><circle cx="16" cy="18" r="1.8"/></svg></span>Bank Transfer</button><button type="button" class="paytile " data-pay="jazz"><span style="color:#b3122e"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" stroke="none" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>JazzCash</button><button type="button" class="paytile " data-pay="easy"><span style="color:#3f9e2c"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" stroke="none" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>EasyPaisa</button><button type="button" class="paytile " data-pay="wadeal"><span style="color:#1faa55"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" stroke="none" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span>WhatsApp Deal</button></div>
 <div class="paypanel on" id="panel-cod"><p style="font-size:14.5px">Pay in cash when your order arrives at your doorstep. Simple, safe and available nationwide.</p>
 <button type="button" class="btn placeorder" style="width:100%;justify-content:center;margin-top:13px">Place Order - Cash on Delivery</button></div>
 <div class="paypanel" id="panel-bank"><div class="acctcard"><div style="letter-spacing:.12em;font-size:12px;opacity:.85">Bank Transfer - Official Account</div>
 <div class="row"><span>Account Title</span><b>Zuresh</b></div>
-<div class="row"><span>Account Number</span><b>0101-0109876543</b><button type="button" class="copybtn" data-copy="0101-0109876543">Copy</button></div><div class="row"><span>IBAN</span><b>PK00MEZN0001010109876543</b><button type="button" class="copybtn" data-copy="PK00MEZN0001010109876543">Copy</button></div></div>
+<div class="row"><span>Account Number</span><b>Account details will be shared after order confirmation</b><button type="button" class="copybtn" data-copy="Account details will be shared after order confirmation">Copy</button></div></div>
 <p style="margin:11px 0;font-size:14.5px">Please send <b class="payamt">Rs 0</b> to the account above, then upload your payment slip below to confirm your order.</p>
 <div class="upload"><b>Upload Payment Slip / Screenshot</b><br><span style="font-size:13px;color:var(--muted)">JPG, PNG, WEBP or PDF</span><br><input type="file" class="slip" accept=".jpg,.jpeg,.png,.webp,.pdf" style="margin-top:9px"></div>
 <button type="button" class="btn placeorder" style="width:100%;justify-content:center">Confirm Bank Transfer Order</button></div>
 <div class="paypanel" id="panel-jazz"><div class="acctcard"><div style="letter-spacing:.12em;font-size:12px;opacity:.85">JazzCash Mobile Account - Direct Wallet Transfer</div>
 <div class="row"><span>Account Title</span><b>Zuresh</b></div>
-<div class="row"><span>Account / Mobile Number</span><b>0321 6699322</b><button type="button" class="copybtn" data-copy="0321 6699322">Copy</button></div></div>
+<div class="row"><span>Account / Mobile Number</span><b>Account details will be shared after order confirmation</b><button type="button" class="copybtn" data-copy="Account details will be shared after order confirmation">Copy</button></div></div>
 <p style="margin:11px 0;font-size:14.5px">Please send <b class="payamt">Rs 0</b> to the account above, then upload your payment slip below to confirm your order.</p>
 <div class="upload"><b>Upload Payment Slip / Screenshot</b><br><span style="font-size:13px;color:var(--muted)">JPG, PNG, WEBP or PDF</span><br><input type="file" class="slip" accept=".jpg,.jpeg,.png,.webp,.pdf" style="margin-top:9px"></div>
 <button type="button" class="btn placeorder" style="width:100%;justify-content:center">Confirm JazzCash Mobile Account Order</button></div>
 <div class="paypanel" id="panel-easy"><div class="acctcard"><div style="letter-spacing:.12em;font-size:12px;opacity:.85">EasyPaisa Mobile Account - Direct Wallet Transfer</div>
 <div class="row"><span>Account Title</span><b>Zuresh</b></div>
-<div class="row"><span>Account / Mobile Number</span><b>0321 6699322</b><button type="button" class="copybtn" data-copy="0321 6699322">Copy</button></div></div>
+<div class="row"><span>Account / Mobile Number</span><b>Account details will be shared after order confirmation</b><button type="button" class="copybtn" data-copy="Account details will be shared after order confirmation">Copy</button></div></div>
 <p style="margin:11px 0;font-size:14.5px">Please send <b class="payamt">Rs 0</b> to the account above, then upload your payment slip below to confirm your order.</p>
 <div class="upload"><b>Upload Payment Slip / Screenshot</b><br><span style="font-size:13px;color:var(--muted)">JPG, PNG, WEBP or PDF</span><br><input type="file" class="slip" accept=".jpg,.jpeg,.png,.webp,.pdf" style="margin-top:9px"></div>
 <button type="button" class="btn placeorder" style="width:100%;justify-content:center">Confirm EasyPaisa Mobile Account Order</button></div>
@@ -401,7 +405,7 @@ nav.main .ddmenu a:hover{background:#7a1f2b;color:#ffffff}
 <p style="font-size:14.5px;margin:8px 0 13px">Your complete order details will be sent instantly to our official WhatsApp number and our team will confirm your order right away.</p>
 <button type="button" class="btn wa placeorder" style="width:100%;justify-content:center">CONFIRM &amp; SEND ORDER VIA WHATSAPP</button></div>
 </div></div>
-<div><div class="panel"><h3>Order Summary</h3><div id="sumitems"></div>
+<div><div class="panel rv" style="transition-delay:180ms"><h3>Order Summary</h3><div id="sumitems"></div>
 <div class="sumrow"><span>Subtotal</span><b id="sumsub">Rs 0</b></div>
 <div class="sumrow"><span>Delivery Charges</span><b id="sumdel">Rs 250</b></div>
 <div id="shipmsg"></div>
@@ -412,7 +416,7 @@ nav.main .ddmenu a:hover{background:#7a1f2b;color:#ffffff}
 <svg class="checkwrap" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46"/><path d="M32 51l13 13 24-27"/></svg>
 <h2 class="fd">Order Placed Successfully!</h2><p id="succtext" style="margin-top:7px"></p>
 <table class="od" id="succtable"></table>
-<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><a class="btn wa" id="trackwa" href="#" onclick="return false">Track on WhatsApp (+92 321 6699322)</a><a class="btn" href="design-1-home.html">Back to Store</a></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><a class="btn wa" id="trackwa" href="#" onclick="return false">Track on WhatsApp</a><a class="btn" href="design-1-home.html">Back to Store</a></div>
 </div></div>
 
 <footer class="site"><div class="wrap">
@@ -423,8 +427,8 @@ nav.main .ddmenu a:hover{background:#7a1f2b;color:#ffffff}
 <div><h4>Shop</h4><a href="design-1-shop.html?cat=Summer">Summer Collection</a><a href="design-1-shop.html?cat=Winter">Winter Collection</a><a href="design-1-home.html#firstedit">The First Edit</a><a href="design-1-shop.html">All Products</a></div>
 <div><h4>Company</h4><a href="design-1-about.html">About Us</a><a href="design-1-blog.html">Blog</a><a href="design-1-contact.html">Contact Us</a><a href="design-1-shop.html">All Products</a></div>
 <div><h4>Get in Touch</h4>
-<a href="#" onclick="return false">WhatsApp: +92 321 6699322</a>
-<a href="tel:+923216699322">Call: +92 321 6699322</a>
+<a href="#" onclick="return false">WhatsApp</a>
+<a href="#" onclick="return false">Call</a>
 <a href="https://www.instagram.com/zuresh.official" target="_blank" rel="noopener">Instagram: @zuresh.official</a>
 <a href="https://www.facebook.com/profile.php?id=61583619492960" target="_blank" rel="noopener">Facebook: Zuresh</a>
 <p style="font-size:14.5px;opacity:.92;margin-top:8px">Faisalabad, Punjab, Pakistan<br>Open Mon-Sat, 9am - 8pm</p></div>
@@ -481,6 +485,9 @@ document.addEventListener('DOMContentLoaded',()=>{
  cartCount();renderCart();
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -4% 0px'});
  document.querySelectorAll('.rv,.rvL,.rvR,.rvZ').forEach(el=>io.observe(el));
+ const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);const el=e.target;const m=el.textContent.trim().match(/^(\D*)(\d+)(.*)$/);if(!m)return;const pre=m[1],target=+m[2],suf=m[3];el.style.minWidth=el.offsetWidth+'px';if(!target)return;const t0=performance.now(),dur=1400;const step=t=>{const k=Math.min(1,(t-t0)/dur),ez=1-Math.pow(1-k,3);el.textContent=pre+Math.round(target*ez)+suf;if(k<1)requestAnimationFrame(step);else el.textContent=pre+target+suf};requestAnimationFrame(step)}),{threshold:.4});
+ document.querySelectorAll('.stat b').forEach(el=>cio.observe(el));
+ document.querySelectorAll('a.ptoc').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();a.classList.add('sweep');document.body.classList.add('pgleave');setTimeout(()=>{location.href=a.getAttribute('href')},400)}));
  // hero slider
  const sl=document.querySelector('.slides');
  if(sl){const n=sl.children.length;let i=0,timer;
@@ -510,7 +517,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  document.querySelectorAll('.fhead').forEach(h=>h.addEventListener('click',()=>h.parentElement.classList.toggle('open')));
  // announcement rotation (3 messages)
  const sm=document.getElementById('stripmsg');
- if(sm){const msgs=['Threads of Timeless Elegance — The First Edit is launching soon','Nationwide delivery flat Rs 250 — <b>FREE</b> on orders over Rs 900','Faisalabad — Pakistan\'s Textile Capital · WhatsApp Concierge +92 321 6699322'];let mi=0;
+ if(sm){const msgs=['Threads of Timeless Elegance — The First Edit is launching soon','Nationwide delivery flat Rs 250 — <b>FREE</b> on orders over Rs 900','Faisalabad — Pakistan\'s Textile Capital · WhatsApp Concierge'];let mi=0;
   setInterval(()=>{sm.style.opacity='0';setTimeout(()=>{mi=(mi+1)%msgs.length;sm.innerHTML=msgs[mi];sm.style.opacity='1'},460)},4200);}
  // faq accordions (one open at a time, smooth)
  document.querySelectorAll('.faqitem').forEach(it=>{
