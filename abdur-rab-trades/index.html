@@ -14,23 +14,40 @@
       // Auto-update checker (user order, 2026-11-17: every device must
       // always show the LATEST live version). The publisher stamps a
       // build id into this page and into version.json on every publish.
-      // This script re-reads version.json (no-store + a unique query,
-      // so no cache can serve a stale copy) on load, every minute and
-      // whenever the tab regains focus; if the live build is newer,
-      // the page reloads itself once onto the fresh files. A visitor
-      // who is typing in a form is never interrupted — the reload
-      // waits until the tab is hidden or the typing stops mattering.
-      window.20261117-112536 = '20261117-112536'
+      // This script re-reads version.json (no-store + a unique query)
+      // every minute and whenever the tab regains focus.
+      //
+      // HARDENED 2026-11-17 (the doubling fix): GitHub's CDN edges do
+      // not all update at once, so for a while different edges serve
+      // DIFFERENT builds. The first version of this checker reloaded
+      // toward whichever build an edge happened to answer with —
+      // on a slow laptop the tab kept reloading between builds and
+      // each new paint landed on top of the previous one, so the
+      // whole page looked doubled. Now a reload happens ONLY when
+      // ALL of these hold: the reported id is strictly NEWER than
+      // the running build (ids are timestamps, so string order is
+      // time order — an older edge copy can never pull the tab
+      // backwards), the SAME newer id is confirmed by two checks in
+      // a row, this page is at least 90 seconds old, the id was not
+      // already reloaded to in this tab session, and a visitor who
+      // is typing in a form (tab visible) is never interrupted.
+      window.20261117-122705 = '20261117-122705'
       ;(function () {
-        var ID = window.20261117-112536
+        var ID = window.20261117-122705
         if (!ID || ID.charAt(0) === '_') return
+        var born = Date.now()
         var typed = false
         document.addEventListener('input', function () { typed = true }, true)
+        var pending = null
+        var pendingCount = 0
         function check() {
           fetch('version.json?t=' + Date.now(), { cache: 'no-store' })
             .then(function (r) { return r.json() })
             .then(function (v) {
-              if (!v || !v.id || v.id === ID) return
+              if (!v || !v.id || v.id <= ID) { pending = null; pendingCount = 0; return }
+              if (v.id === pending) { pendingCount++ } else { pending = v.id; pendingCount = 1 }
+              if (pendingCount < 2) return
+              if (Date.now() - born < 90000) return
               var key = 'upd-' + v.id
               try { if (sessionStorage.getItem(key)) return } catch (e) {}
               if (typed && !document.hidden) return
@@ -39,7 +56,6 @@
             })
             .catch(function () {})
         }
-        check()
         setInterval(check, 60000)
         document.addEventListener('visibilitychange', function () {
           if (!document.hidden) check()
