@@ -10,6 +10,21 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <!-- Security headers deliverable on a static host (AI Security
+         Checklist Part 6, 2026-11-17): GitHub Pages cannot send
+         custom HTTP response headers, so the two protections that
+         CAN travel inside the page are set here — a Content Security
+         Policy limited to this site's own files plus the exact
+         third parties the page uses (TradingView widgets, YouTube
+         embeds, Google Fonts, FormSubmit), and a strict referrer
+         policy. frame-ancestors / X-Frame-Options cannot be set
+         from a meta tag; the WordPress/Hostinger delivery sets the
+         full header suite server-side. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://s3.tradingview.com https://www.tradingview.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; frame-src https://www.tradingview.com https://s3.tradingview.com https://www.youtube-nocookie.com https://www.youtube.com; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <script>
       // Auto-update checker (user order, 2026-11-17: every device must
       // always show the LATEST live version). The publisher stamps a
@@ -31,9 +46,9 @@
       // a row, this page is at least 90 seconds old, the id was not
       // already reloaded to in this tab session, and a visitor who
       // is typing in a form (tab visible) is never interrupted.
-      window.20261117-131457 = '20261117-131457'
+      window.20261117-134127 = '20261117-134127'
       ;(function () {
-        var ID = window.20261117-131457
+        var ID = window.20261117-134127
         if (!ID || ID.charAt(0) === '_') return
         var born = Date.now()
         var typed = false
@@ -69,7 +84,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
     <noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
-    <script type="module" crossorigin src="/abdur-rab-trades/assets/index-fbDwXN_c.js"></script>
+    <script type="module" crossorigin src="/abdur-rab-trades/assets/index-BN6WuSuB.js"></script>
     <link rel="stylesheet" crossorigin href="/abdur-rab-trades/assets/index-Mwuu6PjN.css">
   </head>
   <body>
