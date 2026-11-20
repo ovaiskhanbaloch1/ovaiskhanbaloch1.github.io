@@ -7,10 +7,51 @@
 <title>MKK Sports International — Custom Sportswear Manufacturer</title>
 <meta name="description" content="MKK Sports International — custom sportswear, gym wear, casual wear, martial arts and boxing wear. 331 products, sublimation, cut & sew, screen printing and embroidery." />
 <script>
-(function(){var B="20261120-122951";try{fetch("version.json?cb="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(v){if(v&&v.id&&B!=="__BUILD"+"_ID__"&&v.id!==B){location.reload()}}).catch(function(){})}catch(e){}})();
-</script>
-  <script type="module" crossorigin src="/mdoublek-design-9/assets/index-B9G9_uoZ.js"></script>
-  <link rel="stylesheet" crossorigin href="/mdoublek-design-9/assets/index-DGfLNCLa.css">
+      // Cache buster (same mechanism as the main MKK site): the publisher
+      // stamps a build id into this page and into version.json on every
+      // publish. The check runs at first load, every 60s, and whenever the
+      // tab regains focus/visibility. version.json is fetched with
+      // cache:'no-store' AND a unique ?cb= query, so the answer can never
+      // come from a cache. When a strictly newer id appears, the page
+      // reloads ONCE to the same URL plus ?v=<new id> (the hash route is
+      // preserved untouched); the new query makes the browser fetch a
+      // fresh index.html and the new hashed bundles. Loop guards: a
+      // sessionStorage marker per id, plus refusing to reload when the
+      // URL already carries ?v=<that id>. A visitor who has typed into a
+      // form is never interrupted in a visible tab.
+      window.__BUILD_ID__ = '20261120-123647'
+      ;(function () {
+        var ID = window.__BUILD_ID__
+        if (!ID || ID.charAt(0) === '_') return
+        var typed = false
+        document.addEventListener('input', function () { typed = true }, true)
+        function check() {
+          fetch('version.json?cb=' + Date.now(), { cache: 'no-store' })
+            .then(function (r) { return r.json() })
+            .then(function (v) {
+              if (!v || !v.id || v.id <= ID) return
+              var key = 'cbto-' + v.id
+              try { if (sessionStorage.getItem(key)) return } catch (e) {}
+              var url
+              try { url = new URL(location.href) } catch (e) { return }
+              if (url.searchParams.get('v') === v.id) return
+              if (typed && !document.hidden) return
+              try { sessionStorage.setItem(key, '1') } catch (e) {}
+              url.searchParams.set('v', v.id)
+              location.replace(url.toString())
+            })
+            .catch(function () {})
+        }
+        check()
+        setInterval(check, 60000)
+        document.addEventListener('visibilitychange', function () {
+          if (!document.hidden) check()
+        })
+        window.addEventListener('focus', check)
+      })()
+    </script>
+  <script type="module" crossorigin src="/mdoublek-design-9/assets/index-lv_05frM.js"></script>
+  <link rel="stylesheet" crossorigin href="/mdoublek-design-9/assets/index-BXlc5aDU.css">
 </head>
 <body>
 <div id="root"></div>
