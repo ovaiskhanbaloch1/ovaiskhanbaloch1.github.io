@@ -12,14 +12,14 @@
     <script>
       // Auto-update checker: polls version.json; a device holding an older
       // build reloads itself onto the new one.
-      window.20261120-120244 = '20261120-120244';
+      window.20261120-120834 = '20261120-120834';
       (function () {
-        if (window.20261120-120244.indexOf('__BUILD') === 0) return;
+        if (window.20261120-120834.indexOf('__BUILD') === 0) return;
         function check() {
           fetch('version.json?t=' + Date.now(), { cache: 'no-store' })
             .then(function (r) { return r.json(); })
             .then(function (v) {
-              if (v && v.id && v.id !== window.20261120-120244) location.reload();
+              if (v && v.id && v.id !== window.20261120-120834) location.reload();
             })
             .catch(function () {});
         }
@@ -27,8 +27,8 @@
         setTimeout(check, 4000);
       })();
     </script>
-    <script type="module" crossorigin src="/mdoublek-design-10/assets/index-BQoRYi6H.js"></script>
-    <link rel="stylesheet" crossorigin href="/mdoublek-design-10/assets/index-Cn9q9Rl3.css">
+    <script type="module" crossorigin src="/mdoublek-design-10/assets/index-D-xkU7nD.js"></script>
+    <link rel="stylesheet" crossorigin href="/mdoublek-design-10/assets/index-BhQzSmfH.css">
   </head>
   <body>
     <div id="root"></div>
